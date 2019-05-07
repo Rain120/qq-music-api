@@ -1,0 +1,23 @@
+{
+  "name": "qq-music",
+  "version": "1.0.0",
+  "description": "qq music api, just for study",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Rain120/qq-music.git"
+  },
+  "keywords": [
+    "music\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dqq-music",
+    "koa2"
+  ],
+  "author": "Rain120",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rain120/qq-music/issues"
+  },
+  "homepage": "https://github.com/Rain120/qq-music#readme"
+}
