@@ -4,20 +4,27 @@
   "description": "qq music api, just for study",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Rain120/qq-music.git"
   },
   "keywords": [
-    "music\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dqq-music",
-    "koa2"
+    "QQ音乐",
+    "音乐",
+    "QQ音乐koa2"
   ],
   "author": "Rain120",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Rain120/qq-music/issues"
   },
-  "homepage": "https://github.com/Rain120/qq-music#readme"
+  "homepage": "https://github.com/Rain120/qq-music#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "koa": "^2.7.0"
+  },
+  "devDependencies": {}
 }
