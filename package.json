@@ -24,7 +24,9 @@
   "homepage": "https://github.com/Rain120/qq-music#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "koa": "^2.7.0"
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {}
 }

@@ -1,8 +1,11 @@
 const Koa = require('koa');
 const app = new Koa();
-const request = require('./util/request');
+const bodyParser = require('koa-bodyparser');
 
-const PORT = 9527;
+const cors = require('./middlewares/koa-cors');
+const router = require('./routers/router');
+
+app.use(bodyParser());
 
 // logger
 app.use(async (ctx, next) => {
@@ -10,6 +13,18 @@ app.use(async (ctx, next) => {
   const rt = ctx.response.get('X-Response-Time');
   console.log(`${ctx.method} ${ctx.url} - ${rt}`);
 });
+
+// cors
+app.use(cors({
+  origin: function (ctx) {
+    return '*';
+  },
+  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+  maxAge: 5,
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
 
 // x-response-time
 app.use(async (ctx, next) => {
@@ -19,29 +34,11 @@ app.use(async (ctx, next) => {
   ctx.set('X-Response-Time', `${ms}ms`);
 });
 
-// response
-app.use(async (ctx) => {
-  await request('/splcloud/fcgi-bin/gethotkey.fcg', 'get', {
-    headers: {
-      referer: 'https://c.y.qq.com/',
-      host: 'c.y.qq.com'
-    },
-    params: {
-      g_tk: 963298023,
-      loginUin: 1085131904,
-      hostUin: 0,
-      format: 'json',
-      inCharset: 'utf8',
-      outCharset: 'utf-8',
-      notice: 0,
-      platform: 'yqq.json',
-      needNewCode: 0
-    }
-  }).then(response => {
-    ctx.body = 'response';
-  });
-});
+app.use(router.routes())
+  .use(router.allowedMethods());
+
+const PORT = process.env.PORT || 9527;
 
 app.listen(PORT, () => {
-  console.log(`Listen at ${PORT}`)
+  console.log(`server running @ http://localhost:${PORT}`)
 });
