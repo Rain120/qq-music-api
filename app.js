@@ -37,7 +37,7 @@ app.use(async (ctx, next) => {
 app.use(router.routes())
   .use(router.allowedMethods());
 
-const PORT = process.env.PORT || 9527;
+const PORT = process.env.PORT || 3200;
 
 app.listen(PORT, () => {
   console.log(`server running @ http://localhost:${PORT}`)
