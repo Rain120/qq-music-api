@@ -1,9 +1,11 @@
-const test = require('./test/test');
-const songLists = require('./apis/songLists')
-const songTags = require('./apis/songTags')
+const getHotKey = require('./apis/getHotKey');
+const songLists = require('./apis/songLists');
+const songListCategories = require('./apis/songListCategories');
+const songListDetail = require('./apis/songListDetail');
 
 module.exports = {
-  test,
+  getHotKey,
   songLists,
-  songTags,
+  songListCategories,
+  songListDetail,
 }

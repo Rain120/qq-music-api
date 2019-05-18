@@ -1,10 +1,13 @@
 const commonParams = {
-  g_tk: 963298023,
+  g_tk: 1093895044,
+  loginUin: 0,
+  hostUin: 0,
   inCharset: 'utf8',
   outCharset: 'utf-8',
+  format: 'json',
   notice: 0,
-  format: 'jsonp',
-  loginUin: 0,
+  platform: 'yqq.json',
+  needNewCode: 0,
 }
 
 const options = {
