@@ -1,7 +1,7 @@
 module.exports = ({ request, method = 'get', params = {}, option = {} }) => {
   let options = Object.assign(option, {
     headers: {
-      referer: 'https://c.y.qq.com/',
+      referer: 'https://y.qq.com/portal/playlist.html',
       host: 'y.qq.com'
     },
     params,

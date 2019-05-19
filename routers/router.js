@@ -25,6 +25,36 @@ router.get('/gethotkey', async (ctx, next) => {
   });
 }, router.allowedMethods());
 
+// downloadQQMusic
+router.get('/downloadQQMusic', async (ctx, next) => {
+  let params = Object.assign({}, {
+    loginUin: 0,
+    hostUin: 0,
+    inCharset: 'utf8',
+    outCharset: 'utf-8',
+    format: 'json',
+    notice: 0,
+    needNewCode: 0,
+    format: 'jsonp',
+    jsonpCallback: 'MusicJsonCallback',
+    platform: 'yqq',
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.downloadQQMusic(props).then((res) => {
+    let response = res.data;
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log(error);
+  });
+}, router.allowedMethods());
+
 /**
  * @description: 歌单
  * 1 歌单类型
@@ -35,7 +65,7 @@ router.get('/gethotkey', async (ctx, next) => {
  */
 // 1
 router.get('/getSongListCategories', async (ctx, next) => {
-  let params = Object.assign(config.commonParams, {});
+  let params = Object.assign({}, config.commonParams, {});
   let props = {
     request,
     method: 'get',
@@ -70,7 +100,7 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?', async (ctx, next) => {
   let ein = ctx.query.limit || 19;
   let sin = ctx.query.page || 0;
   let categoryId = ctx.query.categoryId || 10000000;
-  let params = Object.assign(config.commonParams, {
+  let params = Object.assign({}, config.commonParams, {
     picmid: 1,
     categoryId,
     sortId: 5,
@@ -102,9 +132,9 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?', async (ctx, next) => {
 }, router.allowedMethods());
 
 // 4
-router.get('/getSongListDetail/:disstid', async (ctx, next) => {
+router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   let disstid = ctx.query.disstid;
-  let params = Object.assign(config.commonParams, {
+  let params = Object.assign({}, config.commonParams, {
     type: 1,
     json: 1,
     utf8: 1,
@@ -126,6 +156,75 @@ router.get('/getSongListDetail/:disstid', async (ctx, next) => {
     next();
   }).catch(error => {
     console.log(error);
+  });
+}, router.allowedMethods());
+
+router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
+  let page = +ctx.query.page || 1;
+  let num = +ctx.query.limit || 20;
+  let start = (page - 1) * num;
+  let data = {
+    new_album: {
+      module: 'newalbum.NewAlbumServer',
+      method: 'get_new_album_info',
+      param: {
+        area: 1,
+        start,
+        num,
+      }
+    },
+    comm: {
+      ct: 24,
+      cv: 0
+    }
+  }
+  if (!start) {
+    data.new_album_tag = {
+      module: 'newalbum.NewAlbumServer',
+      method: 'get_new_album_area',
+      param: {}
+    };
+  }
+  let params = Object.assign({}, config.commonParams, { data, });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.songListDetail(props).then((res) => {
+    let response = res.data;
+    ctx.body = {
+      response,
+    }
+    next();
+  }).catch(error => {
+    console.log(error);
+  });
+}, router.allowedMethods());
+
+// getMvByTag
+router.get('/getMvByTag', async (ctx, next) => {
+  let params = Object.assign({}, config.commonParams, {
+    format: 'json',
+    outCharset: 'GB2312',
+    cmd: 'shoubo',
+    lan: 'all',
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.getMvByTag(props).then((res) => {
+    let response = res.data;
+    ctx.body = {
+      response,
+    }
+    next();
+  }).catch(error => {
+    console.log('error', error);
   });
 }, router.allowedMethods());
 

@@ -1,5 +1,5 @@
 const commonParams = {
-  g_tk: 1093895044,
+  g_tk: 1124214810,
   loginUin: 0,
   hostUin: 0,
   inCharset: 'utf8',
