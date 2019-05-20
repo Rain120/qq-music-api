@@ -125,7 +125,6 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?', async (ctx, next) => {
     ctx.body = {
       response,
     }
-    next();
   }).catch(error => {
     console.log(error);
   });
@@ -153,7 +152,6 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
     ctx.body = {
       response,
     }
-    next();
   }).catch(error => {
     console.log(error);
   });
@@ -197,7 +195,6 @@ router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
     ctx.body = {
       response,
     }
-    next();
   }).catch(error => {
     console.log(error);
   });
@@ -222,10 +219,129 @@ router.get('/getMvByTag', async (ctx, next) => {
     ctx.body = {
       response,
     }
-    next();
   }).catch(error => {
     console.log('error', error);
   });
+}, router.allowedMethods());
+
+// getSimilarSinger
+router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
+  let singermid = ctx.query.singermid;
+  let params = Object.assign({}, config.commonParams, {
+    utf8: 1,
+    singermid,
+    start: 0,
+    num: 5,
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (singermid) {
+    await apis.getSimilarSinger(props).then((res) => {
+      let response = res.data;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no singermid',
+    }
+  }
+}, router.allowedMethods());
+
+// getSingerAlbum
+router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
+  let singermid = ctx.query.singermid;
+  let num = +ctx.query.limit || 5;
+  let sin = ctx.query.page;
+  console.log(num, sin)
+  let params = Object.assign({}, config.commonParams, {
+    singermid,
+    data: {
+      comm: {
+        ct: 24,
+        cv: 0
+      },
+      singer: {
+        method: 'get_singer_detail_info',
+        param: {
+          sort: 5,
+          singermid,
+          sin: 0,
+          num,
+        },
+        module: 'music.web_singer_info_svr',
+      }
+    }
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (singermid) {
+    await apis.getSingerAlbum(props).then((res) => {
+      let response = res.data;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no singermid',
+    }
+  }
+}, router.allowedMethods());
+
+/**
+ * @description: getSingerMv
+ * @param order: time(fan upload) || listen(singer all)
+ */
+router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
+  let singermid = ctx.query.singermid;
+  let order = ctx.query.order || 'time';
+  let num = ctx.query.limit || 5;
+  let params = Object.assign({}, config.commonParams, {
+    cid: 205360581,
+    singermid,
+    order,
+    begin: 0,
+    num,
+  });
+  if (order.toLowerCase() === 'time') {
+    params = Object.assign(params, {
+      cmd: 1,
+    })
+  }
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (singermid) {
+    await apis.getSingerMv(props).then((res) => {
+      let response = res.data;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no singermid',
+    }
+  }
 }, router.allowedMethods());
 
 module.exports = router;
