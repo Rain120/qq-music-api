@@ -26,6 +26,7 @@ router.get('/gethotkey', async (ctx, next) => {
 }, router.allowedMethods());
 
 // downloadQQMusic
+TODO:
 router.get('/downloadQQMusic', async (ctx, next) => {
   let params = Object.assign({}, {
     loginUin: 0,
@@ -157,6 +158,7 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   });
 }, router.allowedMethods());
 
+TODO:
 router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
   let page = +ctx.query.page || 1;
   let num = +ctx.query.limit || 20;
@@ -256,6 +258,8 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
 }, router.allowedMethods());
 
 // getSingerAlbum
+// singermid: 0025NhlN2yWrP4
+TODO:
 router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
   let num = +ctx.query.limit || 5;
@@ -342,6 +346,82 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
       response: 'no singermid',
     }
   }
+}, router.allowedMethods());
+
+router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
+  let singermid = ctx.query.singermid;
+  let params = Object.assign({}, config.commonParams, {
+    singermid,
+    utf8: 1,
+    format: 'xml',
+    r: 1558442453574,
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (singermid) {
+    await apis.getSingerDesc(props).then((res) => {
+      let response = JSON.stringify(res.data);
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no singermid',
+    }
+  }
+}, router.allowedMethods());
+
+// radio
+router.get('/getRadioLists', async (ctx, next) => {
+  let params = Object.assign({}, config.commonParams, {
+    channel: 'radio',
+    page: 'index',
+    tpl: 'wk',
+    new: 1,
+    p: Math.round(),
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.getRadioLists(props).then((res) => {
+    let response = res.data;
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log('error', error);
+  });
+}, router.allowedMethods());
+
+// DigitalAlbum
+router.get('/getDigitalAlbumLists', async (ctx, next) => {
+  let params = Object.assign({}, config.commonParams, {
+    cmd: 'pc_index_new',
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.getDigitalAlbumLists(props).then((res) => {
+    let response = res.data;
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log('error', error);
+  });
 }, router.allowedMethods());
 
 module.exports = router;
