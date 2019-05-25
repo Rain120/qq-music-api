@@ -28,14 +28,7 @@ router.get('/gethotkey', async (ctx, next) => {
 // downloadQQMusic
 TODO:
 router.get('/downloadQQMusic', async (ctx, next) => {
-  let params = Object.assign({}, {
-    loginUin: 0,
-    hostUin: 0,
-    inCharset: 'utf8',
-    outCharset: 'utf-8',
-    format: 'json',
-    notice: 0,
-    needNewCode: 0,
+  let params = Object.assign({}, config.commonParams, {
     format: 'jsonp',
     jsonpCallback: 'MusicJsonCallback',
     platform: 'yqq',
@@ -46,6 +39,7 @@ router.get('/downloadQQMusic', async (ctx, next) => {
     params,
     options: {}
   };
+
   await apis.downloadQQMusic(props).then((res) => {
     let response = res.data;
     ctx.body = {
@@ -185,14 +179,14 @@ router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
       param: {}
     };
   }
-  let params = Object.assign({}, config.commonParams, { data, });
+  let params = Object.assign({ data, }, config.commonParams);
   let props = {
     request,
     method: 'get',
     params,
     options: {}
   };
-  await apis.songListDetail(props).then((res) => {
+  await apis.newDisks(props).then((res) => {
     let response = res.data;
     ctx.body = {
       response,

@@ -1,4 +1,4 @@
-const getHotKey = require('./apis/getHotKey');
+const getHotKey = require('./apis/search/getHotKey');
 const downloadQQMusic = require('./apis/downloadQQMusic');
 // song list
 const songLists = require('./apis/songLists/songLists');
