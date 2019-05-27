@@ -6,5 +6,5 @@ module.exports = ({ request, method = 'get', params = {}, option = {} }) => {
     },
     params,
   });
-  return request('/cgi-bin/musicu.fcg', method, options, true);
+  return request('/cgi-bin/musicu.fcg', method, options, 'u');
 }

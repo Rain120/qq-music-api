@@ -26,7 +26,6 @@ router.get('/gethotkey', async (ctx, next) => {
 }, router.allowedMethods());
 
 // downloadQQMusic
-TODO:
 router.get('/downloadQQMusic', async (ctx, next) => {
   let params = Object.assign({}, config.commonParams, {
     format: 'jsonp',
@@ -42,6 +41,13 @@ router.get('/downloadQQMusic', async (ctx, next) => {
 
   await apis.downloadQQMusic(props).then((res) => {
     let response = res.data;
+    if (typeof response === 'string') {
+      let reg = /^\w+\(({[^()]+})\)$/;
+      let matches = response.match(reg);
+      if (matches) {
+        response = JSON.parse(matches[1]);
+      }
+    }
     ctx.body = {
       response,
     }
@@ -379,7 +385,7 @@ router.get('/getRadioLists', async (ctx, next) => {
     page: 'index',
     tpl: 'wk',
     new: 1,
-    p: Math.round(),
+    p: Math.round(1),
   });
   let props = {
     request,
