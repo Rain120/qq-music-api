@@ -424,4 +424,39 @@ router.get('/getDigitalAlbumLists', async (ctx, next) => {
   });
 }, router.allowedMethods());
 
+// music
+// getLyric
+// songmid=003rJSwm3TechU
+router.get('/getLyric/:songmid?', async (ctx, next) => {
+  let songmid = ctx.query.songmid;
+  let params = Object.assign({}, config.commonParams, {
+    pcachetime: new Date().getTime(),
+    songmid,
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (songmid) {
+    await apis.getLyric(props).then((res) => {
+      let lyric = res.data && res.data.lyric && new Buffer(res.data.lyric, 'base64').toString();
+      let response = {
+        ...res.data,
+        lyric,
+      };
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no songmid',
+    }
+  }
+}, router.allowedMethods());
+
 module.exports = router;
