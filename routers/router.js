@@ -459,4 +459,81 @@ router.get('/getLyric/:songmid?', async (ctx, next) => {
   }
 }, router.allowedMethods());
 
+router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
+  let songmid = ctx.query.songmid;
+  let params = Object.assign({}, config.commonParams, {
+    data: {
+      req_0: {
+        module: 'vkey.GetVkeyServer',
+        method: 'CgiGetVkey',
+        param: {
+          guid: 1429839143,
+          songmid: [songmid],
+          songtype: [
+            0,
+          ],
+          uin: 0,
+          loginflag: 1,
+          platform: 20
+        }
+      },
+      comm: {
+        uin: 0,
+        format: 'json',
+        ct: 24,
+        cv: 0
+      }
+    }
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (songmid) {
+    await apis.getMusicVKey(props).then((res) => {
+      let response = res.data;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no songmid',
+    }
+  }
+}, router.allowedMethods());
+
+// album
+// albummid=0016l2F430zMux
+router.get('/getAlbum/:albummid?', async (ctx, next) => {
+  let albummid = ctx.query.albummid;
+  let params = Object.assign({}, config.commonParams, {
+    albummid,
+  });
+  let props = {
+    request,
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (albummid) {
+    await apis.getAlbum(props).then((res) => {
+      let response = res.data;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log('error', error);
+    });
+  } else {
+    ctx.body = {
+      response: 'no albummid',
+    }
+  }
+}, router.allowedMethods());
+
 module.exports = router;

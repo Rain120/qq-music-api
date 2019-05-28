@@ -21,6 +21,9 @@ const getDigitalAlbumLists = require('./apis/digitalAlbum/getDigitalAlbumLists')
 
 // music
 const getLyric = require('./apis/music/getLyric');
+const getMusicVKey = require('./apis/music/getMusicVKey');
+// album
+const getAlbum = require('./apis/album/getAlbum');
 
 module.exports = {
   getHotKey,
@@ -42,4 +45,7 @@ module.exports = {
   getDigitalAlbumLists,
   // music
   getLyric,
+  getMusicVKey,
+  // album
+  getAlbum,
 }
