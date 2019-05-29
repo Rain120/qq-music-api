@@ -132,6 +132,7 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?', async (ctx, next) => {
 }, router.allowedMethods());
 
 // 4
+// disstid=7011264340
 router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   let disstid = ctx.query.disstid;
   let params = Object.assign({}, config.commonParams, {
@@ -227,11 +228,12 @@ router.get('/getMvByTag', async (ctx, next) => {
 }, router.allowedMethods());
 
 // getSimilarSinger
+// singermid=0025NhlN2yWrP4
 router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
-  let singermid = ctx.query.singermid;
+  let singer_mid = ctx.query.singermid;
   let params = Object.assign({}, config.commonParams, {
     utf8: 1,
-    singermid,
+    singer_mid,
     start: 0,
     num: 5,
   });
@@ -241,7 +243,7 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
     params,
     options: {}
   };
-  if (singermid) {
+  if (singer_mid) {
     await apis.getSimilarSinger(props).then((res) => {
       let response = res.data;
       ctx.body = {
@@ -459,6 +461,7 @@ router.get('/getLyric/:songmid?', async (ctx, next) => {
   }
 }, router.allowedMethods());
 
+TODO:
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
   let songmid = ctx.query.songmid;
   let params = Object.assign({}, config.commonParams, {

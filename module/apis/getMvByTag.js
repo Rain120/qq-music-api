@@ -6,5 +6,5 @@ module.exports = ({ request, method = 'get', params, option = {} }) => {
     },
     params,
   });
-  return request('/fcgi-bin/getmv_by_tag', method, options);
+  return request('/mv/fcgi-bin/getmv_by_tag', method, options);
 }
