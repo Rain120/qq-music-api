@@ -5,6 +5,7 @@ module.exports = ({ request, method = 'get', params = {}, option = {} }) => {
       host: 'y.qq.com',
       referer: 'https://y.qq.com/portal/album_lib.html',
     },
+    maxContentLength: 2018,
     params,
   });
   return music_common({ request, method, options });

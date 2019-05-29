@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-// axios.defaults.baseURL = 'https://c.y.qq.com';
 // `withCredentials` 表示跨域请求时是否需要使用凭证
 axios.defaults.withCredentials = true;
 axios.defaults.timeout = 10000;
@@ -35,7 +34,9 @@ function request (url, method, options = {}, isUUrl = 'c') {
         }
         return response;
       },
-      error => { throw error }
+      error => {
+        throw error;
+      }
     )
 }
 
