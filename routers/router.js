@@ -4,7 +4,7 @@ const request = require('../util/request');
 const config = require('../module/config');
 const apis = require('../module/index');
 
-router.get('/gethotkey', async (ctx, next) => {
+router.get('/getHotkey', async (ctx, next) => {
   let params = Object.assign(config.commonParams, {
     hostUin: 0,
     needNewCode: 0
@@ -97,14 +97,15 @@ router.get('/getSongListCategories', async (ctx, next) => {
  * @param {categoryId} 分类
  * @return: 
  */
-router.get('/getSongLists/:page?/:limit?/:categoryId?', async (ctx, next) => {
+router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, next) => {
   let ein = ctx.query.limit || 19;
   let sin = ctx.query.page || 0;
+  let sortId = ctx.query.sortId || 5;
   let categoryId = ctx.query.categoryId || 10000000;
   let params = Object.assign({}, config.commonParams, {
     picmid: 1,
     categoryId,
-    sortId: 5,
+    sortId,
     sin,
     ein,
   });
