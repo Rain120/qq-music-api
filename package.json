@@ -1,5 +1,5 @@
 {
-  "name": "q-music",
+  "name": "qq-music-api",
   "version": "1.0.0",
   "description": "qq music api, just for study",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Rain120/qq-music.git"
+    "url": "git+ssh://git@github.com/Rain120/qq-music-api.git"
   },
   "keywords": [
     "QQ音乐",
@@ -20,9 +20,9 @@
   "author": "Rain120",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Rain120/qq-music/issues"
+    "url": "https://github.com/Rain120/qq-music-api/issues"
   },
-  "homepage": "https://github.com/Rain120/qq-music#readme",
+  "homepage": "https://github.com/Rain120/qq-music-api#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "koa": "^2.7.0",
