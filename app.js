@@ -1,9 +1,21 @@
+require("@babel/register");
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
+const exec = require('child_process').exec;
 
 const cors = require('./middlewares/koa-cors');
 const router = require('./routers/router');
+require('./util/colors');
+
+exec('npm info QQ-Music-API version', (err, stdout, stderr) => {
+  if(!err){
+    let version = stdout.trim()
+    if(package.version < version){
+      console.log(`Current Version: ${version}, Current Version: ${package.version}, Please update it.`.prompt);
+    }
+  }
+});
 
 app.use(bodyParser());
 
@@ -11,7 +23,7 @@ app.use(bodyParser());
 app.use(async (ctx, next) => {
   await next();
   const rt = ctx.response.get('X-Response-Time');
-  console.log(`${ctx.method} ${ctx.url} - ${rt}`);
+  console.log(`${ctx.method} ${ctx.url} - ${rt}`.prompt);
 });
 
 // cors
@@ -40,5 +52,5 @@ app.use(router.routes())
 const PORT = process.env.PORT || 3200;
 
 app.listen(PORT, () => {
-  console.log(`server running @ http://localhost:${PORT}`)
+  console.log(`server running @ http://localhost:${PORT}`.prompt)
 });

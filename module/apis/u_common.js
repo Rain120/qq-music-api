@@ -1,4 +1,5 @@
-module.exports = ({ request, method = 'get', options = {} }) => {
+const request = require('../../util/request');
+module.exports = ({ options = {}, method = 'get' }) => {
   let opts = Object.assign(options, {
     headers: {
       referer: 'https://u.y.qq.com/',

@@ -1,4 +1,5 @@
-module.exports = ({ request, method = 'get', params, option = {} }) => {
+const request = require('../../util/request');
+module.exports = ({ method = 'get', params, option = {} }) => {
   let options = Object.assign(option, {
     headers: {
       host: 'y.qq.com',

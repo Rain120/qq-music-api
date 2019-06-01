@@ -1,6 +1,5 @@
 const Router = require('koa-router');
 const router = new Router();
-const request = require('../util/request');
 const { lyricParse } = require('../util/lyricParse');
 const config = require('../module/config');
 const apis = require('../module/index');
@@ -13,7 +12,6 @@ router.get('/downloadQQMusic', async (ctx, next) => {
     platform: 'yqq',
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -32,7 +30,7 @@ router.get('/downloadQQMusic', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log(error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -42,7 +40,6 @@ router.get('/getHotkey', async (ctx, next) => {
     needNewCode: 0
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -53,7 +50,7 @@ router.get('/getHotkey', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log(error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -83,7 +80,6 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
     w,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -95,7 +91,7 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
         response,
       }
     }).catch(error => {
-      console.log(error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -112,7 +108,6 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
     key,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -124,7 +119,7 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log(error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -145,7 +140,6 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
 router.get('/getSongListCategories', async (ctx, next) => {
   let params = Object.assign({}, config.commonParams, {});
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -163,7 +157,7 @@ router.get('/getSongListCategories', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log(error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -188,7 +182,6 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, nex
     ein,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -206,7 +199,7 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, nex
       response,
     }
   }).catch(error => {
-    console.log(error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -223,7 +216,6 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
     disstid,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -234,7 +226,7 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log(error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -265,9 +257,9 @@ router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
       param: {}
     };
   }
-  let params = Object.assign({ data, }, config.commonParams);
+  let params = Object.assign({ data: JSON.stringify(data), }, config.commonParams);
+  console.log(params)
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -278,7 +270,7 @@ router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log(error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -291,7 +283,6 @@ router.get('/getMvByTag', async (ctx, next) => {
     lan: 'all',
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -302,7 +293,7 @@ router.get('/getMvByTag', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log('error', error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -337,7 +328,6 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => 
 }
   let params = Object.assign({ data: JSON.stringify(data), }, config.commonParams);
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -349,7 +339,7 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => 
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -370,7 +360,6 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
     num: 5,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -382,7 +371,7 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -398,27 +387,27 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
   let num = +ctx.query.limit || 5;
   let sin = ctx.query.page || 0;
+  let data = {
+    comm: {
+      ct: 24,
+      cv: 0
+    },
+    singer: {
+      method: 'get_singer_detail_info',
+      param: {
+        sort: 5,
+        singermid,
+        sin,
+        num,
+      },
+      module: 'music.web_singer_info_svr',
+    }
+  };
   let params = Object.assign({}, config.commonParams, {
     singermid,
-    data: {
-      comm: {
-        ct: 24,
-        cv: 0
-      },
-      singer: {
-        method: 'get_singer_detail_info',
-        param: {
-          sort: 5,
-          singermid,
-          sin,
-          num,
-        },
-        module: 'music.web_singer_info_svr',
-      }
-    }
+    data: JSON.stringify(data),
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -430,7 +419,7 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -460,7 +449,6 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
     })
   }
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -472,7 +460,7 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -490,7 +478,6 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
     r: 1558442453574,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -502,7 +489,7 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -521,7 +508,6 @@ router.get('/getRadioLists', async (ctx, next) => {
     p: Math.round(1),
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -532,7 +518,7 @@ router.get('/getRadioLists', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log('error', error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -542,7 +528,6 @@ router.get('/getDigitalAlbumLists', async (ctx, next) => {
     cmd: 'pc_index_new',
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -553,7 +538,7 @@ router.get('/getDigitalAlbumLists', async (ctx, next) => {
       response,
     }
   }).catch(error => {
-    console.log('error', error);
+    console.log(`error`.error, error);
   });
 }, router.allowedMethods());
 
@@ -568,7 +553,6 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
     songmid,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -586,7 +570,7 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -598,35 +582,42 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
 TODO:
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
   let songmid = ctx.query.songmid;
-  let params = Object.assign({}, config.commonParams, {
-    data: {
-      req_0: {
-        module: 'vkey.GetVkeyServer',
-        method: 'CgiGetVkey',
-        param: {
-          guid: 1429839143,
-          songmid: [songmid],
-          songtype: [
-            0,
-          ],
-          uin: 0,
-          loginflag: 1,
-          platform: 20
-        }
-      },
-      comm: {
-        uin: 0,
-        format: 'json',
-        ct: 24,
-        cv: 0
+  let data = {
+    req: {
+      module: "CDN.SrfCdnDispatchServer",
+      method: "GetCdnDispatch",
+      param: {
+        guid: "1429839143",
+        calltype: 0,
+        userip: ""
       }
+    },
+    req_0: {
+      module: 'vkey.GetVkeyServer',
+      method: 'CgiGetVkey',
+      param: {
+        guid: '1429839143',
+        songmid: [songmid],
+        songtype: [0],
+        uin: 0,
+        loginflag: 1,
+        platform: 20
+      }
+    },
+    comm: {
+      uin: 0,
+      format: 'json',
+      ct: 24,
+      cv: 0
     }
+  };
+  let params = Object.assign(config.commonParams, {
+    data: JSON.stringify(data),
   });
   let props = {
-    request,
     method: 'get',
     params,
-    options: {}
+    options: {},
   };
   if (songmid) {
     await apis.getMusicVKey(props).then((res) => {
@@ -635,7 +626,7 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -652,7 +643,6 @@ router.get('/getAlbum/:albummid?', async (ctx, next) => {
     albummid,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -664,7 +654,7 @@ router.get('/getAlbum/:albummid?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {
@@ -705,7 +695,6 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
     cv: 10101010,
   });
   let props = {
-    request,
     method: 'get',
     params,
     options: {}
@@ -717,7 +706,7 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
         response,
       }
     }).catch(error => {
-      console.log('error', error);
+      console.log(`error`.error, error);
     });
   } else {
     ctx.body = {

@@ -1,10 +1,5 @@
-module.exports = ({ request, method = 'get', params = {}, option = {} }) => {
-  let options = Object.assign(option, {
-    headers: {
-      referer: 'https://y.qq.com/portal/playlist.html',
-      host: 'y.qq.com'
-    },
-    params,
-  });
-  return request('/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg', method, options);
+const y_common = require('../y_common');
+module.exports = ({ method = 'get', params = {}, option = {} }) => {
+  let options = Object.assign(option, { params, });
+  return y_common({ url: '/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg', method, options, });
 }

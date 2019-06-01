@@ -1,4 +1,5 @@
 const axios = require('axios');
+require('../util/colors');
 
 // `withCredentials` 表示跨域请求时是否需要使用凭证
 axios.defaults.withCredentials = true;
@@ -32,9 +33,11 @@ function request (url, method, options = {}, isUUrl = 'c') {
         if (!response) {
           throw Error('response is null');
         }
+        console.log(`${url} request success`.info);
         return response;
       },
       error => {
+        console.log(`${url} request error`.error);
         throw error;
       }
     )
