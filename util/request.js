@@ -9,7 +9,7 @@ axios.defaults.responseType = 'json;text/plain;charset=utf-8;';
 
 let yURL = 'https://y.qq.com';
 let cURL = 'https://c.y.qq.com';
-let uURL = 'https:/u.y.qq.com';
+// let uURL = 'https:/u.y.qq.com/cgi-bin/musicu.fcg';
 
 function request (url, method, options = {}, isUUrl = 'c') {
   let baseURL = '';
@@ -18,7 +18,7 @@ function request (url, method, options = {}, isUUrl = 'c') {
         baseURL = yURL + url;
       break;
     case 'u':
-        baseURL = uURL + url;
+        baseURL = url;
       break;
     case 'c':
         baseURL = cURL + url;

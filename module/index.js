@@ -8,17 +8,16 @@ const getSmartbox = require('./apis/search/getSmartbox');
 const songLists = require('./apis/songLists/songLists');
 const songListCategories = require('./apis/songLists/songListCategories');
 const songListDetail = require('./apis/songLists/songListDetail');
-const newDisks = require('./apis/newDisks/newDisks');
 
 // MV
 const getMvByTag = require('./apis/mv/getMvByTag');
-const getMv = require('./apis/mv/getMv');
 
 // singer
 const getSimilarSinger = require('./apis/singers/getSimilarSinger');
-const getSingerAlbum = require('./apis/singers/getSingerAlbum');
 const getSingerMv = require('./apis/singers/getSingerMv');
 const getSingerDesc = require('./apis/singers/getSingerDesc');
+const getSingerStarNum = require('./apis/singers/getSingerStarNum');
+
 // radio
 const getRadioLists = require('./apis/radio/getRadioLists');
 
@@ -27,13 +26,15 @@ const getDigitalAlbumLists = require('./apis/digitalAlbum/getDigitalAlbumLists')
 
 // music
 const getLyric = require('./apis/music/getLyric');
-const getMusicVKey = require('./apis/music/getMusicVKey');
 
 // album
-const getAlbum = require('./apis/album/getAlbum');
+const getAlbumInfo = require('./apis/album/getAlbumInfo');
 
 // comments
 const getAlbumComments = require('./apis/comments/getAlbumComments');
+
+// UCommon
+const UCommon = require('./apis/UCommon/UCommon');
 
 module.exports = {
   downloadQQMusic,
@@ -45,24 +46,23 @@ module.exports = {
   songLists,
   songListCategories,
   songListDetail,
-  newDisks,
   // MV
   getMvByTag,
-  getMv,
   // singer
   getSimilarSinger,
-  getSingerAlbum,
   getSingerMv,
   getSingerDesc,
+  getSingerStarNum,
   // radio
   getRadioLists,
   // DigitalAlbum
   getDigitalAlbumLists,
   // music
   getLyric,
-  getMusicVKey,
   // album
-  getAlbum,
+  getAlbumInfo,
   // comments
   getAlbumComments,
+  // UCommon
+  UCommon,
 }

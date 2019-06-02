@@ -426,13 +426,13 @@
 
 接口说明: 调用此接口, 可获取专辑信息(专辑列表、详情)
 
-接口地址: `/getAlbum`
+接口地址: `/getAlbumInfo`
 
-调用例子: `/getAlbum?albummid=0016l2F430zMux`
+调用例子: `/getAlbumInfo?albummid=0016l2F430zMux`
 
 示例截图:
 
-![获取专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getAlbum.png)
+![获取专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getAlbumInfo.png)
 
 ### 获取数字专辑
 

@@ -1,12 +1,12 @@
 const Router = require('koa-router');
 const router = new Router();
 const { lyricParse } = require('../util/lyricParse');
-const config = require('../module/config');
+const { _guid } = require('../module/config');
 const apis = require('../module/index');
 
 // downloadQQMusic
 router.get('/downloadQQMusic', async (ctx, next) => {
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
     format: 'jsonp',
     jsonpCallback: 'MusicJsonCallback',
     platform: 'yqq',
@@ -26,16 +26,18 @@ router.get('/downloadQQMusic', async (ctx, next) => {
         response = JSON.parse(matches[1]);
       }
     }
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 router.get('/getHotkey', async (ctx, next) => {
-  let params = Object.assign(config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     hostUin: 0,
     needNewCode: 0
   });
@@ -46,13 +48,14 @@ router.get('/getHotkey', async (ctx, next) => {
   };
   await apis.getHotKey(props).then((res) => {
     let response = res.data;
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 // w：搜索关键字
 // p：当前页
@@ -63,7 +66,8 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
   let n = +ctx.query.limit || 10;
   let p = +ctx.query.page || 1;
   let catZhida = +ctx.query.catZhida || 1;
-  let params = Object.assign(config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     ct: 24,
     qqmusic_ver: 1298,
     new_json: 1,
@@ -87,6 +91,7 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
   if (w) {
     await apis.getSearchByKey(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -94,16 +99,18 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'search key is null',
     }
   }
-}, router.allowedMethods());
+});
 
 // search smartbox
 router.get('/getSmartbox/:key?', async (ctx, next) => {
   let key = ctx.query.key;
-  let params = Object.assign(config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     is_xml: 0,
     key,
   });
@@ -115,6 +122,7 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
   if (key) {
     await apis.getSmartbox(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -122,11 +130,12 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 200;
     ctx.body = {
       response: null,
     }
   }
-}, router.allowedMethods());
+});
 
 /**
  * @description: 歌单
@@ -138,7 +147,9 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
  */
 // 1
 router.get('/getSongListCategories', async (ctx, next) => {
-  let params = Object.assign({}, config.commonParams, {});
+  let params = Object.assign({
+    format: 'json',
+  });
   let props = {
     method: 'get',
     params,
@@ -153,13 +164,14 @@ router.get('/getSongListCategories', async (ctx, next) => {
         response = JSON.parse(matches[1]);
       }
     }
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 /**
  * @description: 2, 3
@@ -174,7 +186,8 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, nex
   let sin = ctx.query.page || 0;
   let sortId = ctx.query.sortId || 5;
   let categoryId = ctx.query.categoryId || 10000000;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     picmid: 1,
     categoryId,
     sortId,
@@ -195,19 +208,21 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, nex
         response = JSON.parse(matches[1]);
       }
     }
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 // 4
 // disstid=7011264340
 router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   let disstid = ctx.query.disstid;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     type: 1,
     json: 1,
     utf8: 1,
@@ -222,15 +237,15 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   };
   await apis.songListDetail(props).then((res) => {
     let response = res.data;
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
-TODO:
 router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
   let page = +ctx.query.page || 1;
   let num = +ctx.query.limit || 20;
@@ -257,26 +272,29 @@ router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
       param: {}
     };
   }
-  let params = Object.assign({ data: JSON.stringify(data), }, config.commonParams);
-  console.log(params)
+  let params = Object.assign({
+    format: 'json',
+    data: JSON.stringify(data),
+  });
   let props = {
     method: 'get',
     params,
     options: {}
   };
-  await apis.newDisks(props).then((res) => {
+  await apis.UCommon(props).then((res) => {
     let response = res.data;
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 // getMvByTag
 router.get('/getMvByTag', async (ctx, next) => {
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
     format: 'json',
     outCharset: 'GB2312',
     cmd: 'shoubo',
@@ -289,15 +307,15 @@ router.get('/getMvByTag', async (ctx, next) => {
   };
   await apis.getMvByTag(props).then((res) => {
     let response = res.data;
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
-TODO:
 // MV
 // area_id=15&version_id=7
 router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => {
@@ -326,15 +344,19 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => 
       }
     }
 }
-  let params = Object.assign({ data: JSON.stringify(data), }, config.commonParams);
+  let params = Object.assign({
+    format: 'json',
+    data: JSON.stringify(data),
+  });
   let props = {
     method: 'get',
     params,
     options: {}
   };
   if (version_id && area_id) {
-    await apis.getMv(props).then((res) => {
+    await apis.UCommon(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -342,18 +364,20 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => 
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'version_id or area_id is null',
     }
   }
-}, router.allowedMethods());
+});
 
 
 // getSimilarSinger
 // singermid=0025NhlN2yWrP4
 router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
   let singer_mid = ctx.query.singermid;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     utf8: 1,
     singer_mid,
     start: 0,
@@ -367,6 +391,7 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
   if (singer_mid) {
     await apis.getSimilarSinger(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -374,15 +399,15 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no singermid',
     }
   }
-}, router.allowedMethods());
+});
 
 // getSingerAlbum
-// singermid: 0025NhlN2yWrP4
-TODO:
+// singermid=0025NhlN2yWrP4
 router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
   let num = +ctx.query.limit || 5;
@@ -403,7 +428,8 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
       module: 'music.web_singer_info_svr',
     }
   };
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     singermid,
     data: JSON.stringify(data),
   });
@@ -413,8 +439,9 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
     options: {}
   };
   if (singermid) {
-    await apis.getSingerAlbum(props).then((res) => {
+    await apis.UCommon(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -422,11 +449,12 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no singermid',
     }
   }
-}, router.allowedMethods());
+});
 
 /**
  * @description: getSingerMv
@@ -436,7 +464,8 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
   let order = ctx.query.order;
   let num = ctx.query.limit || 5;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     cid: 205360581,
     singermid,
     order,
@@ -456,6 +485,7 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
   if (singermid) {
     await apis.getSingerMv(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -463,19 +493,21 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no singermid',
     }
   }
-}, router.allowedMethods());
+});
 
 router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'xml',
     singermid,
     utf8: 1,
-    format: 'xml',
-    r: 1558442453574,
+    outCharset: 'utf-8',
+    r: new Date().getTime(),
   });
   let props = {
     method: 'get',
@@ -485,6 +517,7 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
   if (singermid) {
     await apis.getSingerDesc(props).then((res) => {
       let response = JSON.stringify(res.data);
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -492,15 +525,48 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no singermid',
     }
   }
-}, router.allowedMethods());
+});
+
+router.get('/getSingerStarNum/:singermid?', async (ctx, next) => {
+  let singermid = ctx.query.singermid;
+  let params = Object.assign({
+    format: 'json',
+    singermid,
+    utf8: 1,
+    rnd: new Date().getTime(),
+  });
+  let props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (singermid) {
+    await apis.getSingerStarNum(props).then((res) => {
+      let response = res.data;
+      ctx.status = 200;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log(`error`.error, error);
+    });
+  } else {
+    ctx.status = 400;
+    ctx.body = {
+      response: 'no singermid',
+    }
+  }
+});
 
 // radio
 router.get('/getRadioLists', async (ctx, next) => {
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     channel: 'radio',
     page: 'index',
     tpl: 'wk',
@@ -514,17 +580,19 @@ router.get('/getRadioLists', async (ctx, next) => {
   };
   await apis.getRadioLists(props).then((res) => {
     let response = res.data;
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 // DigitalAlbum
 router.get('/getDigitalAlbumLists', async (ctx, next) => {
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign( {
+    format: 'json',
     cmd: 'pc_index_new',
   });
   let props = {
@@ -534,13 +602,14 @@ router.get('/getDigitalAlbumLists', async (ctx, next) => {
   };
   await apis.getDigitalAlbumLists(props).then((res) => {
     let response = res.data;
+    ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
     console.log(`error`.error, error);
   });
-}, router.allowedMethods());
+});
 
 // music
 // getLyric
@@ -548,7 +617,8 @@ router.get('/getDigitalAlbumLists', async (ctx, next) => {
 router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
   let songmid = ctx.query.songmid;
   let isFormat = ctx.query.isFormat || false;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     pcachetime: new Date().getTime(),
     songmid,
   });
@@ -573,13 +643,14 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no songmid',
     }
   }
-}, router.allowedMethods());
+});
 
-TODO:
+// songmid=003rJSwm3TechU
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
   let songmid = ctx.query.songmid;
   let data = {
@@ -588,6 +659,8 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
       method: "GetCdnDispatch",
       param: {
         guid: "1429839143",
+        // guid: _guid + '',
+        uin: 1085131904,
         calltype: 0,
         userip: ""
       }
@@ -599,7 +672,7 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
         guid: '1429839143',
         songmid: [songmid],
         songtype: [0],
-        uin: 0,
+        uin: 1085131904,
         loginflag: 1,
         platform: 20
       }
@@ -611,7 +684,8 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
       cv: 0
     }
   };
-  let params = Object.assign(config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     data: JSON.stringify(data),
   });
   let props = {
@@ -620,7 +694,7 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
     options: {},
   };
   if (songmid) {
-    await apis.getMusicVKey(props).then((res) => {
+    await apis.UCommon(props).then((res) => {
       let response = res.data;
       ctx.body = {
         response,
@@ -629,17 +703,19 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no songmid',
     }
   }
-}, router.allowedMethods());
+});
 
 // album
 // albummid=0016l2F430zMux
-router.get('/getAlbum/:albummid?', async (ctx, next) => {
+router.get('/getAlbumInfo/:albummid?', async (ctx, next) => {
   let albummid = ctx.query.albummid;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     albummid,
   });
   let props = {
@@ -648,7 +724,7 @@ router.get('/getAlbum/:albummid?', async (ctx, next) => {
     options: {}
   };
   if (albummid) {
-    await apis.getAlbum(props).then((res) => {
+    await apis.getAlbumInfo(props).then((res) => {
       let response = res.data;
       ctx.body = {
         response,
@@ -657,16 +733,17 @@ router.get('/getAlbum/:albummid?', async (ctx, next) => {
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'no albummid',
     }
   }
-}, router.allowedMethods());
+});
 
 // comments
 // albumm_id: album请求结果的id值
 // rootcommentid: 上一次请求结果的最后一项, comment.commentlist[commentlist.length - 1].rootcommentid
-// albumm_id: 8220
+// albumm_id=8220
 // rootcommentid=album_8220_1003310416_1558068713
 // cid=205360772
 router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?', async (ctx, next) => {
@@ -679,7 +756,8 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
   let biztype = ctx.query.biztype || 2;
   let rootcommentid = pagenum ? ctx.query.rootcommentid : '';
   let checkrootcommentid = !pagenum ? true : !!rootcommentid;
-  let params = Object.assign({}, config.commonParams, {
+  let params = Object.assign({
+    format: 'json',
     outCharset: 'GB2312',
     cid,
     reqtype,
@@ -702,6 +780,7 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
   if (albumm_id && checkrootcommentid) {
     await apis.getAlbumComments(props).then((res) => {
       let response = res.data;
+      ctx.status = 200;
       ctx.body = {
         response,
       }
@@ -709,9 +788,11 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
       console.log(`error`.error, error);
     });
   } else {
+    ctx.status = 400;
     ctx.body = {
       response: 'Don\'t have albumm_id or rootcommentid',
     }
   }
-}, router.allowedMethods());
+});
+
 module.exports = router;

@@ -4,11 +4,13 @@ const commonParams = {
   hostUin: 0,
   inCharset: 'utf8',
   outCharset: 'utf-8',
-  format: 'json',
+  // format: 'json',
   notice: 0,
   platform: 'yqq.json',
   needNewCode: 0,
 }
+
+const _guid = Math.round(2147483647 * Math.random()) * (new Date).getUTCMilliseconds() % 1e10;
 
 const options = {
   param: 'jsonpCallback',
@@ -23,6 +25,7 @@ const optionsPrefix = {
 
 module.exports = {
   commonParams,
+  _guid,
   options,
   optionsPrefix,
 }
