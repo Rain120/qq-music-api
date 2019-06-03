@@ -329,6 +329,24 @@
 
 ![获取MV标签](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMvByTag.png)
 
+### 获取MV播放信息
+
+接口说明: 调用此接口, 可获取MV播放信息
+
+参数列表:
+
+- 必选参数
+
+`vid`: `video id`
+
+接口地址: `/getMvPlay`
+
+调用例子: `/getMvPlay?vid=u00222le4ox`
+
+示例截图:
+
+![获取MV播放信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMvPlay.png)
+
 ### 获取歌手MV
 
 接口说明: 调用此接口, 可获取歌手MV
@@ -655,13 +673,13 @@
 
 接口说明: 调用此接口, 可获取获取搜索结果
 
-参数列表:
+参数列表(部分参数待注释):
 
 - 必选参数
 
 `key`: 搜索关键字
 
-`catZhida`: 
+`catZhida`: 0表示歌曲, 2表示歌手, 3表示专辑, 默认值为1
 
 - 可选参数
 
@@ -676,3 +694,53 @@
 示例截图:
 
 ![获取获取搜索结果](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSearchByKey.png)
+
+### 获取首页推荐
+
+接口说明: 调用此接口, 可获取首页推荐
+
+接口地址: `/getRecommend`
+
+调用例子: `/getRecommend`
+
+示例截图:
+
+![获取首页推荐](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRecommend.png)
+
+### 获取排行榜单列表
+
+接口说明: 调用此接口, 可获取排行榜单列表
+
+- 可选参数
+
+`page`: 当前页数, 默认为1
+
+`limit`: 取出歌单数量, 默认为 10
+
+接口地址: `/getTopLists`
+
+调用例子: `/getTopLists`
+
+示例截图:
+
+![获取排行榜单列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getTopLists.png)
+
+### 获取排行榜单详情
+
+接口说明: 调用此接口, 可获取排行榜单详情
+
+- 可选参数
+
+`topId`: 榜单`id`
+
+`page`: 当前页数, 默认为1
+
+`limit`: 取出歌单数量, 默认为 10
+
+接口地址: `/getRanks`
+
+调用例子: `/getRanks`
+
+示例截图:
+
+![获取排行榜单详情](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRanks.png)

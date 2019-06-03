@@ -36,6 +36,9 @@ const getAlbumComments = require('./apis/comments/getAlbumComments');
 // UCommon
 const UCommon = require('./apis/UCommon/UCommon');
 
+// getTopLists
+const getTopLists = require('./apis/rank/getTopLists');
+
 module.exports = {
   downloadQQMusic,
   // search
@@ -65,4 +68,6 @@ module.exports = {
   getAlbumComments,
   // UCommon
   UCommon,
+  // getTopLists
+  getTopLists,
 }

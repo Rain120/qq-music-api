@@ -27,7 +27,8 @@
     "axios": "^0.18.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

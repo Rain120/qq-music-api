@@ -1,7 +1,8 @@
+const moment = require('moment');
 const Router = require('koa-router');
 const router = new Router();
 const { lyricParse } = require('../util/lyricParse');
-const { _guid } = require('../module/config');
+const { _guid, commonParams, } = require('../module/config');
 const apis = require('../module/index');
 
 // downloadQQMusic
@@ -508,7 +509,7 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
     singermid,
     utf8: 1,
     outCharset: 'utf-8',
-    r: new Date().getTime(),
+    r: moment().valueOf(),
   });
   let props = {
     method: 'get',
@@ -539,7 +540,7 @@ router.get('/getSingerStarNum/:singermid?', async (ctx, next) => {
     format: 'json',
     singermid,
     utf8: 1,
-    rnd: new Date().getTime(),
+    rnd: moment().valueOf(),
   });
   let props = {
     method: 'get',
@@ -620,7 +621,7 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
   let isFormat = ctx.query.isFormat || false;
   let params = Object.assign({
     format: 'json',
-    pcachetime: new Date().getTime(),
+    pcachetime: moment().valueOf(),
     songmid,
   });
   let props = {
@@ -655,40 +656,38 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
   let songmid = ctx.query.songmid + '';
   let guid = _guid ? _guid + '' : '1429839143';
-  // let data = {
-  //   req: {
-  //     module: "CDN.SrfCdnDispatchServer",
-  //     method: "GetCdnDispatch",
-  //     param: {
-  //       guid,
-  //       calltype: 0,
-  //       userip: ""
-  //     }
-  //   },
-  //   req_0: {
-  //     module: 'vkey.GetVkeyServer',
-  //     method: 'CgiGetVkey',
-  //     param: {
-  //       guid,
-  //       songmid: [songmid],
-  //       songtype: [0],
-  //       uin: 0,
-  //       loginflag: 1,
-  //       platform: 20
-  //     }
-  //   },
-  //   comm: {
-  //     uin: 0,
-  //     format: 'json',
-  //     ct: 24,
-  //     cv: 0
-  //   }
-  // };
-  let data = `{"req":{"module":"CDN.SrfCdnDispatchServer","method":"GetCdnDispatch","param":{"guid":"${guid}","calltype":0,"userip":""}},"req_0":{"module":"vkey.GetVkeyServer","method":"CgiGetVkey","param":{"guid":"${guid}","songmid":["${songmid}"],"songtype":[0],"uin":"0","loginflag":1,"platform":"20"}},"comm":{"uin":0,"format":"json","ct":24,"cv":0}}`
+  let data = {
+    req: {
+      module: "CDN.SrfCdnDispatchServer",
+      method: "GetCdnDispatch",
+      param: {
+        guid,
+        calltype: 0,
+        userip: ""
+      }
+    },
+    req_0: {
+      module: "vkey.GetVkeyServer",
+      method: "CgiGetVkey",
+      param: {
+        guid,
+        songmid: [songmid],
+        songtype: [0],
+        uin: "0",
+        loginflag: 1,
+        platform: "20"
+      }
+    },
+    comm: {
+      uin: 0,
+      format: "json",
+      ct: 24,
+      cv: 0
+    }
+  }
   let params = Object.assign({
     format: 'json',
-    // data: JSON.stringify(data),
-    data,
+    data: JSON.stringify(data),
   });
   let props = {
     method: 'get',
@@ -698,6 +697,14 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
   if (songmid) {
     await apis.UCommon(props).then((res) => {
       let response = res.data;
+      let playLists = [];
+      let req_0 = response.req_0.data;
+      req_0.sip.map(sipURL => {
+        let purl = req_0.midurlinfo[0].purl;
+        let URI = `${sipURL}${purl}`
+        playLists.push(URI);
+      });
+      response.playLists = playLists;
       ctx.body = {
         response,
       }
@@ -890,6 +897,14 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
       ct: 24,
       cv: 4747474
     },
+    getMVUrl: {
+      module: "gosrf.Stream.MvUrlProxy",
+      method: "GetMvUrls",
+      param: {
+        vids: [vid],
+        request_typet: 10001
+      }
+    },
     mvinfo: {
       module: "video.VideoDataServer",
       method: "get_video_info_batch",
@@ -956,6 +971,23 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
   if (vid) {
     await apis.UCommon(props).then((res) => {
       let response = res.data;
+      let mvurls = response.getMVUrl.data;
+      let mvurlskey = Object.keys(mvurls)[0];
+      let mp4_urls = mvurls[mvurlskey].mp4.map(item => item.freeflow_url);
+      let hls_urls = mvurls[mvurlskey].hls.map(item => item.freeflow_url);
+      let urls = [...mp4_urls, ...hls_urls];
+      let play_urls = [];
+      let playLists = {};
+      urls.forEach(url => {
+        play_urls = [...play_urls, ...url]
+      });
+      playLists = {
+        f10: play_urls.filter(item => /\.f10\.mp4/.test(item)),
+        f20: play_urls.filter(item => /\.f20\.mp4/.test(item)),
+        f30: play_urls.filter(item => /\.f30\.mp4/.test(item)),
+        f40: play_urls.filter(item => /\.f40\.mp4/.test(item)),
+      }
+      response.playLists = playLists;
       ctx.status = 200;
       ctx.body = {
         response,
@@ -969,6 +1001,76 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
       response: 'vid is null',
     }
   }
+});
+
+// rankList: getTopLists
+router.get('/getTopLists', async (ctx, next) => {
+  let params = Object.assign(commonParams, {
+    format: 'json',
+    platform: 'h5',
+    needNewCode: 1,
+  });
+  let props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.getTopLists(props).then((res) => {
+    let response = res.data;
+    if (typeof response === 'string') {
+      let reg = /^\w+\(({[^()]+})\)$/;
+      let matches = response.match(reg);
+      if (matches) {
+        response = JSON.parse(matches[1]);
+      }
+    }
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log(`error`.error, error);
+  });
+});
+
+// ranks
+router.get('/getRanks/:topId?/:limit?/:page?', async (ctx, next) => {
+  let topId = +ctx.query.limit || 4;
+  let num = +ctx.query.limit || 20;
+  let offset = +ctx.query.page || 0;
+  let data = {
+    detail: {
+      module: "musicToplist.ToplistInfoServer",
+      method: "GetDetail",
+      param: {
+        topId,
+        offset,
+        num,
+        period: moment().format('YYYY-MM-DD')
+      }
+    },
+    comm: {
+      ct: 24,
+      cv: 0
+    }
+  };
+  let params = Object.assign({
+    format: 'json',
+    data: JSON.stringify(data),
+  });
+  let props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.UCommon(props).then((res) => {
+    let response = res.data;
+    ctx.status = 200;
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log(`error`.error, error);
+  });
 });
 
 module.exports = router;
