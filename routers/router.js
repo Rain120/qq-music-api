@@ -652,15 +652,14 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
 
 // songmid=003rJSwm3TechU
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
-  let songmid = ctx.query.songmid;
-  let data = {
+  let songmid = ctx.query.songmid + '';
+  let guid = _guid ? _guid + '' : '1429839143';
+  let data1 = {
     req: {
       module: "CDN.SrfCdnDispatchServer",
       method: "GetCdnDispatch",
       param: {
-        guid: "1429839143",
-        // guid: _guid + '',
-        uin: 1085131904,
+        guid,
         calltype: 0,
         userip: ""
       }
@@ -669,10 +668,10 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
       module: 'vkey.GetVkeyServer',
       method: 'CgiGetVkey',
       param: {
-        guid: '1429839143',
+        guid,
         songmid: [songmid],
         songtype: [0],
-        uin: 1085131904,
+        uin: 0,
         loginflag: 1,
         platform: 20
       }
@@ -684,9 +683,12 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
       cv: 0
     }
   };
+  let data = `{"req":{"module":"CDN.SrfCdnDispatchServer","method":"GetCdnDispatch","param":{"guid":"${guid}","calltype":0,"userip":""}},"req_0":{"module":"vkey.GetVkeyServer","method":"CgiGetVkey","param":{"guid":"${guid}","songmid":["${songmid}"],"songtype":[0],"uin":"0","loginflag":1,"platform":"20"}},"comm":{"uin":0,"format":"json","ct":24,"cv":0}}`
+  console.log(data, JSON.stringify(data1), data.localeCompare(JSON.stringify(data1)));
   let params = Object.assign({
     format: 'json',
-    data: JSON.stringify(data),
+    // data: JSON.stringify(data),
+    data,
   });
   let props = {
     method: 'get',
