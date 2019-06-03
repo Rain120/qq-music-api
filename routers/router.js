@@ -246,6 +246,7 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   });
 });
 
+// newDisk
 router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
   let page = +ctx.query.page || 1;
   let num = +ctx.query.limit || 20;
@@ -654,37 +655,36 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
   let songmid = ctx.query.songmid + '';
   let guid = _guid ? _guid + '' : '1429839143';
-  let data1 = {
-    req: {
-      module: "CDN.SrfCdnDispatchServer",
-      method: "GetCdnDispatch",
-      param: {
-        guid,
-        calltype: 0,
-        userip: ""
-      }
-    },
-    req_0: {
-      module: 'vkey.GetVkeyServer',
-      method: 'CgiGetVkey',
-      param: {
-        guid,
-        songmid: [songmid],
-        songtype: [0],
-        uin: 0,
-        loginflag: 1,
-        platform: 20
-      }
-    },
-    comm: {
-      uin: 0,
-      format: 'json',
-      ct: 24,
-      cv: 0
-    }
-  };
+  // let data = {
+  //   req: {
+  //     module: "CDN.SrfCdnDispatchServer",
+  //     method: "GetCdnDispatch",
+  //     param: {
+  //       guid,
+  //       calltype: 0,
+  //       userip: ""
+  //     }
+  //   },
+  //   req_0: {
+  //     module: 'vkey.GetVkeyServer',
+  //     method: 'CgiGetVkey',
+  //     param: {
+  //       guid,
+  //       songmid: [songmid],
+  //       songtype: [0],
+  //       uin: 0,
+  //       loginflag: 1,
+  //       platform: 20
+  //     }
+  //   },
+  //   comm: {
+  //     uin: 0,
+  //     format: 'json',
+  //     ct: 24,
+  //     cv: 0
+  //   }
+  // };
   let data = `{"req":{"module":"CDN.SrfCdnDispatchServer","method":"GetCdnDispatch","param":{"guid":"${guid}","calltype":0,"userip":""}},"req_0":{"module":"vkey.GetVkeyServer","method":"CgiGetVkey","param":{"guid":"${guid}","songmid":["${songmid}"],"songtype":[0],"uin":"0","loginflag":1,"platform":"20"}},"comm":{"uin":0,"format":"json","ct":24,"cv":0}}`
-  console.log(data, JSON.stringify(data1), data.localeCompare(JSON.stringify(data1)));
   let params = Object.assign({
     format: 'json',
     // data: JSON.stringify(data),
@@ -793,6 +793,180 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
     ctx.status = 400;
     ctx.body = {
       response: 'Don\'t have albumm_id or rootcommentid',
+    }
+  }
+});
+
+// recommend
+router.get('/getRecommend', async (ctx, next) => {
+  let data = {
+    comm: {
+      ct: 24
+    },
+    category: {
+      method: "get_hot_category",
+      param: {
+        qq: ""
+      },
+      module: "music.web_category_svr"
+    },
+    recomPlaylist: {
+      method: "get_hot_recommend",
+      param: {
+        async: 1,
+        cmd: 2
+      },
+      module: "playlist.HotRecommendServer"
+    },
+    playlist: {
+      method: "get_playlist_by_category",
+      param: {
+        id: 8,
+        curPage: 1,
+        size: 40,
+        order: 5,
+        titleid: 8
+      },
+      module: "playlist.PlayListPlazaServer"
+    },
+    new_song: {
+      module: "newsong.NewSongServer",
+      method: "get_new_song_info",
+      param: {
+        type: 5
+      }
+    },
+    new_album: {
+      module: "newalbum.NewAlbumServer",
+      method: "get_new_album_info",
+      param: {
+        area: 1,
+        sin: 0,
+        num: 10
+      }
+    },
+    new_album_tag: {
+      module: "newalbum.NewAlbumServer",
+      method: "get_new_album_area",
+      param: {}
+    },
+    toplist: {
+      module: "musicToplist.ToplistInfoServer",
+      method: "GetAll",
+      param: {}
+    },
+    focus: {
+      module: "QQMusic.MusichallServer",
+      method: "GetFocus",
+      param: {}
+    }
+  };
+  let params = Object.assign({
+    format: 'json',
+    data: JSON.stringify(data),
+  });
+  let props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.UCommon(props).then((res) => {
+    let response = res.data;
+    ctx.status = 200;
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log(`error`.error, error);
+  });
+});
+
+// mv play
+// vid=u00222le4ox
+router.get('/getMvPlay/:vid?', async (ctx, next) => {
+  let vid = ctx.query.vid;
+  let data = {
+    comm: {
+      ct: 24,
+      cv: 4747474
+    },
+    mvinfo: {
+      module: "video.VideoDataServer",
+      method: "get_video_info_batch",
+      param: {
+        vidlist: [vid],
+        required: [
+          "vid",
+          "type",
+          "sid",
+          "cover_pic",
+          "duration",
+          "singers",
+          "video_switch",
+          "msg",
+          "name",
+          "desc",
+          "playcnt",
+          "pubdate",
+          "isfav",
+          "gmid"
+        ]
+      }
+    },
+    other: {
+      module: "video.VideoLogicServer",
+      method: "rec_video_byvid",
+      param: {
+        vid,
+        required: [
+          "vid",
+          "type",
+          "sid",
+          "cover_pic",
+          "duration",
+          "singers",
+          "video_switch",
+          "msg",
+          "name",
+          "desc",
+          "playcnt",
+          "pubdate",
+          "isfav",
+          "gmid",
+          "uploader_headurl",
+          "uploader_nick",
+          "uploader_encuin",
+          "uploader_uin",
+          "uploader_hasfollow",
+          "uploader_follower_num"
+        ],
+        support: 1
+      }
+    }
+  };
+  let params = Object.assign({
+    format: 'json',
+    data: JSON.stringify(data),
+  });
+  let props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+  if (vid) {
+    await apis.UCommon(props).then((res) => {
+      let response = res.data;
+      ctx.status = 200;
+      ctx.body = {
+        response,
+      }
+    }).catch(error => {
+      console.log(`error`.error, error);
+    });
+  } else {
+    ctx.status = 400;
+    ctx.body = {
+      response: 'vid is null',
     }
   }
 });
