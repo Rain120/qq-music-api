@@ -749,14 +749,15 @@ router.get('/getAlbumInfo/:albummid?', async (ctx, next) => {
   }
 });
 
-// comments
-// albumm_id: album请求结果的id值
+TODO:
+// comments: params error
+// id: 专辑或者歌单请求结果的id
 // rootcommentid: 上一次请求结果的最后一项, comment.commentlist[commentlist.length - 1].rootcommentid
-// albumm_id=8220
+// id=8220
 // rootcommentid=album_8220_1003310416_1558068713
 // cid=205360772
-router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?', async (ctx, next) => {
-  let albumm_id = ctx.query.albumm_id;
+router.get('/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?', async (ctx, next) => {
+  let id = ctx.query.id;
   let pagesize = ctx.query.pagesize || 25;
   let pagenum = ctx.query.pagenum || 0;
   let cid = ctx.query.cid || 205360772;
@@ -771,7 +772,7 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
     cid,
     reqtype,
     biztype,
-    topid: albumm_id,
+    topid: id,
     cmd,
     needmusiccrit: 0,
     pagenum,
@@ -786,8 +787,8 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
     params,
     options: {}
   };
-  if (albumm_id && checkrootcommentid) {
-    await apis.getAlbumComments(props).then((res) => {
+  if (id && checkrootcommentid) {
+    await apis.getComments(props).then((res) => {
       let response = res.data;
       ctx.status = 200;
       ctx.body = {
@@ -799,7 +800,7 @@ router.get('/getAlbumComments/:albumm_id?/:rootcommentid?/:cid?/:pagesize?/:page
   } else {
     ctx.status = 400;
     ctx.body = {
-      response: 'Don\'t have albumm_id or rootcommentid',
+      response: 'Don\'t have id or rootcommentid',
     }
   }
 });
@@ -1055,6 +1056,50 @@ router.get('/getRanks/:topId?/:limit?/:page?', async (ctx, next) => {
   };
   let params = Object.assign({
     format: 'json',
+    data: JSON.stringify(data),
+  });
+  let props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+  await apis.UCommon(props).then((res) => {
+    let response = res.data;
+    ctx.status = 200;
+    ctx.body = {
+      response,
+    }
+  }).catch(error => {
+    console.log(`error`.error, error);
+  });
+});
+
+
+// ticket
+router.get('/getTicketInfo', async (ctx, next) => {
+  let data = {
+    comm: {
+      ct: 24,
+      cv: 0
+    },
+    getFirstData: {
+      module: "mall.ticket_index_page_svr",
+      method: "GetTicketIndexPage",
+      param: {
+        city_id: -1
+      }
+    },
+    getTag: {
+      module: "mall.ticket_index_page_svr",
+      method: "GetShowTypeList",
+      param: {}
+    }
+  };
+  let params = Object.assign({
+    format: 'json',
+    inCharset: 'utf8',
+    outCharset: 'GB2312',
+    platform: 'yqq.json',
     data: JSON.stringify(data),
   });
   let props = {

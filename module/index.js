@@ -31,7 +31,7 @@ const getLyric = require('./apis/music/getLyric');
 const getAlbumInfo = require('./apis/album/getAlbumInfo');
 
 // comments
-const getAlbumComments = require('./apis/comments/getAlbumComments');
+const getComments = require('./apis/comments/getComments');
 
 // UCommon
 const UCommon = require('./apis/UCommon/UCommon');
@@ -65,7 +65,7 @@ module.exports = {
   // album
   getAlbumInfo,
   // comments
-  getAlbumComments,
+  getComments,
   // UCommon
   UCommon,
   // getTopLists

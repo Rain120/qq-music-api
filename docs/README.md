@@ -415,6 +415,24 @@
 
 ![获取歌手信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerDesc.png)
 
+### 获取歌手被关注数量信息
+
+接口说明: 调用此接口, 可获取歌手被关注数量信息
+
+参数列表:
+
+- 必选参数
+
+`singermid`: 歌手`id`
+
+接口地址: `/getSingerStarNum`
+
+调用例子: `/getSingerStarNum?singermid=0025NhlN2yWrP4`
+
+示例截图:
+
+![获取歌手被关注数量信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerStarNum.png)
+
 ### 获取电台列表
 
 接口说明: 调用此接口, 可获取电台列表, 分类
@@ -744,3 +762,51 @@
 示例截图:
 
 ![获取排行榜单详情](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRanks.png)
+
+### 获取评论信息(cmd代表的意思没太弄明白)
+
+接口说明: 调用此接口, 可获取评论信息
+
+- 可选参数
+`id`: 专辑或者歌单请求结果的`id`
+
+- 可选参数
+
+`rootcommentid`: 榜单`id`
+
+`cid`: 
+
+`pagenum`: 当前页数, 默认为0
+
+`pagesize`: 取出评论数量, 默认为 25
+
+`cmd`: 
+
+`reqtype`: 
+
+`biztype`: 
+
+
+接口地址: `/getComments`
+
+调用例子: `/getComments?id=8220&rootcommentid=album_8220_1003310416_1558068713`
+
+示例截图:
+
+![获取评论信息 - id获取](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-id.png)
+
+![获取评论信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments.png)
+
+![获取评论信息 - 带params](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-param.png)
+
+### 获取票务信息
+
+接口说明: 调用此接口, 可获取票务信息
+
+接口地址: `/getTicketInfo`
+
+调用例子: `/getTicketInfo`
+
+示例截图:
+
+![获取票务信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getTicketInfo.png)
