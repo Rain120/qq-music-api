@@ -86,7 +86,6 @@ node app.js
 
 26. 获取票务信息
 
-
 ### 使用文档
 
 使用`apis`详见[文档](https://rain120.github.io/qq-music-api/#/)
@@ -115,4 +114,4 @@ node app.js
 
 ### 关于本人
 
-!> Rain120: 前端菜鸟, 入职前端1年, 公司的技术栈是`React`, 因为公司官网由我重构过, 我使用的`Vue.js`重构的。目前正在脱坑, 求大佬内推呀
+!> Rain120: 前端菜鸟, 入职前端1年, 公司的技术栈是`React` + `Typescript` + `mobx-state-tree`, 因为公司官网由我重构过, 我使用的`Vue.js`重构的。目前正在脱坑, 求大佬内推呀
