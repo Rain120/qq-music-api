@@ -91,7 +91,6 @@ node app.js
 
 使用`apis`详见[文档](https://rain120.github.io/qq-music-api/#/)
 
-
 ### 关于项目
 
 **灵感来自**
@@ -106,7 +105,7 @@ node app.js
 
 [Axios](https://github.com/axios/axios)
 
-[HTTP Referer 教程](http://www.ruanyifeng.com/blog/2019/06/http-referer.html)
+[阮一峰老师 - HTTP Referer 教程](http://www.ruanyifeng.com/blog/2019/06/http-referer.html)
 
 ### 项目不足
 
