@@ -150,6 +150,7 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
 router.get('/getSongListCategories', async (ctx, next) => {
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
   });
   let props = {
     method: 'get',
@@ -158,13 +159,6 @@ router.get('/getSongListCategories', async (ctx, next) => {
   };
   await apis.songListCategories(props).then((res) => {
     let response = res.data;
-    if (typeof response === 'string') {
-      let reg = /^\w+\(({[^()]+})\)$/;
-      let matches = response.match(reg);
-      if (matches) {
-        response = JSON.parse(matches[1]);
-      }
-    }
     ctx.status = 200;
     ctx.body = {
       response,
