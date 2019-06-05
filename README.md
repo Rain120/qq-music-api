@@ -1,8 +1,8 @@
 # QQMusicAPI
 
-!> QQ音乐API koa2 版本, 通过Web网页版请求QQ音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues)
+> QQ音乐API koa2 版本, 通过Web网页版请求QQ音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues)
 
-!> 当前代码仅共学习，不可做商业用途
+> 当前代码仅共学习，不可做商业用途
 
 ### API结构图
 
@@ -10,7 +10,7 @@
 
 ### 环境要求
 
-!> 因为本项目采用的是`koa2`, 所以请确保你的`node`版本是7.6.0+
+> 因为本项目采用的是`koa2`, 所以请确保你的`node`版本是7.6.0+
 
 ```
 node -v
