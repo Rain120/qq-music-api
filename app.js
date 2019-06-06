@@ -2,6 +2,8 @@ require("@babel/register");
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
+const path = require('path');
+const static = require('koa-static');
 const exec = require('child_process').exec;
 
 const cors = require('./middlewares/koa-cors');
@@ -18,6 +20,9 @@ exec('npm info QQ-Music-API version', (err, stdout, stderr) => {
 });
 
 app.use(bodyParser());
+app.use(static(
+  path.join(__dirname,  'public')
+));
 
 // logger
 app.use(async (ctx, next) => {
