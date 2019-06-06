@@ -39,6 +39,7 @@ router.get('/downloadQQMusic', async (ctx, next) => {
 router.get('/getHotkey', async (ctx, next) => {
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     hostUin: 0,
     needNewCode: 0
   });
@@ -69,6 +70,7 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
   let catZhida = +ctx.query.catZhida || 1;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     ct: 24,
     qqmusic_ver: 1298,
     new_json: 1,
@@ -112,6 +114,7 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
   let key = ctx.query.key;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     is_xml: 0,
     key,
   });
@@ -183,6 +186,7 @@ router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, nex
   let categoryId = ctx.query.categoryId || 10000000;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     picmid: 1,
     categoryId,
     sortId,
@@ -218,6 +222,7 @@ router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
   let disstid = ctx.query.disstid;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     type: 1,
     json: 1,
     utf8: 1,
@@ -374,6 +379,7 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
   let singer_mid = ctx.query.singermid;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     utf8: 1,
     singer_mid,
     start: 0,
@@ -462,6 +468,7 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
   let num = ctx.query.limit || 5;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     cid: 205360581,
     singermid,
     order,
@@ -500,9 +507,9 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
   let params = Object.assign({
     format: 'xml',
+    outCharset: 'utf-8',
     singermid,
     utf8: 1,
-    outCharset: 'utf-8',
     r: moment().valueOf(),
   });
   let props = {
@@ -532,6 +539,7 @@ router.get('/getSingerStarNum/:singermid?', async (ctx, next) => {
   let singermid = ctx.query.singermid;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     singermid,
     utf8: 1,
     rnd: moment().valueOf(),
@@ -563,6 +571,7 @@ router.get('/getSingerStarNum/:singermid?', async (ctx, next) => {
 router.get('/getRadioLists', async (ctx, next) => {
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     channel: 'radio',
     page: 'index',
     tpl: 'wk',
@@ -589,6 +598,7 @@ router.get('/getRadioLists', async (ctx, next) => {
 router.get('/getDigitalAlbumLists', async (ctx, next) => {
   let params = Object.assign( {
     format: 'json',
+    outCharset: 'utf-8',
     cmd: 'pc_index_new',
   });
   let props = {
@@ -615,6 +625,7 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
   let isFormat = ctx.query.isFormat || false;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     pcachetime: moment().valueOf(),
     songmid,
   });
@@ -719,6 +730,7 @@ router.get('/getAlbumInfo/:albummid?', async (ctx, next) => {
   let albummid = ctx.query.albummid;
   let params = Object.assign({
     format: 'json',
+    outCharset: 'utf-8',
     albummid,
   });
   let props = {
@@ -1002,6 +1014,7 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
 router.get('/getTopLists', async (ctx, next) => {
   let params = Object.assign(commonParams, {
     format: 'json',
+    outCharset: 'utf-8',
     platform: 'h5',
     needNewCode: 1,
   });
