@@ -82,7 +82,7 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
     catZhida,
     lossless: 0,
     flag_qc: 0,
-    p: 1,
+    p,
     n,
     w,
   });
