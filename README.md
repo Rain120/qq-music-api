@@ -6,6 +6,8 @@
 
 ### API结构图
 
+> 目前暂时没有时间做登录模块的接口，欢迎各位大佬给我`PR`, 阿里嘎多
+
 ![qq-music](./screenshot/qq-music.png)
 
 ### 环境要求
@@ -15,14 +17,14 @@
 ```
 node -v
 ```
-### 安装
+### 📦 安装
 
 ```
 git@github.com:Rain120/qq-music-api.git
 npm install
 ```
 
-### 项目启动
+### 🔨项目启动
 ```
 // npm i -g nodemon
 npm run start
@@ -112,6 +114,20 @@ node app.js
 
 2. 登录获取个人信息等接口都没做
 
-### 关于本人
+#### 🤝 贡献 ![PR](https://img.shields.io/badge/PRs-Welcome-orange?style=flat-square&logo=appveyor)
 
-> Rain120: 前端菜鸟, 入职前端1年, 公司的技术栈是`React` + `Typescript` + `mobx-state-tree`, 因为公司官网由我重构过, 我使用的`Vue.js`重构的。目前正在脱坑, 求大佬内推呀
+We welcome all contributions. You can submit any ideas as [pull requests](https://github.com/Rain120/qq-music-api/pulls) or as a GitHub [issue](https://github.com/Rain120/qq-music-api/issues). 
+
+#### 👨‍🏭 作者
+
+> Front-End development engineer, technology stack: React + Typescript + Mobx, also used Vue + Vuex for a while
+
+- [Github](https://github.com/Rain120)
+- [知乎](https://www.zhihu.com/people/yan-yang-nian-hua-120/activities)
+- [掘金](https://juejin.im/user/57c616496be3ff00584f54db)
+
+#### 📝 License
+
+[MIT](https://github.com/Rain120/qq-music-api/blob/master/LICENSE)
+
+Copyright © 2019-present [Rain120](https://github.com/Rain120).
