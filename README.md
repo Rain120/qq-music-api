@@ -1,4 +1,14 @@
-# QQMusicAPI
+<h1 align="center">QQMusicAPI</h1>
+
+<div align="center">
+
+![GitHub watchers](https://img.shields.io/github/watchers/rain120/qq-music-api?style=social) ![GitHub stars](https://img.shields.io/github/stars/rain120/qq-music-api?style=social) ![GitHub forks](https://img.shields.io/github/forks/rain120/qq-music-api?style=social)
+<br />
+![node](https://img.shields.io/node/v/koa?style=flat-square)
+<br />
+![GitHub repo size](https://img.shields.io/github/repo-size/rain120/qq-music-api?style=flat-square) ![GitHub package.json version](https://img.shields.io/github/package-json/v/rain120/qq-music-api?style=flat-square) ![GitHub](https://img.shields.io/github/license/rain120/qq-music-api?style=flat-square) ![GitHub open issues](https://img.shields.io/github/issues/rain120/qq-music-api?style=flat-square) ![GitHub closed issues](https://img.shields.io/github/issues-closed/rain120/qq-music-api) ![GitHub last commit](https://img.shields.io/github/last-commit/rain120/qq-music-api?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/rain120/qq-music-api?style=flat-square)
+
+</div>
 
 > QQ音乐API koa2 版本, 通过Web网页版请求QQ音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues)
 
