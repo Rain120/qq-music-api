@@ -1,4 +1,4 @@
-<h1 align="center">QQMusicAPI</h1>
+<h1 align="center">QQ Music API</h1>
 
 <div align="center">
 
