@@ -1,4 +1,4 @@
-<h2 align="center">QQ Music API</h2>
+<h2 align="center" id="qqmusicapi">QQ Music API</h2>
 
 !> QQ音乐API koa2 版本, 通过Web网页版请求QQ音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues), 或者你有其他想法欢迎`PR`.
 
