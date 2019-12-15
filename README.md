@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src='music.png' />
+
 ![GitHub watchers](https://img.shields.io/github/watchers/rain120/qq-music-api?style=social) ![GitHub stars](https://img.shields.io/github/stars/rain120/qq-music-api?style=social) ![GitHub forks](https://img.shields.io/github/forks/rain120/qq-music-api?style=social)
 <br />
 ![node](https://img.shields.io/node/v/koa?style=flat-square)

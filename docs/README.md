@@ -639,6 +639,25 @@
 
 ![获取歌手专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerAlbum.png)
 
+### 获取歌曲相关信息
+
+接口说明: 调用此接口, 可获取歌曲相关信息
+
+参数列表:
+
+- 必选参数
+
+`songmid`: 歌曲`id`
+
+接口地址: `/getSongInfo`
+
+调用例子: `/getSongInfo?songmid=0025NhlN2yWrP4`
+
+示例截图:
+
+![获取歌曲相关信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSongInfo.png)
+
+
 ### 获取歌曲VKey
 
 接口说明: 调用此接口, 可获取歌曲VKey

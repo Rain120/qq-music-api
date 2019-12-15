@@ -1,61 +1,33 @@
 const moment = require('moment');
 const Router = require('koa-router');
 const router = new Router();
-const { lyricParse } = require('../util/lyricParse');
 const { _guid, commonParams, } = require('../module/config');
 const apis = require('../module/index');
 
 // downloadQQMusic
 router.get('/downloadQQMusic', async (ctx, next) => {
-  let params = Object.assign({
-    format: 'jsonp',
-    jsonpCallback: 'MusicJsonCallback',
-    platform: 'yqq',
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
-    options: {}
-  };
-
-  await apis.downloadQQMusic(props).then((res) => {
-    let response = res.data;
-    if (typeof response === 'string') {
-      let reg = /^\w+\(({[^()]+})\)$/;
-      let matches = response.match(reg);
-      if (matches) {
-        response = JSON.parse(matches[1]);
-      }
-    }
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
+    params: {},
+    option: {}
+  }
+  const { status, body } = await apis.downloadQQMusic(props);
+  Object.assign(ctx, {
+    status,
+    body,
   });
 });
 
 router.get('/getHotkey', async (ctx, next) => {
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    hostUin: 0,
-    needNewCode: 0
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
+    params: {},
     options: {}
   };
-  await apis.getHotKey(props).then((res) => {
-    let response = res.data;
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
+  const { status, body } = await apis.getHotKey(props);
+  Object.assign(ctx, {
+    status,
+    body,
   });
 });
 
@@ -64,42 +36,22 @@ router.get('/getHotkey', async (ctx, next) => {
 // n：每页歌曲数量
 // catZhida: 0表示歌曲, 2表示歌手, 3表示专辑, 4, 5
 router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) => {
-  let w = ctx.query.key;
-  let n = +ctx.query.limit || 10;
-  let p = +ctx.query.page || 1;
-  let catZhida = +ctx.query.catZhida || 1;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    ct: 24,
-    qqmusic_ver: 1298,
-    new_json: 1,
-    remoteplace: 'txt.yqq.song',
-    // searchid: 58932895599763136,
-    t: 0,
-    aggr: 1,
-    cr: 1,
-    catZhida,
-    lossless: 0,
-    flag_qc: 0,
-    p,
-    n,
-    w,
-  });
-  let props = {
+  const { key: w, limit: n, page: p, catZhida } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      w,
+      n: +n || 10,
+      p: +p || 1,
+      catZhida: +catZhida || 1,
+    },
     options: {}
   };
   if (w) {
-    await apis.getSearchByKey(props).then((res) => {
-      let response = res.data;
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
+    const { status, body } = await apis.getSearchByKey(props);
+    Object.assign(ctx, {
+      status,
+      body,
     });
   } else {
     ctx.status = 400;
@@ -111,27 +63,19 @@ router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) 
 
 // search smartbox
 router.get('/getSmartbox/:key?', async (ctx, next) => {
-  let key = ctx.query.key;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    is_xml: 0,
-    key,
-  });
-  let props = {
+  const { key } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      key,
+    },
     options: {}
   };
   if (key) {
-    await apis.getSmartbox(props).then((res) => {
-      let response = res.data;
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
+    const { status, body } = await apis.getSmartbox(props);
+    Object.assign(ctx, {
+      status,
+      body,
     });
   } else {
     ctx.status = 200;
@@ -151,24 +95,16 @@ router.get('/getSmartbox/:key?', async (ctx, next) => {
  */
 // 1
 router.get('/getSongListCategories', async (ctx, next) => {
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
+    params: {},
     options: {}
   };
-  await apis.songListCategories(props).then((res) => {
-    let response = res.data;
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
-  });
+  const { status, body } = await apis.songListCategories(props);
+  Object.assign(ctx, {
+    status,
+    body
+  })
 });
 
 /**
@@ -180,78 +116,99 @@ router.get('/getSongListCategories', async (ctx, next) => {
  * @return: 
  */
 router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, next) => {
-  let ein = ctx.query.limit || 19;
-  let sin = ctx.query.page || 0;
-  let sortId = ctx.query.sortId || 5;
-  let categoryId = ctx.query.categoryId || 10000000;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    picmid: 1,
+  const {
+    limit: ein = 19,
+    page: sin = 0,
+    sortId = 5,
+    categoryId = 10000000
+  } = ctx.query;
+  const params = Object.assign({
     categoryId,
     sortId,
     sin,
     ein,
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
-  await apis.songLists(props).then((res) => {
-    let response = res.data;
-    if (typeof response === 'string') {
-      let reg = /^\w+\(({[^()]+})\)$/;
-      let matches = response.match(reg);
-      if (matches) {
-        response = JSON.parse(matches[1]);
-      }
+  const { status, body } = await apis.songLists(props);
+  Object.assign(ctx, {
+    status,
+    body,
+  })
+});
+
+// getSongInfo
+router.get('/getSongInfo/:songmid?/:songid?', async (ctx, next) => {
+  const song_mid = ctx.query.songmid;
+  const song_id = ctx.query.songid || '';
+
+  const params = Object.assign(commonParams, {
+    format: "json",
+    inCharset: "utf8",
+    outCharset: "utf-8",
+    notice: 0,
+    platform: "yqq.json",
+    needNewCode: 0,
+    data: {
+        comm: {
+            ct: 24,
+            cv: 0
+        },
+        songinfo: {
+            method: "get_song_detail_yqq",
+            param: {
+                song_type: 0,
+                song_mid,
+                song_id,
+            },
+            module: "music.pf_song_detail_svr"
+        }
     }
+  });
+  const props = {
+    method: 'get',
+    params,
+    options: {}
+  };
+
+  await apis.UCommon(props).then((res) => {
+    const response = res.data;
     ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
-    console.log(`error`.error, error);
+    console.log(`error`, error);
   });
 });
 
 // 4
 // disstid=7011264340
 router.get('/getSongListDetail/:disstid?', async (ctx, next) => {
-  let disstid = ctx.query.disstid;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    type: 1,
-    json: 1,
-    utf8: 1,
-    onlysong: 0,
-    new_format: 1,
-    disstid,
-  });
-  let props = {
+  const { disstid } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      disstid,
+    },
     options: {}
   };
-  await apis.songListDetail(props).then((res) => {
-    let response = res.data;
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
-  });
+  const { status, body } = await apis.songListDetail(props);
+  Object.assign(ctx, {
+    status,
+    body,
+  })
 });
 
 // newDisk
 router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
-  let page = +ctx.query.page || 1;
-  let num = +ctx.query.limit || 20;
-  let start = (page - 1) * num;
-  let data = {
+  const page = +ctx.query.page || 1;
+  const num = +ctx.query.limit || 20;
+  const start = (page - 1) * num;
+  const data = {
     new_album: {
       module: 'newalbum.NewAlbumServer',
       method: 'get_new_album_info',
@@ -273,58 +230,51 @@ router.get('/getNewDisks/:page?/:limit?', async (ctx, next) => {
       param: {}
     };
   }
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   await apis.UCommon(props).then((res) => {
-    let response = res.data;
+    const response = res.data;
     ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
-    console.log(`error`.error, error);
+    console.log(`error`, error);
   });
 });
 
 // getMvByTag
 router.get('/getMvByTag', async (ctx, next) => {
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'GB2312',
-    cmd: 'shoubo',
-    lan: 'all',
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
+    params: {},
     options: {}
   };
-  await apis.getMvByTag(props).then((res) => {
-    let response = res.data;
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
+  const { status, body } = await apis.getMvByTag(props);
+  Object.assign(ctx, {
+    status,
+    body,
   });
 });
 
 // MV
 // area_id=15&version_id=7
 router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => {
-  let area_id = +ctx.query.area_id;
-  let version_id = +ctx.query.version_id;
-  let size = +ctx.query.limit || 20;
-  let start = (ctx.query.page - 1 || 0) * size;
-  let data = {
+  const {
+    area_id = 15,
+    version_id = 7,
+    size = 20,
+    page = 0,
+  } = ctx.query;
+  const start = (page - 1 || 0) * size;
+  const data = {
     comm: {
       ct: 24
     },
@@ -345,24 +295,24 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => 
       }
     }
 }
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   if (version_id && area_id) {
     await apis.UCommon(props).then((res) => {
-      let response = res.data;
+      const response = res.data;
       ctx.status = 200;
       ctx.body = {
         response,
       }
     }).catch(error => {
-      console.log(`error`.error, error);
+      console.log(`error`, error);
     });
   } else {
     ctx.status = 400;
@@ -376,30 +326,22 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', async (ctx, next) => 
 // getSimilarSinger
 // singermid=0025NhlN2yWrP4
 router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
-  let singer_mid = ctx.query.singermid;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    utf8: 1,
-    singer_mid,
-    start: 0,
-    num: 5,
-  });
-  let props = {
+  const {
+    singermid: singer_mid
+  } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      singer_mid,
+    },
     options: {}
   };
   if (singer_mid) {
-    await apis.getSimilarSinger(props).then((res) => {
-      let response = res.data;
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getSimilarSinger(props);
+    Object.assign(ctx, {
+      status,
+      body
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -411,10 +353,10 @@ router.get('/getSimilarSinger/:singermid?', async (ctx, next) => {
 // getSingerAlbum
 // singermid=0025NhlN2yWrP4
 router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
-  let singermid = ctx.query.singermid;
-  let num = +ctx.query.limit || 5;
-  let sin = ctx.query.page || 0;
-  let data = {
+  const singermid = ctx.query.singermid;
+  const num = +ctx.query.limit || 5;
+  const sin = ctx.query.page || 0;
+  const data = {
     comm: {
       ct: 24,
       cv: 0
@@ -430,25 +372,25 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
       module: 'music.web_singer_info_svr',
     }
   };
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     singermid,
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   if (singermid) {
     await apis.UCommon(props).then((res) => {
-      let response = res.data;
+      const response = res.data;
       ctx.status = 200;
       ctx.body = {
         response,
       }
     }).catch(error => {
-      console.log(`error`.error, error);
+      console.log(`error`, error);
     });
   } else {
     ctx.status = 400;
@@ -463,16 +405,14 @@ router.get('/getSingerAlbum/:singermid?/:limit?/:page?', async (ctx, next) => {
  * @param order: time(fan upload) || listen(singer all)
  */
 router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
-  let singermid = ctx.query.singermid;
-  let order = ctx.query.order;
-  let num = ctx.query.limit || 5;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    cid: 205360581,
+  const {
     singermid,
     order,
-    begin: 0,
+    num = 5,
+  } = ctx.query;
+  const params = Object.assign({
+    singermid,
+    order,
     num,
   });
   if (order && order.toLowerCase() === 'time') {
@@ -480,21 +420,17 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
       cmd: 1,
     })
   }
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   if (singermid) {
-    await apis.getSingerMv(props).then((res) => {
-      let response = res.data;
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getSingerMv(props);
+    Object.assign(ctx, {
+      status,
+      body,
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -504,29 +440,22 @@ router.get('/getSingerMv/:singermid?/:limit?/:order?', async (ctx, next) => {
 });
 
 router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
-  let singermid = ctx.query.singermid;
-  let params = Object.assign({
-    format: 'xml',
-    outCharset: 'utf-8',
+  const {
     singermid,
-    utf8: 1,
-    r: moment().valueOf(),
-  });
-  let props = {
+  } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      singermid,
+    },
     options: {}
   };
   if (singermid) {
-    await apis.getSingerDesc(props).then((res) => {
-      let response = JSON.stringify(res.data);
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getSingerDesc(props);
+    Object.assign(ctx, {
+      status,
+      body,
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -536,29 +465,22 @@ router.get('/getSingerDesc/:singermid?', async (ctx, next) => {
 });
 
 router.get('/getSingerStarNum/:singermid?', async (ctx, next) => {
-  let singermid = ctx.query.singermid;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
+  const {
     singermid,
-    utf8: 1,
-    rnd: moment().valueOf(),
-  });
-  let props = {
+  } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      singermid,
+    },
     options: {}
   };
   if (singermid) {
-    await apis.getSingerStarNum(props).then((res) => {
-      let response = res.data;
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getSingerStarNum(props);
+    Object.assign(ctx, {
+      status,
+      body,
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -569,86 +491,54 @@ router.get('/getSingerStarNum/:singermid?', async (ctx, next) => {
 
 // radio
 router.get('/getRadioLists', async (ctx, next) => {
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    channel: 'radio',
-    page: 'index',
-    tpl: 'wk',
-    new: 1,
-    p: Math.round(1),
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
+    params: {},
     options: {}
   };
-  await apis.getRadioLists(props).then((res) => {
-    let response = res.data;
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
-  });
+  const { status, body } = await apis.getRadioLists(props);
+  Object.assign(ctx, {
+    status,
+    body,
+  })
 });
 
 // DigitalAlbum
 router.get('/getDigitalAlbumLists', async (ctx, next) => {
-  let params = Object.assign( {
-    format: 'json',
-    outCharset: 'utf-8',
-    cmd: 'pc_index_new',
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
+    params: {},
     options: {}
   };
-  await apis.getDigitalAlbumLists(props).then((res) => {
-    let response = res.data;
-    ctx.status = 200;
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
-  });
+  const { status, body } = await apis.getDigitalAlbumLists(props);
+  Object.assign(ctx, {
+    status,
+    body,
+  })
 });
 
 // music
 // getLyric
 // songmid=003rJSwm3TechU
 router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
-  let songmid = ctx.query.songmid;
-  let isFormat = ctx.query.isFormat || false;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    pcachetime: moment().valueOf(),
+  const {
     songmid,
-  });
-  let props = {
+    isFormat,
+  } = ctx.query;
+  const props = {
     method: 'get',
-    params,
-    options: {}
+    params: {
+      songmid,
+    },
+    options: {},
+    isFormat,
   };
   if (songmid) {
-    await apis.getLyric(props).then((res) => {
-      let lyricString = res.data && res.data.lyric &&
-        new Buffer.from(res.data.lyric, 'base64').toString();
-      let lyric = isFormat ? lyricParse(lyricString) : lyricString;
-      let response = {
-        ...res.data,
-        lyric,
-      };
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getLyric(props);
+    Object.assign(ctx, {
+      status,
+      body,
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -659,9 +549,9 @@ router.get('/getLyric/:songmid?/:isFormat?', async (ctx, next) => {
 
 // songmid=003rJSwm3TechU
 router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
-  let songmid = ctx.query.songmid + '';
-  let guid = _guid ? _guid + '' : '1429839143';
-  let data = {
+  const songmid = ctx.query.songmid + '';
+  const guid = _guid ? _guid + '' : '1429839143';
+  const data = {
     req: {
       module: "CDN.SrfCdnDispatchServer",
       method: "GetCdnDispatch",
@@ -690,23 +580,23 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
       cv: 0
     }
   }
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {},
   };
   if (songmid) {
     await apis.UCommon(props).then((res) => {
-      let response = res.data;
+      const response = res.data;
       let playLists = [];
-      let req_0 = response.req_0.data;
+      const req_0 = response.req_0.data;
       req_0.sip.map(sipURL => {
-        let purl = req_0.midurlinfo[0].purl;
-        let URI = `${sipURL}${purl}`
+        const purl = req_0.midurlinfo[0].purl;
+        const URI = `${sipURL}${purl}`
         playLists.push(URI);
       });
       response.playLists = playLists;
@@ -714,7 +604,7 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log(`error`.error, error);
+      console.log(`error`, error);
     });
   } else {
     ctx.status = 400;
@@ -727,26 +617,20 @@ router.get('/getMusicVKey/:songmid?', async (ctx, next) => {
 // album
 // albummid=0016l2F430zMux
 router.get('/getAlbumInfo/:albummid?', async (ctx, next) => {
-  let albummid = ctx.query.albummid;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'utf-8',
-    albummid,
-  });
-  let props = {
+  const { albummid } = ctx.query;
+  const props = {
     method: 'get',
-    params,
+    params: {
+      albummid,
+    },
     options: {}
   };
   if (albummid) {
-    await apis.getAlbumInfo(props).then((res) => {
-      let response = res.data;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getAlbumInfo(props);
+    Object.assign(ctx, {
+      status,
+      body,
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -763,46 +647,39 @@ TODO:
 // rootcommentid=album_8220_1003310416_1558068713
 // cid=205360772
 router.get('/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?', async (ctx, next) => {
-  let id = ctx.query.id;
-  let pagesize = ctx.query.pagesize || 25;
-  let pagenum = ctx.query.pagenum || 0;
-  let cid = ctx.query.cid || 205360772;
-  let cmd = ctx.query.cmd || 8;
-  let reqtype = ctx.query.reqtype || 2;
-  let biztype = ctx.query.biztype || 2;
-  let rootcommentid = pagenum ? ctx.query.rootcommentid : '';
-  let checkrootcommentid = !pagenum ? true : !!rootcommentid;
-  let params = Object.assign({
-    format: 'json',
-    outCharset: 'GB2312',
+  const {
+    id,
+    pagesize = 25,
+    pagenum = 0,
+    cid = 205360772,
+    cmd = 8,
+    reqtype = 2,
+    biztype = 2,
+    rootcommentid = !pagenum && '',
+  } = ctx.query;
+  const checkrootcommentid = !pagenum ? true : !!rootcommentid;
+
+  const params = Object.assign({
     cid,
     reqtype,
     biztype,
     topid: id,
     cmd,
-    needmusiccrit: 0,
     pagenum,
     pagesize,
     lasthotcommentid: rootcommentid,
-    domain: 'qq.com',
-    ct: 24,
-    cv: 10101010,
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   if (id && checkrootcommentid) {
-    await apis.getComments(props).then((res) => {
-      let response = res.data;
-      ctx.status = 200;
-      ctx.body = {
-        response,
-      }
-    }).catch(error => {
-      console.log(`error`.error, error);
-    });
+    const { status, body } = await apis.getComments(props);
+    Object.assign(ctx, {
+      status,
+      body,
+    })
   } else {
     ctx.status = 400;
     ctx.body = {
@@ -813,7 +690,7 @@ router.get('/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:
 
 // recommend
 router.get('/getRecommend', async (ctx, next) => {
-  let data = {
+  const data = {
     comm: {
       ct: 24
     },
@@ -875,31 +752,33 @@ router.get('/getRecommend', async (ctx, next) => {
       param: {}
     }
   };
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   await apis.UCommon(props).then((res) => {
-    let response = res.data;
+    const response = res.data;
     ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
-    console.log(`error`.error, error);
+    console.log(`error`, error);
   });
 });
 
 // mv play
 // vid=u00222le4ox
 router.get('/getMvPlay/:vid?', async (ctx, next) => {
-  let vid = ctx.query.vid;
-  let data = {
+  const {
+    vid,
+  } = ctx.query;
+  const data = {
     comm: {
       ct: 24,
       cv: 4747474
@@ -966,18 +845,18 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
       }
     }
   };
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   if (vid) {
     await apis.UCommon(props).then((res) => {
-      let response = res.data;
+      const response = res.data;
       let mvurls = response.getMVUrl.data;
       let mvurlskey = Object.keys(mvurls)[0];
       let mp4_urls = mvurls[mvurlskey].mp4.map(item => item.freeflow_url);
@@ -985,7 +864,7 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
       let urls = [...mp4_urls, ...hls_urls];
       let play_urls = [];
       let playLists = {};
-      urls.forEach(url => {
+      urls.length && urls.forEach(url => {
         play_urls = [...play_urls, ...url]
       });
       playLists = {
@@ -1000,7 +879,7 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
         response,
       }
     }).catch(error => {
-      console.log(`error`.error, error);
+      console.log(`error`, error);
     });
   } else {
     ctx.status = 400;
@@ -1012,40 +891,24 @@ router.get('/getMvPlay/:vid?', async (ctx, next) => {
 
 // rankList: getTopLists
 router.get('/getTopLists', async (ctx, next) => {
-  let params = Object.assign(commonParams, {
-    format: 'json',
-    outCharset: 'utf-8',
-    platform: 'h5',
-    needNewCode: 1,
-  });
-  let props = {
+  const props = {
     method: 'get',
-    params,
+    params: commonParams,
     options: {}
   };
-  await apis.getTopLists(props).then((res) => {
-    let response = res.data;
-    if (typeof response === 'string') {
-      let reg = /^\w+\(({[^()]+})\)$/;
-      let matches = response.match(reg);
-      if (matches) {
-        response = JSON.parse(matches[1]);
-      }
-    }
-    ctx.body = {
-      response,
-    }
-  }).catch(error => {
-    console.log(`error`.error, error);
-  });
+  const { status, body } = await apis.getTopLists(props);
+  Object.assign(ctx, {
+    status,
+    body,
+  })
 });
 
 // ranks
 router.get('/getRanks/:topId?/:limit?/:page?', async (ctx, next) => {
-  let topId = +ctx.query.limit || 4;
-  let num = +ctx.query.limit || 20;
-  let offset = +ctx.query.page || 0;
-  let data = {
+  const topId = +ctx.query.limit || 4;
+  const num = +ctx.query.limit || 20;
+  const offset = +ctx.query.page || 0;
+  const data = {
     detail: {
       module: "musicToplist.ToplistInfoServer",
       method: "GetDetail",
@@ -1061,30 +924,30 @@ router.get('/getRanks/:topId?/:limit?/:page?', async (ctx, next) => {
       cv: 0
     }
   };
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   await apis.UCommon(props).then((res) => {
-    let response = res.data;
+    const response = res.data;
     ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
-    console.log(`error`.error, error);
+    console.log(`error`, error);
   });
 });
 
 
 // ticket
 router.get('/getTicketInfo', async (ctx, next) => {
-  let data = {
+  const data = {
     comm: {
       ct: 24,
       cv: 0
@@ -1102,26 +965,26 @@ router.get('/getTicketInfo', async (ctx, next) => {
       param: {}
     }
   };
-  let params = Object.assign({
+  const params = Object.assign({
     format: 'json',
     inCharset: 'utf8',
     outCharset: 'GB2312',
     platform: 'yqq.json',
     data: JSON.stringify(data),
   });
-  let props = {
+  const props = {
     method: 'get',
     params,
     options: {}
   };
   await apis.UCommon(props).then((res) => {
-    let response = res.data;
+    const response = res.data;
     ctx.status = 200;
     ctx.body = {
       response,
     }
   }).catch(error => {
-    console.log(`error`.error, error);
+    console.log(`error`, error);
   });
 });
 
