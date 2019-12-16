@@ -3,63 +3,14 @@ const Router = require('koa-router');
 const router = new Router();
 const { _guid, commonParams, } = require('../module/config');
 const apis = require('../module/index');
+const context = require('./context');
 
 // downloadQQMusic
-router.get('/downloadQQMusic', async (ctx, next) => {
-  const props = {
-    method: 'get',
-    params: {},
-    option: {}
-  }
-  const { status, body } = await apis.downloadQQMusic(props);
-  Object.assign(ctx, {
-    status,
-    body,
-  });
-});
+router.get('/downloadQQMusic', context.getDownloadQQMusic);
 
-router.get('/getHotkey', async (ctx, next) => {
-  const props = {
-    method: 'get',
-    params: {},
-    options: {}
-  };
-  const { status, body } = await apis.getHotKey(props);
-  Object.assign(ctx, {
-    status,
-    body,
-  });
-});
+router.get('/getHotkey', context.getHotKey);
 
-// w：搜索关键字
-// p：当前页
-// n：每页歌曲数量
-// catZhida: 0表示歌曲, 2表示歌手, 3表示专辑, 4, 5
-router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', async (ctx, next) => {
-  const { key: w, limit: n, page: p, catZhida } = ctx.query;
-  const props = {
-    method: 'get',
-    params: {
-      w,
-      n: +n || 10,
-      p: +p || 1,
-      catZhida: +catZhida || 1,
-    },
-    options: {}
-  };
-  if (w) {
-    const { status, body } = await apis.getSearchByKey(props);
-    Object.assign(ctx, {
-      status,
-      body,
-    });
-  } else {
-    ctx.status = 400;
-    ctx.body = {
-      response: 'search key is null',
-    }
-  }
-});
+router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', context.getSearchByKey);
 
 // search smartbox
 router.get('/getSmartbox/:key?', async (ctx, next) => {
