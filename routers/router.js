@@ -13,83 +13,12 @@ router.get('/getHotkey', context.getHotKey);
 router.get('/getSearchByKey/:key?/:limit?/:page?/:catZhida?', context.getSearchByKey);
 
 // search smartbox
-router.get('/getSmartbox/:key?', async (ctx, next) => {
-  const { key } = ctx.query;
-  const props = {
-    method: 'get',
-    params: {
-      key,
-    },
-    options: {}
-  };
-  if (key) {
-    const { status, body } = await apis.getSmartbox(props);
-    Object.assign(ctx, {
-      status,
-      body,
-    });
-  } else {
-    ctx.status = 200;
-    ctx.body = {
-      response: null,
-    }
-  }
-});
+router.get('/getSmartbox/:key?', context.getSmartbox);
 
-/**
- * @description: 歌单
- * 1 歌单类型
- * 2 所有歌单
- * 3 分类歌单
- * 4 歌单详情
- *
- */
 // 1
-router.get('/getSongListCategories', async (ctx, next) => {
-  const props = {
-    method: 'get',
-    params: {},
-    options: {}
-  };
-  const { status, body } = await apis.songListCategories(props);
-  Object.assign(ctx, {
-    status,
-    body
-  })
-});
+router.get('/getSongListCategories', context.getSongListCategories);
 
-/**
- * @description: 2, 3
- * @param {page} 页数
- * @param {limit} 每页条数[20, 60]
- * @param {categoryId} 分类
- * @param {sortId} 分类
- * @return: 
- */
-router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', async (ctx, next) => {
-  const {
-    limit: ein = 19,
-    page: sin = 0,
-    sortId = 5,
-    categoryId = 10000000
-  } = ctx.query;
-  const params = Object.assign({
-    categoryId,
-    sortId,
-    sin,
-    ein,
-  });
-  const props = {
-    method: 'get',
-    params,
-    options: {}
-  };
-  const { status, body } = await apis.songLists(props);
-  Object.assign(ctx, {
-    status,
-    body,
-  })
-});
+router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', context.getSongLists);
 
 // getSongInfo
 router.get('/getSongInfo/:songmid?/:songid?', async (ctx, next) => {
