@@ -9,6 +9,7 @@ const getSongListDetail = require('./getSongListDetail');
 const getNewDisks = require('./getNewDisks');
 const getMvByTag = require('./getMvByTag');
 const getMv = require('./getMv');
+const getSingerList = require('./getSingerList');
 const getSimilarSinger = require('./getSimilarSinger');
 const getSingerAlbum = require('./getSingerAlbum');
 const getSingerMv = require('./getSingerMv');
@@ -38,6 +39,7 @@ module.exports = {
   getNewDisks,
   getMvByTag,
   getMv,
+  getSingerList,
   getSimilarSinger,
   getSingerAlbum,
   getSingerMv,

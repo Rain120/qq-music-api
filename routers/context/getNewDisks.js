@@ -44,6 +44,7 @@ module.exports = async (ctx, next) => {
     const response = res.data;
     ctx.status = 200;
     ctx.body = {
+      status: 200,
       response,
     }
   }).catch(error => {

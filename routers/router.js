@@ -37,6 +37,8 @@ router.get('/getMvByTag', context.getMvByTag);
 // area_id=15&version_id=7
 router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', context.getMv);
 
+// getSingerList
+router.get('/getSingerList/:area?/:sex?/:genre?/:index?/:page?', context.getSingerList);
 
 // getSimilarSinger
 // singermid=0025NhlN2yWrP4

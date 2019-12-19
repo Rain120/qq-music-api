@@ -22,6 +22,7 @@ module.exports = async (ctx, next) => {
   } else {
     ctx.status = 400;
     ctx.body = {
+      status: 400,
       response: 'no singermid',
     }
   }

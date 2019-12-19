@@ -100,6 +100,10 @@ node app.js
 
 26. 获取票务信息
 
+27. 获取歌单详情
+
+28. 获取歌手列表
+
 ### 使用文档
 
 使用`apis`详见[文档](https://rain120.github.io/qq-music-api/#/)
