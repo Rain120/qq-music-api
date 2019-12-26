@@ -23,6 +23,7 @@ router.post('/batchGetSongLists', context.batchGetSongLists);
 
 // getSongInfo
 router.get('/getSongInfo/:songmid?/:songid?', context.getSongInfo);
+router.post('/batchGetSongInfo', context.batchGetSongInfo);
 
 // 4
 // disstid=7011264340

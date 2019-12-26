@@ -6,6 +6,7 @@ const getSongListCategories = require('./getSongListCategories');
 const getSongLists = require('./getSongLists');
 const batchGetSongLists = require('./batchGetSongLists');
 const getSongInfo = require('./getSongInfo');
+const batchGetSongInfo = require('./batchGetSongInfo');
 const getSongListDetail = require('./getSongListDetail');
 const getNewDisks = require('./getNewDisks');
 const getMvByTag = require('./getMvByTag');
@@ -37,6 +38,7 @@ module.exports = {
   getSongLists,
   batchGetSongLists,
   getSongInfo,
+  batchGetSongInfo,
   getSongListDetail,
   getNewDisks,
   getMvByTag,

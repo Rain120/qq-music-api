@@ -39,7 +39,7 @@ module.exports = async (ctx, next) => {
     options: {}
   };
 
-  await UCommon(props).then((res) => {
+  await UCommon(props).then(res => {
     const response = res.data;
     ctx.status = 200;
     ctx.body = {

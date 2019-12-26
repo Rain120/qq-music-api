@@ -313,9 +313,9 @@
 
 `sortId`: 最新, 最热,评分,  默认为5
 
-接口地址: `/getSongLists`
+接口地址: `/batchGetSongLists`
 
-调用例子: `/getSongLists`
+调用例子: `/batchGetSongLists`
 
 ```body
 {
@@ -881,6 +881,39 @@
 示例截图:
 
 ![获取歌曲相关信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSongInfo.png)
+
+### 批量获取歌曲相关信息
+
+接口说明: 调用此接口, 可批量获取歌曲相关信息
+
+参数列表:
+
+- 必选参数
+```
+songs: [
+  [`songmid`, `songid`]
+]
+```
+
+其中 `songid`可以不传
+
+接口地址: `/batchGetSongInfo`
+
+调用例子: `/batchGetSongInfo`
+
+```body
+{
+  "songs": [
+    ["001CLC7W2Gpz4J"],
+    ["0025NhlN2yWrP4"]
+  ]
+}
+```
+
+示例截图:
+
+![获取歌曲相关信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/batchGetSongInfo.png)
+
 
 
 ### 获取歌曲VKey
