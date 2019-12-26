@@ -275,7 +275,7 @@
 
 - 必选参数
 
-`categoryId`: 类别`id`
+`categoryId`: 类别`id`, 详见 `/getSongListCategories`
 
 - 可选参数
 
@@ -294,6 +294,43 @@
 **获取歌单列表**
 
 ![获取歌单列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSongLists.png)
+
+### 批量获取歌单列表
+
+接口说明: 调用此接口, 可批量获取歌单列表
+
+参数列表:
+
+- 必选参数
+
+`categoryIds`: 类别`id`列表, 详见 `/getSongListCategories`
+
+- 可选参数
+
+`page`: 当前页数, 默认为1
+
+`limit`: 取出歌单数量, 默认为 20
+
+`sortId`: 最新, 最热,评分,  默认为5
+
+接口地址: `/getSongLists`
+
+调用例子: `/getSongLists`
+
+```body
+{
+  "limit": 19,
+  "page": 0,
+  "sortId": 5,
+  "categoryIds": [167, 168]
+}
+```
+
+示例截图:
+
+**批量获取歌单列表**
+
+![获取歌单列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/batchGetSongLists.png)
 
 **获取歌单列表-带参数**
 

@@ -4,6 +4,7 @@ const getSearchByKey = require('./getSearchByKey');
 const getSmartbox = require('./getSmartbox');
 const getSongListCategories = require('./getSongListCategories');
 const getSongLists = require('./getSongLists');
+const batchGetSongLists = require('./batchGetSongLists');
 const getSongInfo = require('./getSongInfo');
 const getSongListDetail = require('./getSongListDetail');
 const getNewDisks = require('./getNewDisks');
@@ -34,6 +35,7 @@ module.exports = {
   getSmartbox,
   getSongListCategories,
   getSongLists,
+  batchGetSongLists,
   getSongInfo,
   getSongListDetail,
   getNewDisks,

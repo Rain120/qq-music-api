@@ -1,4 +1,3 @@
-const moment = require('moment');
 const Router = require('koa-router');
 const router = new Router();
 const { _guid, commonParams, } = require('../module/config');
@@ -19,6 +18,8 @@ router.get('/getSmartbox/:key?', context.getSmartbox);
 router.get('/getSongListCategories', context.getSongListCategories);
 
 router.get('/getSongLists/:page?/:limit?/:categoryId?/:sortId?', context.getSongLists);
+
+router.post('/batchGetSongLists', context.batchGetSongLists);
 
 // getSongInfo
 router.get('/getSongInfo/:songmid?/:songid?', context.getSongInfo);
