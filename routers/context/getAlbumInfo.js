@@ -10,7 +10,7 @@ module.exports = async (ctx, next) => {
     params: {
       albummid,
     },
-    options: {}
+    option: {}
   };
   if (albummid) {
     const { status, body } = await getAlbumInfo(props);

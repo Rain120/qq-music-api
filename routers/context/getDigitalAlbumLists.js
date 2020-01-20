@@ -6,7 +6,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params: {},
-    options: {}
+    option: {}
   };
   const { status, body } = await getDigitalAlbumLists(props);
   Object.assign(ctx, {

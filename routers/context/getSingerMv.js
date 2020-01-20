@@ -21,7 +21,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params,
-    options: {}
+    option: {}
   };
   if (singermid) {
     const { status, body } = await getSingerMv(props);

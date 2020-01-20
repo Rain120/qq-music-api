@@ -11,7 +11,7 @@ module.exports = async (ctx, next) => {
     params: {
       singermid,
     },
-    options: {}
+    option: {}
   };
   if (singermid) {
     const { status, body } = await getSingerStarNum(props);

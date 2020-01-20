@@ -36,7 +36,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params,
-    options: {}
+    option: {}
   };
 
   await UCommon(props).then(res => {

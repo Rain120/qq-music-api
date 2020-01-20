@@ -9,7 +9,7 @@ module.exports = async (ctx, next) => {
     params: {
       key,
     },
-    options: {}
+    option: {}
   };
   if (key) {
     const { status, body } = await getSmartbox(props);

@@ -35,7 +35,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params,
-    options: {}
+    option: {}
   };
   if (id && checkrootcommentid) {
     const { status, body } = await getComments(props);

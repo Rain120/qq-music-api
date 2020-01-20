@@ -13,7 +13,7 @@ module.exports = async (ctx, next) => {
     params: {
       songmid,
     },
-    options: {},
+    option: {},
     isFormat,
   };
   if (songmid) {

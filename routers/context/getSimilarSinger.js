@@ -12,7 +12,7 @@ module.exports = async (ctx, next) => {
     params: {
       singer_mid,
     },
-    options: {}
+    option: {}
   };
   if (singer_mid) {
     const { status, body } = await getSimilarSinger(props);

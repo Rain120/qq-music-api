@@ -9,7 +9,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params: commonParams,
-    options: {}
+    option: {}
   };
   const { status, body } = await getTopLists(props);
   Object.assign(ctx, {

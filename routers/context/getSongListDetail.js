@@ -17,7 +17,7 @@ module.exports = async (ctx, next) => {
     params: {
       disstid,
     },
-    options: {}
+    option: {}
   };
   const { status, body } = await songListDetail(props);
   Object.assign(ctx, {

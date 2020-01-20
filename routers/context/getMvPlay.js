@@ -81,7 +81,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params,
-    options: {}
+    option: {}
   };
   if (vid) {
     await UCommon(props).then((res) => {

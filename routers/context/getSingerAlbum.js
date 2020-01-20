@@ -31,7 +31,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params,
-    options: {}
+    option: {}
   };
   if (singermid) {
     await UCommon(props).then((res) => {

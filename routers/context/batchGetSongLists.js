@@ -26,7 +26,7 @@ module.exports = async (ctx, next) => {
 
   const props = {
     method: 'get',
-    options: {},
+    option: {},
     params,
   }
   

@@ -7,7 +7,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params: {},
-    options: {}
+    option: {}
   };
   const { status, body } = await getMvByTag(props);
   Object.assign(ctx, {

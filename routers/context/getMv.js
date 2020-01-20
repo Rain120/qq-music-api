@@ -39,7 +39,7 @@ module.exports = async (ctx, next) => {
   const props = {
     method: 'get',
     params,
-    options: {}
+    option: {}
   };
   if (version_id && area_id) {
     await UCommon(props).then((res) => {

@@ -17,7 +17,7 @@ module.exports =  async (ctx, next) => {
       p: +p || 1,
       catZhida: +catZhida || 1,
     },
-    options: {}
+    option: {}
   };
   if (w) {
     const { status, body } = await getSearchByKey(props);
