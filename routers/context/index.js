@@ -1,5 +1,5 @@
 const getDownloadQQMusic = require('./getDownloadQQMusic');
-const getHotKey = require('./getHotKey');
+const getHotKey = require('./getHotkey');
 const getSearchByKey = require('./getSearchByKey');
 const getSmartbox = require('./getSmartbox');
 const getSongListCategories = require('./getSongListCategories');
