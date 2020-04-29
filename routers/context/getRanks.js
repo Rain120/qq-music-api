@@ -4,7 +4,8 @@ const {
 const moment = require('moment');
 
 module.exports = async (ctx, next) => {
-  const topId = +ctx.query.limit || 4;
+  // Desc: https://github.com/Rain120/qq-music-api/issues/14
+  const topId = +ctx.query.topId || 4;
   const num = +ctx.query.limit || 20;
   const offset = +ctx.query.page || 0;
   const data = {
