@@ -5,9 +5,15 @@ const moment = require('moment');
 
 module.exports = async (ctx, next) => {
   // Desc: https://github.com/Rain120/qq-music-api/issues/14
+  // 1. topId is useless
+  // 2. qq api period is change not YYYY-MM-DD
   const topId = +ctx.query.topId || 4;
   const num = +ctx.query.limit || 20;
   const offset = +ctx.query.page || 0;
+  const date = ctx.query.period || moment();
+  const week = moment(date).isoWeek();
+  const year = moment(date).year();
+  const period = `${year}_${week}`
   const data = {
     detail: {
       module: "musicToplist.ToplistInfoServer",
@@ -16,7 +22,7 @@ module.exports = async (ctx, next) => {
         topId,
         offset,
         num,
-        period: moment().format('YYYY-MM-DD')
+        period
       }
     },
     comm: {
