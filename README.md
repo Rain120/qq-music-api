@@ -104,6 +104,8 @@ node app.js
 
 28. 获取歌手列表
 
+29. 获取歌曲 + 专辑图片 2020-05-24
+
 ### 使用文档
 
 使用`apis`详见[文档](https://rain120.github.io/qq-music-api/#/)

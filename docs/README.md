@@ -1044,7 +1044,7 @@ songs: [
 
 接口说明: 调用此接口, 可获取评论信息
 
-- 可选参数
+- 必选参数
 `id`: 专辑或者歌单请求结果的`id`
 
 - 可选参数
@@ -1075,6 +1075,37 @@ songs: [
 ![获取评论信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments.png)
 
 ![获取评论信息 - 带params](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-param.png)
+
+### 获取歌曲 + 专辑 图片
+
+接口说明: 调用此接口, 可获取票务信息
+
+- 必选参数
+  `id`: 专辑或者歌单请求结果的`id`
+
+- 可选参数
+
+  `size`: 图片大小, 默认 `300x300`
+
+  `maxAge`: 图片过期时间, 默认 `12 mins = 2592000ms`
+
+接口地址: `/getImageUrl`
+
+调用例子: `/getImageUrl?id=000MkMni19ClKG` or `/getImageUrl?id=000MkMni19ClKG&size=500x500`
+
+示例截图:
+
+![获取歌曲id](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-song-id.png)
+
+![获取歌曲图片地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-song-image.png)
+
+![歌曲图片地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/song-image.png)
+
+![获取专辑id](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-song-album-id.png)
+
+![获取歌曲专辑地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-album-image.png)
+
+![歌曲专辑地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/album-image.png)
 
 ### 获取票务信息
 

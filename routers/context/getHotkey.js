@@ -1,6 +1,4 @@
-const {
-  getHotKey,
-} = require('../../module');
+const { getHotKey } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const props = {

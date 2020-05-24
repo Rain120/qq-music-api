@@ -1,6 +1,4 @@
-const {
-  getSimilarSinger,
-} = require('../../module');
+const { getSimilarSinger } = require('../../module');
 
 // singermid=0025NhlN2yWrP4
 module.exports = async (ctx, next) => {

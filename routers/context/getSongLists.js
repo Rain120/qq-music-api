@@ -1,6 +1,5 @@
 const {
-  songLists,
-} = require('../../module');
+  songLists } = require('../../module');
 
 /**
  * @description: 2, 3

@@ -1,6 +1,4 @@
-const {
-  getSmartbox,
-} = require('../../module');
+const { getSmartbox } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const { key } = ctx.query;

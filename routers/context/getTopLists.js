@@ -1,9 +1,5 @@
-const {
-  getTopLists,
-} = require('../../module');
-const {
-  commonParams
-} = require('../../module/config');
+const { getTopLists } = require('../../module');
+const { commonParams } = require('../../module/config');
 
 module.exports = async (ctx, next) => {
   const props = {

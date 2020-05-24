@@ -1,6 +1,4 @@
-const {
-  UCommon,
-} = require('../../module');
+const { UCommon } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const data = {

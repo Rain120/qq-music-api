@@ -1,6 +1,4 @@
-const {
-  UCommon,
-} = require('../../module');
+const { UCommon } = require('../../module');
 
 // vid=u00222le4ox
 module.exports = async (ctx, next) => {

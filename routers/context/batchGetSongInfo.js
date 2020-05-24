@@ -1,9 +1,5 @@
-const {
-  UCommon,
-} = require('../../module');
-const {
-  commonParams
-} = require('../../module/config');
+const { UCommon } = require('../../module');
+const { commonParams } = require('../../module/config');
 /**
  * @description: 2, 3
  * @param songs 歌曲信息 [[songmid, songid]]

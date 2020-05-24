@@ -1,6 +1,4 @@
-const {
-  UCommon,
-} = require('../../module');
+const { UCommon } = require('../../module');
 const { _guid, } = require('../../module/config');
 
 // songmid=003rJSwm3TechU

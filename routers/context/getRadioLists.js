@@ -1,6 +1,4 @@
-const {
-  getRadioLists,
-} = require('../../module');
+const { getRadioLists } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const props = {

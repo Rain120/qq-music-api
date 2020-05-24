@@ -1,6 +1,4 @@
-const {
-  getMvByTag,
-} = require('../../module');
+const { getMvByTag } = require('../../module');
 
 // songmid=001CLC7W2Gpz4J
 module.exports = async (ctx, next) => {

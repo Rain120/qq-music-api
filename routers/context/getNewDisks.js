@@ -1,9 +1,5 @@
-const {
-  UCommon,
-} = require('../../module');
-const {
-  commonParams
-} = require('../../module/config');
+const { UCommon } = require('../../module');
+const { commonParams } = require('../../module/config');
 
 module.exports = async (ctx, next) => {
   const page = +ctx.query.page || 1;

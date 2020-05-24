@@ -1,6 +1,4 @@
-const {
-  UCommon,
-} = require('../../module');
+const { UCommon } = require('../../module');
 const { _guid, commonParams } = require('../../module/config');
 
 // -100 默认值 all

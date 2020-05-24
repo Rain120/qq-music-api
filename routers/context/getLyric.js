@@ -1,6 +1,4 @@
-const {
-  getLyric,
-} = require('../../module');
+const { getLyric } = require('../../module');
 
 // songmid=003rJSwm3TechU
 module.exports = async (ctx, next) => {

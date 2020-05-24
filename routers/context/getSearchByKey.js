@@ -1,6 +1,4 @@
-const {
-  getSearchByKey,
-} = require('../../module');
+const { getSearchByKey } = require('../../module');
 
 
 // w：搜索关键字

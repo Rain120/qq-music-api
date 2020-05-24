@@ -1,6 +1,4 @@
-const {
-  getDigitalAlbumLists,
-} = require('../../module');
+const { getDigitalAlbumLists } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const props = {

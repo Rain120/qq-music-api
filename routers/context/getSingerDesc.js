@@ -1,6 +1,4 @@
-const {
-  getSingerDesc,
-} = require('../../module');
+const { getSingerDesc } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const {

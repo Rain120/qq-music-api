@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon app.js",
-    "docs": "docsify serve docs"
+    "docs": "docsify serve docs -p 9611",
+    "commit-push": "./commit-push.sh"
   },
   "repository": {
     "type": "git",

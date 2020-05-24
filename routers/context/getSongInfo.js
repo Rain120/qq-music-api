@@ -1,9 +1,5 @@
-const {
-  UCommon,
-} = require('../../module');
-const {
-  commonParams
-} = require('../../module/config');
+const { UCommon } = require('../../module');
+const { commonParams } = require('../../module/config');
 
 // songmid=001CLC7W2Gpz4J
 module.exports = async (ctx, next) => {

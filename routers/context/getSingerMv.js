@@ -1,6 +1,4 @@
-const {
-  getSingerMv,
-} = require('../../module');
+const { getSingerMv } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const {

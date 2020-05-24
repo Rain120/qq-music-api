@@ -1,6 +1,4 @@
-const {
-  downloadQQMusic,
-} = require('../../module');
+const { downloadQQMusic } = require('../../module');
 
 module.exports = async (ctx, next) => {
   const props = {

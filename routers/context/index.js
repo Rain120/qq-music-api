@@ -28,6 +28,7 @@ const getMvPlay = require('./getMvPlay');
 const getTopLists = require('./getTopLists');
 const getRanks = require('./getRanks');
 const getTicketInfo = require('./getTicketInfo');
+const getImageUrl = require('./getImageUrl');
 
 module.exports = {
   getDownloadQQMusic,
@@ -60,4 +61,5 @@ module.exports = {
   getTopLists,
   getRanks,
   getTicketInfo,
+  getImageUrl,
 }

@@ -1,6 +1,4 @@
-const {
-  getAlbumInfo,
-} = require('../../module');
+const { getAlbumInfo } = require('../../module');
 
 // albummid=0016l2F430zMux
 module.exports = async (ctx, next) => {

@@ -1,6 +1,4 @@
-const {
-  getComments,
-} = require('../../module');
+const { getComments } = require('../../module');
 
 TODO:
 // comments: params error

@@ -1,7 +1,5 @@
 const Router = require('koa-router');
 const router = new Router();
-const { _guid, commonParams, } = require('../module/config');
-const apis = require('../module/index');
 const context = require('./context');
 
 // downloadQQMusic
@@ -94,5 +92,8 @@ router.get('/getRanks/:topId?/:limit?/:page?', context.getRanks);
 
 // ticket
 router.get('/getTicketInfo', context.getTicketInfo);
+
+// getImageUrl
+router.get('/getImageUrl', context.getImageUrl);
 
 module.exports = router;
