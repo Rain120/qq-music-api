@@ -2,13 +2,14 @@ const { UCommon } = require('../../module');
 
 // area_id=15&version_id=7
 module.exports = async (ctx, next) => {
+  // BUGFIX: https://github.com/Rain120/qq-music-api/issues/16#issuecomment-638230301
   const {
     area_id = 15,
     version_id = 7,
-    size = 20,
+    limit = 20,
     page = 0,
   } = ctx.query;
-  const start = (page - 1 || 0) * size;
+  const start = (+page ? +page - 1 : 0) * +limit;
   const data = {
     comm: {
       ct: 24
@@ -23,7 +24,7 @@ module.exports = async (ctx, next) => {
       method: 'GetAllocMvInfo',
       param: {
         start,
-        size,
+        limit: +limit,
         version_id,
         area_id,
         order: 1
