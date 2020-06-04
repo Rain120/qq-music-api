@@ -1,9 +1,7 @@
 const { getSingerStarNum } = require('../../module');
 
 module.exports = async (ctx, next) => {
-  const {
-    singermid,
-  } = ctx.query;
+  const { singermid } = ctx.query;
   const props = {
     method: 'get',
     params: {

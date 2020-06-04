@@ -11,11 +11,14 @@ const {
  */
 module.exports = async (ctx, next) => {
   const {
-    limit: ein = 19,
-    page: sin = 0,
+    limit = 20,
+    page = 0,
     sortId = 5,
     categoryId = 10000000
   } = ctx.query;
+  // BUGFIX: https://github.com/Rain120/qq-music-api/issues/16
+  const sin = +page * +limit;
+  const ein = +limit * (+page + 1) - 1;
   const params = Object.assign({
     categoryId,
     sortId,
