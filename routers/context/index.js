@@ -14,6 +14,7 @@ const getMv = require('./getMv');
 const getSingerList = require('./getSingerList');
 const getSimilarSinger = require('./getSimilarSinger');
 const getSingerAlbum = require('./getSingerAlbum');
+const getSingerHotsong = require('./getSingerHotsong');
 const getSingerMv = require('./getSingerMv');
 const getSingerDesc = require('./getSingerDesc');
 const getSingerStarNum = require('./getSingerStarNum');
@@ -47,6 +48,7 @@ module.exports = {
   getSingerList,
   getSimilarSinger,
   getSingerAlbum,
+  getSingerHotsong,
   getSingerMv,
   getSingerDesc,
   getSingerStarNum,

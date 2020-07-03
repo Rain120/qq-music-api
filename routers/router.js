@@ -48,6 +48,9 @@ router.get('/getSimilarSinger/:singermid?', context.getSimilarSinger);
 // singermid=0025NhlN2yWrP4
 router.get('/getSingerAlbum/:singermid?/:limit?/:page?', context.getSingerAlbum);
 
+
+router.get('/getSingerHotsong/:singermid?/:limit?/:page?', context.getSingerHotsong);
+
 /**
  * @description: getSingerMv
  * @param order: time(fan upload) || listen(singer all)
