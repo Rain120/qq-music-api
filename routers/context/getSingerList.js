@@ -12,7 +12,7 @@ module.exports = async (ctx, next) => {
     sex = -100,
     genre = -100,
     index = -100,
-    page = 1
+    page = 1,
   } = ctx.query;
   const guid = _guid ? _guid + '' : '1429839143';
   const data = {
@@ -28,7 +28,7 @@ module.exports = async (ctx, next) => {
         sex: +sex,
         genre: +genre,
         index: +index,
-        sin: 0,
+        sin: (page-1)*80,
         cur_page: +page
       }
     }
