@@ -1,0 +1,31 @@
+# http://editorconfig.org
+# https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+# 表示是最顶层的配置文件, 发现设为true时, 才会停止查找.editorconfig文件
+root = true
+
+[*]
+# tab space
+indent_style = tab
+
+indent_size = 2
+# 设置换行符, 值为lf, cr, crlf
+end_of_line = lf
+charset = utf-8
+
+# 用一个整数来设置tab缩进的列数。默认是indent_size
+tab_width = indent_size
+
+#是否删除行尾的空格
+trim_trailing_whitespace = true
+
+#是否在文件的最后插入一个空行
+insert_final_newline = true
+
+[*.md]
+indent_size = 2
+trim_trailing_whitespace = false
+insert_final_newline = true
+
+[Makefile]
+indent_style = tab

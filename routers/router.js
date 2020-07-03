@@ -48,7 +48,6 @@ router.get('/getSimilarSinger/:singermid?', context.getSimilarSinger);
 // singermid=0025NhlN2yWrP4
 router.get('/getSingerAlbum/:singermid?/:limit?/:page?', context.getSingerAlbum);
 
-
 router.get('/getSingerHotsong/:singermid?/:limit?/:page?', context.getSingerHotsong);
 
 /**
@@ -79,7 +78,10 @@ router.get('/getMusicVKey/:songmid?', context.getMusicVKey);
 // albummid=0016l2F430zMux
 router.get('/getAlbumInfo/:albummid?', context.getAlbumInfo);
 
-router.get('/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?', context.getComments);
+router.get(
+	'/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?',
+	context.getComments,
+);
 
 // recommend
 router.get('/getRecommend', context.getRecommend);

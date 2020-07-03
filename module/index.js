@@ -40,34 +40,34 @@ const UCommon = require('./apis/UCommon/UCommon');
 const getTopLists = require('./apis/rank/getTopLists');
 
 module.exports = {
-  downloadQQMusic,
-  // search
-  getHotKey,
-  getSearchByKey,
-  getSmartbox,
-  // song lists
-  songLists,
-  songListCategories,
-  songListDetail,
-  // MV
-  getMvByTag,
-  // singer
-  getSimilarSinger,
-  getSingerMv,
-  getSingerDesc,
-  getSingerStarNum,
-  // radio
-  getRadioLists,
-  // DigitalAlbum
-  getDigitalAlbumLists,
-  // music
-  getLyric,
-  // album
-  getAlbumInfo,
-  // comments
-  getComments,
-  // UCommon
-  UCommon,
-  // getTopLists
-  getTopLists,
-}
+	downloadQQMusic,
+	// search
+	getHotKey,
+	getSearchByKey,
+	getSmartbox,
+	// song lists
+	songLists,
+	songListCategories,
+	songListDetail,
+	// MV
+	getMvByTag,
+	// singer
+	getSimilarSinger,
+	getSingerMv,
+	getSingerDesc,
+	getSingerStarNum,
+	// radio
+	getRadioLists,
+	// DigitalAlbum
+	getDigitalAlbumLists,
+	// music
+	getLyric,
+	// album
+	getAlbumInfo,
+	// comments
+	getComments,
+	// UCommon
+	UCommon,
+	// getTopLists
+	getTopLists,
+};

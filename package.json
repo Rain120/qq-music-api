@@ -4,10 +4,13 @@
   "description": "qq music api, just for study",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon app.js",
     "docs": "docsify serve docs -p 9611",
-    "commit-push": "./commit-push.sh"
+    "commit-push": "./commit-push.sh",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "eslint": "eslint --fix --color module/**/** routers/**/** util/**/**",
+    "prettier": "prettier --write --tab-width=2 module/**/** routers/**/** util/**/**",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,20 @@
     "url": "https://github.com/Rain120/qq-music-api/issues"
   },
   "homepage": "https://github.com/Rain120/qq-music-api#readme",
+  "lint-staged": {
+    "*.{js}": [
+      "npm run prettier",
+      "npm run changelog"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "lint-staged"
+      ],
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "koa": "^2.7.0",
@@ -36,7 +53,19 @@
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-async-to-generator": "^7.4.4",
     "@babel/register": "^7.4.4",
-    "colors": "^1.3.3"
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "colors": "^1.3.3",
+    "conventional-changelog-cli": "^2.0.34",
+    "eslint": "^7.3.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
   },
   "engines": {
     "node": ">=7.6.0"
