@@ -4,21 +4,21 @@ const { UCommon } = require('../../module');
 module.exports = async (ctx, next) => {
   const singermid = ctx.query.singermid;
   const num = +ctx.query.limit || 5;
-  const begin = +ctx.query.page || 0;
+  const sin = ctx.query.page || 0;
   const data = {
     comm: {
       ct: 24,
       cv: 0
     },
     singer: {
-      method: 'GetAlbumList',
+      method: 'get_singer_detail_info',
       param: {
         sort: 5,
         singermid,
-        begin,
+        sin,
         num,
       },
-      module: 'music.musichallAlbum.AlbumListServer',
+      module: 'music.web_singer_info_svr',
     }
   };
   const params = Object.assign({
