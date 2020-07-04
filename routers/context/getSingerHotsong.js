@@ -4,7 +4,7 @@ const { UCommon } = require('../../module');
 module.exports = async (ctx, next) => {
 	const singermid = ctx.query.singermid;
 	const num = +ctx.query.limit || 5;
-	const sin = +ctx.query.page || 0;
+	const page = +ctx.query.page || 0;
 	const data = {
 		comm: {
 			ct: 24,
@@ -15,7 +15,7 @@ module.exports = async (ctx, next) => {
 			param: {
 				sort: 5,
 				singermid,
-				sin,
+				sin: (page-1)*num,
 				num,
 			},
 			module: 'music.web_singer_info_svr',
