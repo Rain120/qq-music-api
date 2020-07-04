@@ -1,0 +1,34 @@
+# dae 应用名
+application: qqmusic_api
+
+# runtime
+runtime: dockerfile
+
+# channel
+slack_report_channel: "#qqmusic_api"
+
+# 可选
+report_observer_emails:
+- liaoxingyi@douban.com
+- wanghaodong@douban.com
+
+# web 只能有一个
+web:
+
+  # 启动指令, 可选, 格式 list[string],  默认镜像 ENTRYPOINT
+  cmd: ["node", "app.js"]
+
+  # 单个容器内存上限
+  mem_mb: 1024
+
+  # 单个容器 cpu 上限
+  cpus: 2
+
+  # 容器侧暴露端口
+  port: 3200
+
+  # 容器个数, 可选, 默认 1
+  replicas: 1
+
+  # 工作目录, 可选, 默认镜像内 cwd
+  dir: /app
