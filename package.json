@@ -4,7 +4,7 @@
   "description": "qq music api, just for study",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon app.js",
+    "start": "nodemon app.js",
     "docs": "docsify serve docs -p 9611",
     "commit-push": "./commit-push.sh",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
@@ -65,6 +65,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   },
   "engines": {
