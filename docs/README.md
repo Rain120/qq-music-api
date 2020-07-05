@@ -416,6 +416,30 @@
 
 ![获取歌手MV - fans](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-time.png)
 
+### 获取歌手热门歌曲
+
+接口说明: 调用此接口, 可获取歌手热门歌曲
+
+参数列表:
+
+- 必选参数
+
+`singermid`: 歌手`id`
+
+- 可选参数
+
+`page`: 页数, 默认为0
+
+`limit`: 取出歌单数量, 默认为5
+
+接口地址: `/getSingerHotsong`
+
+调用例子: `/getSingerHotsong?singermid=0025NhlN2yWrP4&limit=10&page=2`
+
+示例截图:
+
+![获取歌手热门歌曲](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerHotsong.png)
+
 ### 获取相似歌手
 
 接口说明: 调用此接口, 可获取相似歌手
