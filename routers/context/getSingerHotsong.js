@@ -15,7 +15,7 @@ module.exports = async (ctx, next) => {
 			param: {
 				sort: 5,
 				singermid,
-				sin: (page-1)*num,
+				sin: (page - 1) * num,
 				num,
 			},
 			module: 'music.web_singer_info_svr',
