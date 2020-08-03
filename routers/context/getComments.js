@@ -14,7 +14,7 @@ module.exports = async (ctx, next) => {
 		cid = 205360772,
 		cmd = 8,
 		reqtype = 2,
-		biztype = 2,
+		biztype = 1,
 		rootcommentid = !pagenum && '',
 	} = ctx.query;
 	const checkrootcommentid = !pagenum ? true : !!rootcommentid;
