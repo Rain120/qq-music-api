@@ -5,7 +5,7 @@ const { getSearchByKey } = require('../../module');
 // n：每页歌曲数量
 // catZhida: 0表示歌曲, 2表示歌手, 3表示专辑, 4, 5
 module.exports = async (ctx, next) => {
-	const { key: w, limit: n, page: p, catZhida } = ctx.query;
+	const { key: w, limit: n, page: p, catZhida, remoteplace = 'song' } = ctx.query;
 	const props = {
 		method: 'get',
 		params: {
@@ -13,6 +13,7 @@ module.exports = async (ctx, next) => {
 			n: +n || 10,
 			p: +p || 1,
 			catZhida: +catZhida || 1,
+			remoteplace: `txt.yqq.${remoteplace}`,
 		},
 		option: {},
 	};

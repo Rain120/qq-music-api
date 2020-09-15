@@ -275,15 +275,15 @@
 
 - 必选参数
 
-`categoryId`: 类别`id`, 详见 `/getSongListCategories`
+	- `categoryId`: 类别`id`, 详见 `/getSongListCategories`
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为1
 
-`limit`: 取出歌单数量, 默认为 20
+	- `limit`: 取出歌单数量, 默认为 20
 
-`sortId`: 最新, 最热,评分,  默认为5
+	- `sortId`: 最新, 最热,评分,  默认为5
 
 接口地址: `/getSongLists`
 
@@ -303,15 +303,15 @@
 
 - 必选参数
 
-`categoryIds`: 类别`id`列表, 详见 `/getSongListCategories`
+	- `categoryIds`: 类别`id`列表, 详见 `/getSongListCategories`
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为1
 
-`limit`: 取出歌单数量, 默认为 20
+	- `limit`: 取出歌单数量, 默认为 20
 
-`sortId`: 最新, 最热,评分,  默认为5
+	- `sortId`: 最新, 最热,评分,  默认为5
 
 接口地址: `/batchGetSongLists`
 
@@ -344,7 +344,7 @@
 
 - 必选参数
 
-`disstid`: 歌单`id`
+	- `disstid`: 歌单`id`
 
 接口地址: `/getSongListDetail`
 
@@ -374,7 +374,7 @@
 
 - 必选参数
 
-`vid`: `video id`
+	- `vid`: `video id`
 
 接口地址: `/getMvPlay`
 
@@ -392,17 +392,17 @@
 
 - 必选参数
 
-`singermid`: 歌手`id`
+	- `singermid`: 歌手`id`
 
 - 可选参数
 
-`order`: 当前MV类型, 默认为`time`
+	- `order`: 当前MV类型, 默认为`time`
 
-- `listen`: 歌手专辑音乐MV
+		- `listen`: 歌手专辑音乐MV
 
-- `time`: 粉丝上传MV视频
+		- `time`: 粉丝上传MV视频
 
-`limit`: 取出歌单数量, 默认为5
+	- `limit`: 取出歌单数量, 默认为5
 
 接口地址: `/getSingerMV`
 
@@ -424,13 +424,13 @@
 
 - 必选参数
 
-`singermid`: 歌手`id`
+	- `singermid`: 歌手`id`
 
 - 可选参数
 
-`page`: 页数, 默认为0
+	- `page`: 页数, 默认为0
 
-`limit`: 取出歌单数量, 默认为5
+	- `limit`: 取出歌单数量, 默认为5
 
 接口地址: `/getSingerHotsong`
 
@@ -448,7 +448,7 @@
 
 - 必选参数
 
-`singermid`: 歌手`id`
+	- `singermid`: 歌手`id`
 
 接口地址: `/getSimilarSinger`
 
@@ -466,7 +466,7 @@
 
 - 必选参数
 
-`singermid`: 歌手`id`
+	- `singermid`: 歌手`id`
 
 接口地址: `/getSingerDesc`
 
@@ -672,7 +672,7 @@
 
 - 必选参数
 
-`singermid`: 歌手`id`
+	- `singermid`: 歌手`id`
 
 接口地址: `/getSingerStarNum`
 
@@ -702,7 +702,7 @@
 
 - 必选参数
 
-`albummid`: 专辑`id`
+	- `albummid`: 专辑`id`
 
 接口地址: `/getAlbumInfo`
 
@@ -732,11 +732,11 @@
 
 - 必选参数
 
-`songmid`: 专辑`id`
+	- `songmid`: 专辑`id`
 
 - 可选参数
 
-`isFormat`: 是否格式化歌词, 默认值为 `false`
+	- `isFormat`: 是否格式化歌词, 默认值为 `false`
 
 接口地址: `/getLyric`
 
@@ -756,7 +756,7 @@
 
 - 必选参数
 
-`area_id`: 区域`id`, 默认值为全部(15)
+	- `area_id`: 区域`id`, 默认值为全部(15)
 
 <details>
   <summary>Area</summary>
@@ -832,9 +832,9 @@
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为1
 
-`limit`: 取出歌单数量, 默认为 20
+	- `limit`: 取出歌单数量, 默认为 20
 
 接口地址: `/getMv`
 
@@ -852,9 +852,9 @@
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为1
 
-`limit`: 取出歌单数量, 默认为 20
+	- `limit`: 取出歌单数量, 默认为 20
 
 接口地址: `/getNewDisks`
 
@@ -872,13 +872,13 @@
 
 - 必选参数
 
-`singermid`: 歌手`id`
+	- `singermid`: 歌手`id`
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为1
 
-`limit`: 取出歌单数量, 默认为 20
+	- `limit`: 取出歌单数量, 默认为 20
 
 接口地址: `/getSingerAlbum`
 
@@ -896,7 +896,7 @@
 
 - 必选参数
 
-`songmid`: 歌曲`id`
+	- `songmid`: 歌曲`id`
 
 接口地址: `/getSongInfo`
 
@@ -938,8 +938,6 @@ songs: [
 
 ![获取歌曲相关信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/batchGetSongInfo.png)
 
-
-
 ### 获取歌曲VKey
 
 接口说明: 调用此接口, 可获取歌曲VKey
@@ -948,7 +946,7 @@ songs: [
 
 - 必选参数
 
-`songmid`: 歌曲`id`
+- `songmid`: 歌曲`id`
 
 接口地址: `/getMusicVKey`
 
@@ -978,7 +976,7 @@ songs: [
 
 - 必选参数
 
-`key`: 搜索关键字
+	- `key`: 搜索关键字
 
 接口地址: `/getSmartbox`
 
@@ -996,15 +994,35 @@ songs: [
 
 - 必选参数
 
-`key`: 搜索关键字
+	- `key`: 搜索关键字
 
-`catZhida`: 0表示歌曲, 2表示歌手, 3表示专辑, 默认值为1
+	- ~~`catZhida`: 默认值为1~~
+
+		~~1. `0` 表示歌曲~~
+
+		~~2. `2` 表示歌手~~
+
+		~~3. `3` 表示专辑~~
+
+	- `remoteplace`: 默认值为 `song`
+
+		1. 单曲: `song`
+
+		2. 专辑: `album`
+
+		3. MV: `mv`
+
+		4. 歌单: `playlist`
+
+		5. 用户: `user`
+
+		6. 歌词: `lyric`
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为 `1`
 
-`limit`: 取出歌单数量, 默认为 10
+	- `limit`: 取出歌单数量, 默认为 `10`
 
 接口地址: `/getSearchByKey`
 
@@ -1032,9 +1050,9 @@ songs: [
 
 - 可选参数
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为 `1`
 
-`limit`: 取出歌单数量, 默认为 10
+	- `limit`: 取出歌单数量, 默认为 `10`
 
 接口地址: `/getTopLists`
 
@@ -1050,11 +1068,11 @@ songs: [
 
 - 可选参数
 
-`topId`: 榜单`id`
+	- `topId`: 榜单`id`
 
-`page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为1
 
-`limit`: 取出歌单数量, 默认为 10
+	- `limit`: 取出歌单数量, 默认为 10
 
 接口地址: `/getRanks`
 
@@ -1069,23 +1087,24 @@ songs: [
 接口说明: 调用此接口, 可获取评论信息
 
 - 必选参数
-`id`: 专辑或者歌单请求结果的`id`
+
+	- `id`: 专辑或者歌单请求结果的`id`
 
 - 可选参数
 
-`rootcommentid`: 榜单`id`
+	- `rootcommentid`: 榜单`id`
 
-`cid`: 
+	- `cid`: 
 
-`pagenum`: 当前页数, 默认为0
+	- `pagenum`: 当前页数, 默认为 `0`
 
-`pagesize`: 取出评论数量, 默认为 25
+	- `pagesize`: 取出评论数量, 默认为 `25`
 
-`cmd`: 
+	- `cmd`: 
 
-`reqtype`: 
+	- `reqtype`: 
 
-`biztype`: 
+	- `biztype`: 
 
 
 接口地址: `/getComments`
@@ -1105,13 +1124,14 @@ songs: [
 接口说明: 调用此接口, 可获取票务信息
 
 - 必选参数
-  `id`: 专辑或者歌单请求结果的`id`
+
+  - `id`: 专辑或者歌单请求结果的`id`
 
 - 可选参数
 
-  `size`: 图片大小, 默认 `300x300`
+  - `size`: 图片大小, 默认 `300x300`
 
-  `maxAge`: 图片过期时间, 默认 `12 mins = 2592000ms`
+  - `maxAge`: 图片过期时间, 默认 `12 mins = 2592000ms`
 
 接口地址: `/getImageUrl`
 

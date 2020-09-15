@@ -14,6 +14,7 @@ module.exports = ({ method = 'get', params = {}, option = {} }) => {
 		cr: 1,
 		lossless: 0,
 		flag_qc: 0,
+		platform: 'yqq.json',
 	});
 	const options = Object.assign(option, {
 		params: data,
