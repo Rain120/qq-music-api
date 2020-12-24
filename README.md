@@ -46,6 +46,19 @@ node app.js
 ```
 项目监听端口是`3200`
 
+### 🐳 Docker
+
+```sh
+# local build
+npm run build:images
+
+# local run
+npm run run:images
+
+# remote run
+docker pull qq-music-api
+```
+
 ### 功能特性
 
 1. 获取QQ音乐产品的下载地址

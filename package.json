@@ -4,13 +4,16 @@
   "description": "qq music api, just for study",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
+    "start": "node app.js",
     "docs": "docsify serve docs -p 9611",
-    "commit-push": "./commit-push.sh",
+    "commit-push": "./scripts/commit-push.sh",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "eslint": "eslint --fix --color module/**/** routers/**/** util/**/**",
     "prettier": "prettier --write --tab-width=2 module/**/** routers/**/** util/**/**",
-    "lint-staged": "lint-staged"
+		"lint-staged": "lint-staged",
+		"build:images": "node ./scripts/build-images.js",
+		"run:images": "docker run -d --name qq-music-api -p 3200:3200 qq-music-api "
   },
   "repository": {
     "type": "git",
