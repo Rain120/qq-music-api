@@ -49,8 +49,11 @@ node app.js
 ### 🐳 Docker
 
 ```sh
-# local build
-npm run build:images
+# local local build
+npm run build:local-images
+
+# local remote build
+npm run build:remote-images
 
 # local run
 npm run run:images
