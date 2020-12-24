@@ -1,6 +1,6 @@
 {
   "name": "qq-music-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "qq music api, just for study",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "eslint": "eslint --fix --color module/**/** routers/**/** util/**/**",
     "prettier": "prettier --write --tab-width=2 module/**/** routers/**/** util/**/**",
 		"lint-staged": "lint-staged",
-		"build:images": "node ./scripts/build-images.js",
+		"build:local-images": "node ./scripts/build-images.js local",
+		"build:remote-images": "node ./scripts/build-images.js remote",
 		"run:images": "docker run -d --name qq-music-api -p 3200:3200 qq-music-api "
   },
   "repository": {
