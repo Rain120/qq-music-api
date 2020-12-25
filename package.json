@@ -14,6 +14,7 @@
 		"lint-staged": "lint-staged",
 		"build:local-images": "node ./scripts/build-images.js local",
 		"build:remote-images": "node ./scripts/build-images.js remote",
+		"build:images": "npm run build:local-images && npm run build:remote-images",
 		"run:images": "docker run -d --name qq-music-api -p 3200:3200 qq-music-api "
   },
   "repository": {

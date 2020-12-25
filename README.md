@@ -55,6 +55,9 @@ npm run build:local-images
 # local remote build
 npm run build:remote-images
 
+# build images
+npm run build:images
+
 # local run
 npm run run:images
 
