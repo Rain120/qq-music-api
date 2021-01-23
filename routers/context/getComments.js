@@ -43,7 +43,9 @@ module.exports = async (ctx, next) => {
 	} else {
 		ctx.status = 400;
 		ctx.body = {
-			response: "Don't have id or rootcommentid",
+			data: {
+				message: "Don't have id or rootcommentid",
+			}
 		};
 	}
 };

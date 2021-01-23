@@ -30,8 +30,11 @@ const getTopLists = require('./getTopLists');
 const getRanks = require('./getRanks');
 const getTicketInfo = require('./getTicketInfo');
 const getImageUrl = require('./getImageUrl');
+const {get: getCookie, set: setCookie} = require('./cookies');
 
 module.exports = {
+	getCookie,
+	setCookie,
 	getDownloadQQMusic,
 	getHotKey,
 	getSearchByKey,
