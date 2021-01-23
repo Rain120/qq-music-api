@@ -9,5 +9,6 @@ module.exports = ({ url, method = 'get', options = {}, hasCommonParams = true })
 			host: 'c.y.qq.com',
 		},
 	});
+	console.log(url, {opts})
 	return request(url, method, opts);
 };

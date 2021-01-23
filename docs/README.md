@@ -10,6 +10,41 @@
 
 !> koa2 接口说明(参数, 地址, 效果图)
 
+## 新特性
+
+### 支持自定义设置cookie
+
+#### 格式化自定义的 cookie
+
+![normalize-cookie.png](./screenshot/normalize-cookie.png)
+
+### 特性提示支持
+
+![new-feature-error-tips.png](./screenshot/new-feature-error-tips.png)
+
+### 获取 Cookie
+
+!> 目前只支持用户自己从 *QQ音乐* 获取获取 `Cookie`, 如何获取 `Cookie`, 登录 `QQ音乐`, 然后 `F12`, 找到 `Network`, 随便找一个获取数据的接口, 复制接口中 `request headers` 中的 `Cookie` 即可。
+
+接口说明: 调用此接口, 可获取自己在 `config/user-info.js` 配置的 `Cookie` 被格式化的结果
+
+配置信息如下:
+
+```
+const userInfo = {
+	loginUin: 'qq号码',
+	cookie: '',
+}
+```
+
+接口地址: `/getCookie`
+
+调用例子: `/getCookie`
+
+示例截图:
+
+![normalize-cookie.png](./screenshot/normalize-cookie.png)
+
 ### 获取QQ音乐产品的下载地址
 
 接口说明: 调用此接口, 可获取QQ音乐标准产品下载链接

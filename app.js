@@ -5,10 +5,24 @@ const bodyParser = require('koa-bodyparser');
 const path = require('path');
 const static = require('koa-static');
 const exec = require('child_process').exec;
+const chalk = require('chalk');
 
 const cors = require('./middlewares/koa-cors');
 const router = require('./routers/router');
+const cookie = require('./util/cookie');
 require('./util/colors');
+const userInfo = require('./config/user-info')
+global = Object.assign({}, userInfo);
+
+console.log(chalk.green('\n🥳🎉 We had supported config the user cookies. \n'));
+
+if (!(global.loginUin && (global.cookieObject || {}).uin)) {
+	console.log(chalk.yellow(`😔 The configuration ${chalk.red('loginUin')} or your ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
+}
+
+if (!global.cookie) {
+	console.log(chalk.yellow(`😔 The configuration ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
+}
 
 exec('npm info QQ-Music-API version', (err, stdout, stderr) => {
   if(!err){
@@ -20,6 +34,7 @@ exec('npm info QQ-Music-API version', (err, stdout, stderr) => {
 });
 
 app.use(bodyParser());
+app.use(cookie());
 app.use(static(
   path.join(__dirname,  'public')
 ));

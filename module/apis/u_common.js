@@ -9,5 +9,6 @@ module.exports = ({ options = {}, method = 'get' }) => {
 			'content-type': 'application/x-www-form-urlencoded',
 		},
 	});
+	console.log('https://u.y.qq.com/cgi-bin/musicu.fcg', {opts})
 	return request('https://u.y.qq.com/cgi-bin/musicu.fcg', method, opts, 'u');
 };

@@ -19,7 +19,9 @@ module.exports = async (ctx, next) => {
 	} else {
 		ctx.status = 400;
 		ctx.body = {
-			response: 'no albummid',
+			data: {
+				message: 'no albummid'
+			},
 		};
 	}
 };

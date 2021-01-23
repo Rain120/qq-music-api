@@ -2,6 +2,10 @@ const Router = require('koa-router');
 const router = new Router();
 const context = require('./context');
 
+// cookies
+router.get('/user/getCookie', context.getCookie);
+router.get('/user/setCookie', context.setCookie);
+
 // downloadQQMusic
 router.get('/downloadQQMusic', context.getDownloadQQMusic);
 
