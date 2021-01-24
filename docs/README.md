@@ -16,11 +16,11 @@
 
 #### 格式化自定义的 cookie
 
-![normalize-cookie.png](`https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/normalize-cookie.png)
+![normalize-cookie.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/normalize-cookie.png)
 
 ### 特性提示支持
 
-![new-feature-error-tips.png](`https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/new-feature-error-tips.png)
+![new-feature-error-tips.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/new-feature-error-tips.png)
 
 ### 获取 Cookie
 
