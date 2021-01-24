@@ -16,7 +16,7 @@ global = Object.assign({}, userInfo);
 
 console.log(chalk.green('\n🥳🎉 We had supported config the user cookies. \n'));
 
-if (!(global.loginUin && (global.cookieObject || {}).uin)) {
+if (!(global.loginUin || global.uin)) {
 	console.log(chalk.yellow(`😔 The configuration ${chalk.red('loginUin')} or your ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
 }
 

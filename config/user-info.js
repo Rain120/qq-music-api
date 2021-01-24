@@ -2,7 +2,7 @@
  * @Author: Rainy [https://github.com/rain120]
  * @Date: 2021-01-23 15:38:31
  * @LastEditors: Rainy
- * @LastEditTime: 2021-01-23 18:19:27
+ * @LastEditTime: 2021-01-24 11:47:04
  */
 
 const userInfo = {
@@ -21,6 +21,7 @@ cookieList.filter(Boolean).forEach(_ => {
 });
 
 module.exports = Object.assign(userInfo, {
+	uin: userInfo.loginUin || cookieObject.uin,
 	cookieList,
 	cookieObject,
 });

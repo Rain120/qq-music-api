@@ -76,7 +76,7 @@ router.get('/getDigitalAlbumLists', context.getDigitalAlbumLists);
 router.get('/getLyric/:songmid?/:isFormat?', context.getLyric);
 
 // songmid=003rJSwm3TechU
-router.get('/getMusicVKey/:songmid?', context.getMusicVKey);
+router.get('/getMusicPlay/:songmid?', context.getMusicPlay);
 
 // album
 // albummid=0016l2F430zMux
