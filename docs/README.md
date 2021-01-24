@@ -16,11 +16,11 @@
 
 #### 格式化自定义的 cookie
 
-![normalize-cookie.png](./screenshot/normalize-cookie.png)
+![normalize-cookie.png](`https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/normalize-cookie.png)
 
 ### 特性提示支持
 
-![new-feature-error-tips.png](./screenshot/new-feature-error-tips.png)
+![new-feature-error-tips.png](`https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/new-feature-error-tips.png)
 
 ### 获取 Cookie
 
@@ -43,7 +43,7 @@ const userInfo = {
 
 示例截图:
 
-![normalize-cookie.png](./screenshot/normalize-cookie.png)
+![normalize-cookie.png](`https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/normalize-cookie.png)
 
 ### 获取QQ音乐产品的下载地址
 
@@ -887,7 +887,7 @@ const userInfo = {
 
 - 可选参数
 
-	- `page`: 当前页数, 默认为1
+	- `page`: 当前页数, 默认为 1
 
 	- `limit`: 取出歌单数量, 默认为 20
 
@@ -950,7 +950,7 @@ const userInfo = {
 - 必选参数
 ```
 songs: [
-  [`songmid`, `songid`]
+  [songmid, songid]
 ]
 ```
 
@@ -973,23 +973,39 @@ songs: [
 
 ![获取歌曲相关信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/batchGetSongInfo.png)
 
-### 获取歌曲VKey
+### 获取歌曲播放链接
 
-接口说明: 调用此接口, 可获取歌曲VKey
+接口说明: 调用此接口, 可获取歌曲播放链接
 
 参数列表:
 
 - 必选参数
 
-- `songmid`: 歌曲`id`
+- `songmid`: 歌曲`id`, 多个播放链接使用 `,`分隔
 
-接口地址: `/getMusicVKey`
+- `justPlayUrl`: 仅返回播放链接, 默认是 `play`。`[all | play]`
 
-调用例子: `/getMusicVKey?songmid=0025NhlN2yWrP4`
+接口地址: `/getMusicPlay`
+
+调用例子:
 
 示例截图:
+#### 获取单个播放链接
 
-![获取歌曲VKey](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMusicVKey.png)
+例子: `/songmid=0025NhlN2yWrP4`
+
+![获取单个播放链接](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMusicPlay.png)
+
+#### 获取多个播放链接
+
+例子: `/songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=play`
+
+![获取多个歌曲播放链接](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/just-get-play-url.png)
+#### 获取多个播放链接
+
+例子: `/songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=all`
+
+![获取接口所有数据](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-play-all-data.png)
 
 ### 获取搜索热词
 
