@@ -21,7 +21,7 @@ const getSingerStarNum = require('./getSingerStarNum');
 const getRadioLists = require('./getRadioLists');
 const getDigitalAlbumLists = require('./getDigitalAlbumLists');
 const getLyric = require('./getLyric');
-const getMusicVKey = require('./getMusicVKey');
+const getMusicPlay = require('./getMusicPlay');
 const getAlbumInfo = require('./getAlbumInfo');
 const getComments = require('./getComments');
 const getRecommend = require('./getRecommend');
@@ -58,7 +58,7 @@ module.exports = {
 	getRadioLists,
 	getDigitalAlbumLists,
 	getLyric,
-	getMusicVKey,
+	getMusicPlay,
 	getAlbumInfo,
 	getComments,
 	getRecommend,

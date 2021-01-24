@@ -1,6 +1,6 @@
 const commonParams = {
 	g_tk: 1124214810,
-	loginUin: global.loginUin || (global.cookieObject || {}).uin || 0,
+	loginUin: global.uin || '0',
 	hostUin: 0,
 	inCharset: 'utf8',
 	outCharset: 'utf-8',
