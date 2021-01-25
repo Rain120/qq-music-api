@@ -43,7 +43,7 @@ const userInfo = {
 
 示例截图:
 
-![normalize-cookie.png](`https://raw.githubusercontent.com/Rain120/qq-music-api/master`screenshot/normalize-cookie.png)
+![normalize-cookie.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/normalize-cookie.png)
 
 ### 获取QQ音乐产品的下载地址
 
@@ -985,11 +985,14 @@ songs: [
 
 - `justPlayUrl`: 仅返回播放链接, 默认是 `play`。`[all | play]`
 
+- `quality`: 播放品质, 默认是 128。`[m4a | 128 | 320 | ape | flac]`
+
 接口地址: `/getMusicPlay`
 
 调用例子:
 
 示例截图:
+
 #### 获取单个播放链接
 
 例子: `/songmid=0025NhlN2yWrP4`
@@ -1001,11 +1004,20 @@ songs: [
 例子: `/songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=play`
 
 ![获取多个歌曲播放链接](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/just-get-play-url.png)
+
 #### 获取多个播放链接
 
 例子: `/songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=all`
 
 ![获取接口所有数据](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-play-all-data.png)
+
+#### 歌曲品质
+
+例子: `songmid=001yNIo41SJjuC&resType=play&quality=m4a`
+
+![song-quality-128.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/song-quality-128.png)
+
+![song-quality-m4a.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/song-quality-m4a.png)
 
 ### 获取搜索热词
 
