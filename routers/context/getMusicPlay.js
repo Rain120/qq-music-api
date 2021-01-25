@@ -10,7 +10,7 @@ module.exports = async (ctx, next) => {
 	// response data only need play url value (all play)
 	const justPlayUrl = (ctx.query.resType || 'play') === 'play';
 	const guid = _guid ? _guid + '' : '1429839143';
-	const {type = '128', mediaId = songmid} = ctx.query;
+	let {quality = 128, mediaId} = ctx.query;
 	const fileType = {
 		m4a: {
 			s: 'C400',
@@ -33,9 +33,9 @@ module.exports = async (ctx, next) => {
 			e: '.flac',
 		}
 	};
-	const songmidList = songmid.split(',').map(_ => `${_}`)
-	const fileInfo = fileType[type];
-	const file = songmidList.length === 1 && `${fileInfo.s}${songmid}${mediaId}${fileInfo.e}`;
+	const songmidList = songmid.split(',');
+	const fileInfo = fileType[quality];
+	const file = songmidList.map(_ => `${fileInfo.s}${_}${mediaId || _}${fileInfo.e}`);
 	const data = {
 		// req: {
 		// 	module: 'CDN.SrfCdnDispatchServer',
@@ -50,7 +50,7 @@ module.exports = async (ctx, next) => {
 			module: 'vkey.GetVkeyServer',
 			method: 'CgiGetVkey',
 			param: {
-				filename: file ? [file] : [],
+				filename: file,
 				guid,
 				songmid: songmidList,
 				songtype: [0],

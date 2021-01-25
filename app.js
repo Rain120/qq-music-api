@@ -48,9 +48,7 @@ app.use(async (ctx, next) => {
 
 // cors
 app.use(cors({
-  origin: function (ctx) {
-    return '*';
-  },
+  origin: (ctx) => ctx.request.header.origin,
   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
   maxAge: 5,
   credentials: true,
