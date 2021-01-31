@@ -14,6 +14,8 @@
 
 ### 支持自定义设置cookie
 
+!> 2020-01-23 新增, 只需要配置 `config/user-info.js` 中的 `cookies` 字段就会在发送请求时带上你的 `cookies`。
+
 #### 格式化自定义的 cookie
 
 ![normalize-cookie.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/normalize-cookie.png)
