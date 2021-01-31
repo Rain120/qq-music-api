@@ -12,11 +12,11 @@
 
 </div>
 
-> QQ音乐API koa2 版本, 通过Web网页版请求QQ音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues)
+> QQ 音乐 API koa2 版本, 通过 Web 网页版请求 QQ 音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues)
 
 > 当前代码仅共学习，不可做商业用途
 
-### API结构图
+### API 结构图
 
 > 目前暂时没有时间做登录模块的接口，欢迎各位大佬给我`PR`, 阿里嘎多
 
@@ -24,11 +24,12 @@
 
 ### 环境要求
 
-> 因为本项目采用的是`koa2`, 所以请确保你的`node`版本是7.6.0+
+> 因为本项目采用的是`koa2`, 所以请确保你的`node`版本是 7.6.0+
 
 ```
 node -v
 ```
+
 ### 📦 安装
 
 ```
@@ -36,7 +37,8 @@ git@github.com:Rain120/qq-music-api.git
 npm install
 ```
 
-### 🔨项目启动
+### 🔨 项目启动
+
 ```
 // npm i -g nodemon
 npm run start
@@ -44,6 +46,7 @@ npm run start
 // or don't install nodemon
 node app.js
 ```
+
 项目监听端口是`3200`
 
 ### 🐳 Docker
@@ -65,7 +68,11 @@ npm run run:images
 docker pull qq-music-api
 ```
 
-### 功能特性
+### 功能特性 & 日志更新
+
+- [ ] 大改版, 迭代 `v2.0.0`
+
+  - [ ] `API` 设计优化
 
 - [x] 获取歌曲播放链接 **2021-01-24**
 
@@ -75,7 +82,7 @@ docker pull qq-music-api
 
 - [x] 获取歌手热门歌曲 **2020-07-04**
 
-- [x] 获取QQ音乐产品的下载地址
+- [x] 获取 QQ 音乐产品的下载地址
 
 - [x] 获取歌单分类
 
@@ -83,11 +90,11 @@ docker pull qq-music-api
 
 - [x] 获取歌单详情
 
-- [x] 获取MV标签
+- [x] 获取 MV 标签
 
-- [x] 获取MV播放信息
+- [x] 获取 MV 播放信息
 
-- [x] 获取歌手MV
+- [x] 获取歌手 MV
 
 - [x] 获取相似歌手
 
@@ -103,13 +110,13 @@ docker pull qq-music-api
 
 - [x] 获取歌曲歌词
 
-- [x] 获取MV
+- [x] 获取 MV
 
 - [x] 获取新碟信息
 
 - [x] 获取歌手专辑
 
-- [x] ~~获取歌曲VKey~~ **2021-01-24**
+- [x] ~~获取歌曲 VKey~~ **2021-01-24**
 
 - [x] 获取搜索热词
 
@@ -123,7 +130,7 @@ docker pull qq-music-api
 
 - [x] 获取排行榜单详情
 
-- [x] 获取评论信息(cmd代表的意思没太弄明白)
+- [x] 获取评论信息(cmd 代表的意思没太弄明白)
 
 - [x] 获取票务信息
 
@@ -141,7 +148,7 @@ docker pull qq-music-api
 
 [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
-[Vue2.0开发企业级移动端音乐Web App](https://coding.imooc.com/class/107.html)
+[Vue2.0 开发企业级移动端音乐 Web App](https://coding.imooc.com/class/107.html)
 
 **参考内容**
 
@@ -159,7 +166,7 @@ docker pull qq-music-api
 
 #### 🤝 贡献 ![PR](https://img.shields.io/badge/PRs-Welcome-orange?style=flat-square&logo=appveyor)
 
-We welcome all contributions. You can submit any ideas as [pull requests](https://github.com/Rain120/qq-music-api/pulls) or as a GitHub [issue](https://github.com/Rain120/qq-music-api/issues). 
+We welcome all contributions. You can submit any ideas as [pull requests](https://github.com/Rain120/qq-music-api/pulls) or as a GitHub [issue](https://github.com/Rain120/qq-music-api/issues).
 
 #### 👨‍🏭 作者
 

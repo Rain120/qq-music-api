@@ -1,30 +1,40 @@
 <h2 align="center" id="qqmusicapi">QQ Music API</h2>
 
-!> QQ音乐API koa2 版本, 通过Web网页版请求QQ音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues), 或者你有其他想法欢迎`PR`.
+!> QQ 音乐 API koa2 版本, 通过 Web 网页版请求 QQ 音乐接口数据, 有问题请提 [issue](https://github.com/Rain120/qq-music-api/issues), 或者你有其他想法欢迎`PR`.
 
-## API结构图
+## API 结构图
 
 ![qq-music](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/qq-music.png)
 
-## API接口
+## API 接口
 
 !> koa2 接口说明(参数, 地址, 效果图)
 
 ## 新特性
 
-### 支持自定义设置cookie
+!> `v2.0.0`大版本修改是为了修复之前 **接口设计** 的 **可读性差** , **API 不合理** 等众多问题。
 
-#### 格式化自定义的 cookie
+!> 我们在旧版本的基础上, 针对性修改。所以对 **接口参数**, **接口返回**, **路由** 等方面做了一定的 **优化**, 我们推荐新用户使用当前时间最新版 `v2.0.0`。
 
-![normalize-cookie.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/normalize-cookie.png)
+!> 对于先前接入的用户, 我们也做了一些兼容性的接口处理, 主要是 **路由的变化 mapping**, 具体可以在 `routers/map-router.js` 中体现, 感谢你的关注和使用。
 
 ### 特性提示支持
 
 ![new-feature-error-tips.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/new-feature-error-tips.png)
 
+## 用户个人信息
+
+### 支持自定义设置 cookie
+
+!> 2020-01-23 新增, 只需要配置 `config/user-info.js` 中的 `cookies` 字段就会在发送请求是带上你的 `cookies`。
+
+#### 格式化自定义的 cookie
+
+![normalize-cookie.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/normalize-cookie.png)
+
 ### 获取 Cookie
 
-!> 目前只支持用户自己从 *QQ音乐* 获取获取 `Cookie`, 如何获取 `Cookie`, 登录 `QQ音乐`, 然后 `F12`, 找到 `Network`, 随便找一个获取数据的接口, 复制接口中 `request headers` 中的 `Cookie` 即可。
+!> 目前只支持用户自己从 _QQ 音乐_ 获取获取 `Cookie`, 如何获取 `Cookie`, 登录 `QQ音乐`, 然后 `F12`, 找到 `Network`, 随便找一个获取数据的接口, 复制接口中 `request headers` 中的 `Cookie` 即可。
 
 接口说明: 调用此接口, 可获取自己在 `config/user-info.js` 配置的 `Cookie` 被格式化的结果
 
@@ -45,17 +55,99 @@ const userInfo = {
 
 ![normalize-cookie.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/normalize-cookie.png)
 
-### 获取QQ音乐产品的下载地址
+## 推荐
 
-接口说明: 调用此接口, 可获取QQ音乐标准产品下载链接
+### 获取首页推荐
 
-接口地址: `/downloadQQMusic`
+接口说明: 调用此接口, 可获取首页推荐
 
-调用例子: `/downloadQQMusic`
+接口地址: `/getRecommend`
+
+调用例子: `/getRecommend`
 
 示例截图:
 
-![获取QQ音乐产品的下载地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/downloadQQMusic.png)
+![获取首页推荐](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRecommend.png)
+
+## 搜索
+
+### 获取搜索热词
+
+接口说明: 调用此接口, 可获取搜索热词
+
+接口地址: `/getHotkey`
+
+调用例子: `/getHotkey`
+
+示例截图:
+
+![获取搜索热词](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/gethotkey.png)
+
+### 获取关键字搜索提示
+
+接口说明: 调用此接口, 可获取获取关键字搜索提示
+
+参数列表:
+
+- 必选参数
+
+  - `key`: 搜索关键字
+
+接口地址: `/getSmartbox`
+
+调用例子: `/getSmartbox?key=周杰伦`
+
+示例截图:
+
+![获取获取关键字搜索提示](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSmartbox.png)
+
+### 获取搜索结果
+
+接口说明: 调用此接口, 可获取获取搜索结果
+
+参数列表(部分参数待注释):
+
+- 必选参数
+
+  - `key`: 搜索关键字
+
+  - ~~`catZhida`: 默认值为 1~~
+
+    ~~1. `0` 表示歌曲~~
+
+    ~~2. `2` 表示歌手~~
+
+    ~~3. `3` 表示专辑~~
+
+  - `remoteplace`: 默认值为 `song`
+
+    1. 单曲: `song`
+
+    2. 专辑: `album`
+
+    3. MV: `mv`
+
+    4. 歌单: `playlist`
+
+    5. 用户: `user`
+
+    6. 歌词: `lyric`
+
+- 可选参数
+
+  - `page`: 当前页数, 默认为 `1`
+
+  - `limit`: 取出歌单数量, 默认为 `10`
+
+接口地址: `/getSearchByKey`
+
+调用例子: `/getSearchByKey?key=周杰伦`
+
+示例截图:
+
+![获取获取搜索结果](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSearchByKey.png)
+
+## 歌单
 
 ### 获取歌单分类
 
@@ -65,7 +157,6 @@ const userInfo = {
 
 调用例子: `/getSongListCategories`
 
-
 <details>
   <summary>SortID</summary>
 
@@ -74,6 +165,7 @@ const userInfo = {
     sortId: 3, sortName: 最热
     sortId: 4, sortName: 评分
     sortId: 5, sortName: none
+
 </details>
 
 **歌单分类(categoryId & categoryName)**
@@ -84,6 +176,7 @@ const userInfo = {
     1.1
       "categoryId": 10000000,
       "categoryName": 全部,
+
 </details>
 
 <details>
@@ -166,6 +259,7 @@ const userInfo = {
     3.16
       "categoryId": 220,
       "categoryName": "世界音乐",
+
 </details>
 
 <details>
@@ -219,6 +313,7 @@ const userInfo = {
     4.16
       "categoryId": 14,
       "categoryName": "DJ",
+
 </details>
 
 <details>
@@ -251,6 +346,7 @@ const userInfo = {
     5.9
       "categoryId": 68,
       "categoryName": "思念",
+
 </details>
 
 <details>
@@ -295,6 +391,7 @@ const userInfo = {
     6.13
       "categoryId": 16,
       "categoryName": "校园",
+
   </summary>
 </details>
 
@@ -310,15 +407,15 @@ const userInfo = {
 
 - 必选参数
 
-	- `categoryId`: 类别`id`, 详见 `/getSongListCategories`
+  - `categoryId`: 类别`id`, 详见 `/getSongListCategories`
 
 - 可选参数
 
-	- `page`: 当前页数, 默认为1
+  - `page`: 当前页数, 默认为 1
 
-	- `limit`: 取出歌单数量, 默认为 20
+  - `limit`: 取出歌单数量, 默认为 20
 
-	- `sortId`: 最新, 最热,评分,  默认为5
+  - `sortId`: 最新, 最热,评分, 默认为 5
 
 接口地址: `/getSongLists`
 
@@ -338,15 +435,15 @@ const userInfo = {
 
 - 必选参数
 
-	- `categoryIds`: 类别`id`列表, 详见 `/getSongListCategories`
+  - `categoryIds`: 类别`id`列表, 详见 `/getSongListCategories`
 
 - 可选参数
 
-	- `page`: 当前页数, 默认为1
+  - `page`: 当前页数, 默认为 1
 
-	- `limit`: 取出歌单数量, 默认为 20
+  - `limit`: 取出歌单数量, 默认为 20
 
-	- `sortId`: 最新, 最热,评分,  默认为5
+  - `sortId`: 最新, 最热,评分, 默认为 5
 
 接口地址: `/batchGetSongLists`
 
@@ -379,7 +476,7 @@ const userInfo = {
 
 - 必选参数
 
-	- `disstid`: 歌单`id`
+  - `disstid`: 歌单`id`
 
 接口地址: `/getSongListDetail`
 
@@ -389,67 +486,7 @@ const userInfo = {
 
 ![获取歌单详情](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSongListDetail.png)
 
-### 获取MV标签
-
-接口说明: 调用此接口, 可获取MV标签
-
-接口地址: `/getMvByTag`
-
-调用例子: `/getMvByTag`
-
-示例截图:
-
-![获取MV标签](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMvByTag.png)
-
-### 获取MV播放信息
-
-接口说明: 调用此接口, 可获取MV播放信息
-
-参数列表:
-
-- 必选参数
-
-	- `vid`: `video id`
-
-接口地址: `/getMvPlay`
-
-调用例子: `/getMvPlay?vid=u00222le4ox`
-
-示例截图:
-
-![获取MV播放信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMvPlay.png)
-
-### 获取歌手MV
-
-接口说明: 调用此接口, 可获取歌手MV
-
-参数列表:
-
-- 必选参数
-
-	- `singermid`: 歌手`id`
-
-- 可选参数
-
-	- `order`: 当前MV类型, 默认为`time`
-
-		- `listen`: 歌手专辑音乐MV
-
-		- `time`: 粉丝上传MV视频
-
-	- `limit`: 取出歌单数量, 默认为5
-
-接口地址: `/getSingerMV`
-
-调用例子: `/getSingerMV?singermid=0025NhlN2yWrP4&order=all&limit=5`
-
-示例截图:
-
-![获取歌手MV - default](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-default.png)
-
-![获取歌手MV - belong](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-listen.png)
-
-![获取歌手MV - fans](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-time.png)
+## 歌手
 
 ### 获取歌手热门歌曲
 
@@ -459,13 +496,13 @@ const userInfo = {
 
 - 必选参数
 
-	- `singermid`: 歌手`id`
+  - `singermid`: 歌手`id`
 
 - 可选参数
 
-	- `page`: 页数, 默认为0
+  - `page`: 页数, 默认为 0
 
-	- `limit`: 取出歌单数量, 默认为5
+  - `limit`: 取出歌单数量, 默认为 5
 
 接口地址: `/getSingerHotsong`
 
@@ -483,7 +520,11 @@ const userInfo = {
 
 - 必选参数
 
-	- `singermid`: 歌手`id`
+  - `singermid`: 歌手`id`
+
+!> 接口地址: `/singer/similar`
+
+!> 调用例子: `/singer/similar?id=4558&singermid=0025NhlN2yWrP4`
 
 接口地址: `/getSimilarSinger`
 
@@ -501,7 +542,11 @@ const userInfo = {
 
 - 必选参数
 
-	- `singermid`: 歌手`id`
+  - `singermid`: 歌手`id`
+
+!> New 调用例子: `/singer/desc`
+
+!> New 调用例子: `/singer/desc?singermid=0025NhlN2yWrP4`
 
 接口地址: `/getSingerDesc`
 
@@ -544,46 +589,47 @@ const userInfo = {
   </details>
 
   <details>
-    <summary>genre 默认是 -100</summary>   
+    <summary>genre 默认是 -100</summary>
 
       "id": -100,
       "name": "全部"
-      
+
       "id": 1,
       "name": "流行"
-      
+
       "id": 6,
       "name": "嘻哈"
-      
+
       "id": 2,
       "name": "摇滚"
-      
+
       "id": 4,
       "name": "电子"
-      
+
       "id": 3,
       "name": "民谣"
-      
+
       "id": 8,
       "name": "R&B"
-      
+
       "id": 10,
       "name": "民歌"
-      
+
       "id": 9,
       "name": "轻音乐"
-      
+
       "id": 5,
       "name": "爵士"
-      
+
       "id": 14,
       "name": "古典"
-      
+
       "id": 25,
       "name": "乡村"
-      
+
       "id": 20,
       "name": "蓝调"
+
   </details>
 
   <details>
@@ -591,87 +637,88 @@ const userInfo = {
 
       "id": -100,
       "name": "热门"
-      
+
       "id": 1,
       "name": "A"
-      
+
       "id": 2,
       "name": "B"
-      
+
       "id": 3,
       "name": "C"
-      
+
       "id": 4,
       "name": "D"
-      
+
       "id": 5,
       "name": "E"
-      
+
       "id": 6,
       "name": "F"
-      
+
       "id": 7,
       "name": "G"
-      
+
       "id": 8,
       "name": "H"
-      
+
       "id": 9,
       "name": "I"
-      
+
       "id": 10,
       "name": "J"
-      
+
       "id": 11,
       "name": "K"
-      
+
       "id": 12,
       "name": "L"
-      
+
       "id": 13,
       "name": "M"
-      
+
       "id": 14,
       "name": "N"
-      
+
       "id": 15,
       "name": "O"
-      
+
       "id": 16,
       "name": "P"
-      
+
       "id": 17,
       "name": "Q"
-      
+
       "id": 18,
       "name": "R"
-      
+
       "id": 19,
       "name": "S"
-      
+
       "id": 20,
       "name": "T"
-      
+
       "id": 21,
       "name": "U"
-      
+
       "id": 22,
       "name": "V"
-      
+
       "id": 23,
       "name": "W"
-      
+
       "id": 24,
       "name": "X"
-      
+
       "id": 25,
       "name": "Y"
-      
+
       "id": 26,
       "name": "Z"
-      
+
       "id": 27,
       "name": "#"
+
   </details>
 
   <details>
@@ -679,15 +726,16 @@ const userInfo = {
 
       "id": -100,
       "name": "全部"
-      
+
       "id": 0,
       "name": "男"
-      
+
       "id": 1,
       "name": "女"
-      
+
       "id": 2,
       "name": "组合"
+
   </details>
 
 接口地址: `/getSingerList`
@@ -699,229 +747,7 @@ const userInfo = {
 
 ![获取歌手列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerList.png)
 
-### 获取歌手被关注数量信息
-
-接口说明: 调用此接口, 可获取歌手被关注数量信息
-
-参数列表:
-
-- 必选参数
-
-	- `singermid`: 歌手`id`
-
-接口地址: `/getSingerStarNum`
-
-调用例子: `/getSingerStarNum?singermid=0025NhlN2yWrP4`
-
-示例截图:
-
-![获取歌手被关注数量信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerStarNum.png)
-
-### 获取电台列表
-
-接口说明: 调用此接口, 可获取电台列表, 分类
-
-接口地址: `/getRadioLists`
-
-调用例子: `/getRadioLists`
-
-示例截图:
-
-![获取电台列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRadioLists.png)
-
-### 获取专辑
-
-接口说明: 调用此接口, 可获取专辑信息(专辑列表、详情)
-
-参数列表:
-
-- 必选参数
-
-	- `albummid`: 专辑`id`
-
-接口地址: `/getAlbumInfo`
-
-调用例子: `/getAlbumInfo?albummid=0016l2F430zMux`
-
-示例截图:
-
-![获取专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getAlbumInfo.png)
-
-### 获取数字专辑
-
-接口说明: 调用此接口, 可获取数字专辑, 轮播图`banner`, 专辑列表等信息, 详见[API结构图](#API结构图)
-
-接口地址: `/getDigitalAlbumLists`
-
-调用例子: `/getDigitalAlbumLists`
-
-示例截图:
-
-![获取数字专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getDigitalAlbumLists.png)
-
-### 获取歌曲歌词
-
-接口说明: 调用此接口, 可获取歌曲歌词
-
-参数列表:
-
-- 必选参数
-
-	- `songmid`: 专辑`id`
-
-- 可选参数
-
-	- `isFormat`: 是否格式化歌词, 默认值为 `false`
-
-接口地址: `/getLyric`
-
-调用例子: `/getLyric?songmid=003rJSwm3TechU`
-
-示例截图:
-
-![获取歌曲歌词 - 未格式化](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getLyric.png)
-
-![获取歌曲歌词 - 格式化](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getLyric-parse.png)
-
-### 获取MV
-
-接口说明: 调用此接口, 可获取MV以及其Tag信息
-
-参数列表:
-
-- 必选参数
-
-	- `area_id`: 区域`id`, 默认值为全部(15)
-
-<details>
-  <summary>Area</summary>
-
-    "area": [
-      {
-        "id": 15,
-        "name": "全部"
-      },
-      {
-        "id": 16,
-        "name": "内地"
-      },
-      {
-        "id": 17,
-        "name": "港台"
-      },
-      {
-        "id": 18,
-        "name": "欧美"
-      },
-      {
-        "id": 19,
-        "name": "韩国"
-      },
-      {
-        "id": 20,
-        "name": "日本"
-      }
-    ]
-</details>
-
-`version_id`: 版本`id`, 默认值为全部(7)
-
-<details>
-  <summary>Version</summary>
-
-    "version": [
-      {
-        "id": 7,
-        "name": "全部"
-      },
-      {
-        "id": 8,
-        "name": "MV"
-      },
-      {
-        "id": 9,
-        "name": "现场"
-      },
-      {
-        "id": 10,
-        "name": "翻唱"
-      },
-      {
-        "id": 11,
-        "name": "舞蹈"
-      },
-      {
-        "id": 12,
-        "name": "影视"
-      },
-      {
-        "id": 13,
-        "name": "综艺"
-      },
-      {
-        "id": 14,
-        "name": "儿歌"
-      }
-    ]
-</details>
-
-- 可选参数
-
-	- `page`: 当前页数, 默认为1
-
-	- `limit`: 取出歌单数量, 默认为 20
-
-接口地址: `/getMv`
-
-调用例子: `/getMv`
-
-示例截图:
-
-![获取MV](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMv.png)
-
-### 获取新碟信息
-
-接口说明: 调用此接口, 可获取新碟信息
-
-参数列表:
-
-- 可选参数
-
-	- `page`: 当前页数, 默认为 1
-
-	- `limit`: 取出歌单数量, 默认为 20
-
-接口地址: `/getNewDisks`
-
-调用例子: `/getNewDisks`
-
-示例截图:
-
-![获取新碟信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getNewDisks.png)
-
-### 获取歌手专辑
-
-接口说明: 调用此接口, 可获取歌手专辑
-
-参数列表:
-
-- 必选参数
-
-	- `singermid`: 歌手`id`
-
-- 可选参数
-
-	- `page`: 当前页数, 默认为1
-
-	- `limit`: 取出歌单数量, 默认为 20
-
-接口地址: `/getSingerAlbum`
-
-调用例子: `/getSingerAlbum?singermid=0025NhlN2yWrP4`
-
-示例截图:
-
-![获取歌手专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerAlbum.png)
+## 歌曲
 
 ### 获取歌曲相关信息
 
@@ -931,7 +757,7 @@ const userInfo = {
 
 - 必选参数
 
-	- `songmid`: 歌曲`id`
+  - `songmid`: 歌曲`id`
 
 接口地址: `/getSongInfo`
 
@@ -948,6 +774,7 @@ const userInfo = {
 参数列表:
 
 - 必选参数
+
 ```
 songs: [
   [songmid, songid]
@@ -1019,169 +846,6 @@ songs: [
 
 ![song-quality-m4a.png](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/song-quality-m4a.png)
 
-### 获取搜索热词
-
-接口说明: 调用此接口, 可获取搜索热词
-
-接口地址: `/getHotkey`
-
-调用例子: `/getHotkey`
-
-示例截图:
-
-![获取搜索热词](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/gethotkey.png)
-
-### 获取关键字搜索提示
-
-接口说明: 调用此接口, 可获取获取关键字搜索提示
-
-参数列表:
-
-- 必选参数
-
-	- `key`: 搜索关键字
-
-接口地址: `/getSmartbox`
-
-调用例子: `/getSmartbox?key=周杰伦`
-
-示例截图:
-
-![获取获取关键字搜索提示](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSmartbox.png)
-
-### 获取搜索结果
-
-接口说明: 调用此接口, 可获取获取搜索结果
-
-参数列表(部分参数待注释):
-
-- 必选参数
-
-	- `key`: 搜索关键字
-
-	- ~~`catZhida`: 默认值为1~~
-
-		~~1. `0` 表示歌曲~~
-
-		~~2. `2` 表示歌手~~
-
-		~~3. `3` 表示专辑~~
-
-	- `remoteplace`: 默认值为 `song`
-
-		1. 单曲: `song`
-
-		2. 专辑: `album`
-
-		3. MV: `mv`
-
-		4. 歌单: `playlist`
-
-		5. 用户: `user`
-
-		6. 歌词: `lyric`
-
-- 可选参数
-
-	- `page`: 当前页数, 默认为 `1`
-
-	- `limit`: 取出歌单数量, 默认为 `10`
-
-接口地址: `/getSearchByKey`
-
-调用例子: `/getSearchByKey?key=周杰伦`
-
-示例截图:
-
-![获取获取搜索结果](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSearchByKey.png)
-
-### 获取首页推荐
-
-接口说明: 调用此接口, 可获取首页推荐
-
-接口地址: `/getRecommend`
-
-调用例子: `/getRecommend`
-
-示例截图:
-
-![获取首页推荐](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRecommend.png)
-
-### 获取排行榜单列表
-
-接口说明: 调用此接口, 可获取排行榜单列表
-
-- 可选参数
-
-	- `page`: 当前页数, 默认为 `1`
-
-	- `limit`: 取出歌单数量, 默认为 `10`
-
-接口地址: `/getTopLists`
-
-调用例子: `/getTopLists`
-
-示例截图:
-
-![获取排行榜单列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getTopLists.png)
-
-### 获取排行榜单详情
-
-接口说明: 调用此接口, 可获取排行榜单详情
-
-- 可选参数
-
-	- `topId`: 榜单`id`
-
-	- `page`: 当前页数, 默认为1
-
-	- `limit`: 取出歌单数量, 默认为 10
-
-接口地址: `/getRanks`
-
-调用例子: `/getRanks`
-
-示例截图:
-
-![获取排行榜单详情](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRanks.png)
-
-### 获取评论信息(cmd代表的意思没太弄明白)
-
-接口说明: 调用此接口, 可获取评论信息
-
-- 必选参数
-
-	- `id`: 专辑或者歌单请求结果的`id`
-
-- 可选参数
-
-	- `rootcommentid`: 榜单`id`
-
-	- `cid`: 
-
-	- `pagenum`: 当前页数, 默认为 `0`
-
-	- `pagesize`: 取出评论数量, 默认为 `25`
-
-	- `cmd`: 
-
-	- `reqtype`: 
-
-	- `biztype`: 
-
-
-接口地址: `/getComments`
-
-调用例子: `/getComments?id=8220&rootcommentid=album_8220_1003310416_1558068713`
-
-示例截图:
-
-![获取评论信息 - id获取](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-id.png)
-
-![获取评论信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments.png)
-
-![获取评论信息 - 带params](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-param.png)
-
 ### 获取歌曲 + 专辑 图片
 
 接口说明: 调用此接口, 可获取票务信息
@@ -1214,6 +878,382 @@ songs: [
 
 ![歌曲专辑地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/album-image.png)
 
+### 获取歌曲歌词
+
+接口说明: 调用此接口, 可获取歌曲歌词
+
+参数列表:
+
+- 必选参数
+
+  - `songmid`: 专辑`id`
+
+- 可选参数
+
+  - `isFormat`: 是否格式化歌词, 默认值为 `false`
+
+接口地址: `/getLyric`
+
+调用例子: `/getLyric?songmid=003rJSwm3TechU`
+
+示例截图:
+
+![获取歌曲歌词 - 未格式化](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getLyric.png)
+
+![获取歌曲歌词 - 格式化](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getLyric-parse.png)
+
+## MV
+
+### 获取 MV 标签
+
+接口说明: 调用此接口, 可获取 MV 标签
+
+接口地址: `/getMvByTag`
+
+调用例子: `/getMvByTag`
+
+示例截图:
+
+![获取MV标签](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMvByTag.png)
+
+### 获取 MV 播放信息
+
+接口说明: 调用此接口, 可获取 MV 播放信息
+
+参数列表:
+
+- 必选参数
+
+  - `vid`: `video id`
+
+接口地址: `/getMvPlay`
+
+调用例子: `/getMvPlay?vid=u00222le4ox`
+
+示例截图:
+
+![获取MV播放信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMvPlay.png)
+
+### 获取歌手 MV
+
+接口说明: 调用此接口, 可获取歌手 MV
+
+参数列表:
+
+- 必选参数
+
+  - `singermid`: 歌手`id`
+
+- 可选参数
+
+  - `order`: 当前 MV 类型, 默认为`time`
+
+    - `listen`: 歌手专辑音乐 MV
+
+    - `time`: 粉丝上传 MV 视频
+
+  - `limit`: 取出歌单数量, 默认为 5
+
+接口地址: `/getSingerMV`
+
+调用例子: `/getSingerMV?singermid=0025NhlN2yWrP4&order=all&limit=5`
+
+示例截图:
+
+![获取歌手MV - default](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-default.png)
+
+![获取歌手MV - belong](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-listen.png)
+
+![获取歌手MV - fans](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerMv-time.png)
+
+### 获取 MV
+
+接口说明: 调用此接口, 可获取 MV 以及其 Tag 信息
+
+参数列表:
+
+- 必选参数
+
+  - `area_id`: 区域`id`, 默认值为全部(15)
+
+<details>
+  <summary>Area</summary>
+
+    "area": [
+      {
+        "id": 15,
+        "name": "全部"
+      },
+      {
+        "id": 16,
+        "name": "内地"
+      },
+      {
+        "id": 17,
+        "name": "港台"
+      },
+      {
+        "id": 18,
+        "name": "欧美"
+      },
+      {
+        "id": 19,
+        "name": "韩国"
+      },
+      {
+        "id": 20,
+        "name": "日本"
+      }
+    ]
+
+</details>
+
+`version_id`: 版本`id`, 默认值为全部(7)
+
+<details>
+  <summary>Version</summary>
+
+    "version": [
+      {
+        "id": 7,
+        "name": "全部"
+      },
+      {
+        "id": 8,
+        "name": "MV"
+      },
+      {
+        "id": 9,
+        "name": "现场"
+      },
+      {
+        "id": 10,
+        "name": "翻唱"
+      },
+      {
+        "id": 11,
+        "name": "舞蹈"
+      },
+      {
+        "id": 12,
+        "name": "影视"
+      },
+      {
+        "id": 13,
+        "name": "综艺"
+      },
+      {
+        "id": 14,
+        "name": "儿歌"
+      }
+    ]
+
+</details>
+
+- 可选参数
+
+  - `page`: 当前页数, 默认为 1
+
+  - `limit`: 取出歌单数量, 默认为 20
+
+接口地址: `/getMv`
+
+调用例子: `/getMv`
+
+示例截图:
+
+![获取MV](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMv.png)
+
+## 排行榜
+
+### 获取排行榜单列表
+
+接口说明: 调用此接口, 可获取排行榜单列表
+
+- 可选参数
+
+  - `page`: 当前页数, 默认为 `1`
+
+  - `limit`: 取出歌单数量, 默认为 `10`
+
+接口地址: `/getTopLists`
+
+调用例子: `/getTopLists`
+
+示例截图:
+
+![获取排行榜单列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getTopLists.png)
+
+### 获取排行榜单详情
+
+接口说明: 调用此接口, 可获取排行榜单详情
+
+- 可选参数
+
+  - `topId`: 榜单`id`
+
+  - `page`: 当前页数, 默认为 1
+
+  - `limit`: 取出歌单数量, 默认为 10
+
+接口地址: `/getRanks`
+
+调用例子: `/getRanks`
+
+示例截图:
+
+![获取排行榜单详情](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRanks.png)
+
+### 获取评论信息(cmd 代表的意思没太弄明白)
+
+接口说明: 调用此接口, 可获取评论信息
+
+- 必选参数
+
+  - `id`: 专辑或者歌单请求结果的`id`
+
+- 可选参数
+
+  - `rootcommentid`: 榜单`id`
+
+  - `cid`:
+
+  - `pagenum`: 当前页数, 默认为 `0`
+
+  - `pagesize`: 取出评论数量, 默认为 `25`
+
+  - `cmd`:
+
+  - `reqtype`:
+
+  - `biztype`:
+
+接口地址: `/getComments`
+
+调用例子: `/getComments?id=8220&rootcommentid=album_8220_1003310416_1558068713`
+
+示例截图:
+
+![获取评论信息 - id获取](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-id.png)
+
+![获取评论信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments.png)
+
+![获取评论信息 - 带params](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getComments-param.png)
+
+## 关注
+
+### 获取歌手被关注数量信息
+
+接口说明: 调用此接口, 可获取歌手被关注数量信息
+
+参数列表:
+
+- 必选参数
+
+  - `singermid`: 歌手`id`
+
+接口地址: `/getSingerStarNum`
+
+调用例子: `/getSingerStarNum?singermid=0025NhlN2yWrP4`
+
+示例截图:
+
+![获取歌手被关注数量信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerStarNum.png)
+
+## 电台
+
+### 获取电台列表
+
+接口说明: 调用此接口, 可获取电台列表, 分类
+
+接口地址: `/getRadioLists`
+
+调用例子: `/getRadioLists`
+
+示例截图:
+
+![获取电台列表](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getRadioLists.png)
+
+## 专辑
+
+### 获取专辑
+
+接口说明: 调用此接口, 可获取专辑信息(专辑列表、详情)
+
+参数列表:
+
+- 必选参数
+
+  - `albummid`: 专辑`id`
+
+接口地址: `/getAlbumInfo`
+
+调用例子: `/getAlbumInfo?albummid=0016l2F430zMux`
+
+示例截图:
+
+![获取专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getAlbumInfo.png)
+
+### 获取数字专辑
+
+接口说明: 调用此接口, 可获取数字专辑, 轮播图`banner`, 专辑列表等信息, 详见[API 结构图](#API结构图)
+
+接口地址: `/getDigitalAlbumLists`
+
+调用例子: `/getDigitalAlbumLists`
+
+示例截图:
+
+![获取数字专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getDigitalAlbumLists.png)
+
+### 获取歌手专辑
+
+接口说明: 调用此接口, 可获取歌手专辑
+
+参数列表:
+
+- 必选参数
+
+  - `singermid`: 歌手`id`
+
+- 可选参数
+
+  - `page`: 当前页数, 默认为 1
+
+  - `limit`: 取出歌单数量, 默认为 20
+
+接口地址: `/getSingerAlbum`
+
+调用例子: `/getSingerAlbum?singermid=0025NhlN2yWrP4`
+
+示例截图:
+
+![获取歌手专辑](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getSingerAlbum.png)
+
+## 新碟
+
+### 获取新碟信息
+
+接口说明: 调用此接口, 可获取新碟信息
+
+参数列表:
+
+- 可选参数
+
+  - `page`: 当前页数, 默认为 1
+
+  - `limit`: 取出歌单数量, 默认为 20
+
+接口地址: `/getNewDisks`
+
+调用例子: `/getNewDisks`
+
+示例截图:
+
+![获取新碟信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getNewDisks.png)
+
+## 产品
+
 ### 获取票务信息
 
 接口说明: 调用此接口, 可获取票务信息
@@ -1225,3 +1265,15 @@ songs: [
 示例截图:
 
 ![获取票务信息](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getTicketInfo.png)
+
+### 获取 QQ 音乐产品的下载地址
+
+接口说明: 调用此接口, 可获取 QQ 音乐标准产品下载链接
+
+接口地址: `/downloadQQMusic`
+
+调用例子: `/downloadQQMusic`
+
+示例截图:
+
+![获取QQ音乐产品的下载地址](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/downloadQQMusic.png)
