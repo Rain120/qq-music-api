@@ -74,7 +74,8 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "xml2js": "^0.4.23"
   },
   "engines": {
     "node": ">=7.6.0"

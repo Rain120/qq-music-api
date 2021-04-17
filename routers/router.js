@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const router = new Router();
-const context = require('./context');
+const context = require('.');
 
 // cookies
 router.get('/user/getCookie', context.getCookie);
@@ -45,8 +45,11 @@ router.get('/getMv/:area_id?/:version_id?/:limit?/:page?', context.getMv);
 router.get('/getSingerList/:area?/:sex?/:genre?/:index?/:page?', context.getSingerList);
 
 // getSimilarSinger
-// singermid=0025NhlN2yWrP4
+// /getSimilarSinger?singermid=0025NhlN2yWrP4
 router.get('/getSimilarSinger/:singermid?', context.getSimilarSinger);
+
+// /singer/similar?singermid=0025NhlN2yWrP4
+router.get('/singer/similar/:singermid?', context.getSimilarSinger);
 
 // getSingerAlbum
 // singermid=0025NhlN2yWrP4
@@ -83,8 +86,8 @@ router.get('/getMusicPlay/:songmid?', context.getMusicPlay);
 router.get('/getAlbumInfo/:albummid?', context.getAlbumInfo);
 
 router.get(
-	'/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?',
-	context.getComments,
+  '/getComments/:id?/:rootcommentid?/:cid?/:pagesize?/:pagenum?/:cmd?/:reqtype?/:biztype?',
+  context.getComments,
 );
 
 // recommend
