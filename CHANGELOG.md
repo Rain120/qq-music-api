@@ -1,9 +1,51 @@
-# 1.0.0 (2020-07-04)
+## [1.0.4](https://github.com/Rain120/qq-music-api/compare/v1.0.3...v1.0.4) (2021-01-25)
 
 
 ### Bug Fixes
 
-* getSingerHotsong pagination ([396ae16](https://github.com/Rain120/qq-music-api/commit/396ae167ab66dd3de28cf53091fb438c9a6a07c8))
+* doc screenshot png path ([fe811e2](https://github.com/Rain120/qq-music-api/commit/fe811e26c0c0a2ed468728b0323866bd27b5a404))
+* music play url quality; docs about cookie, music play; ([#35](https://github.com/Rain120/qq-music-api/issues/35)) ([f0b7923](https://github.com/Rain120/qq-music-api/commit/f0b7923b9feb7e32c44bc9417c2d426148ab3865))
+
+
+
+## [1.0.3](https://github.com/Rain120/qq-music-api/compare/v1.0.1...v1.0.3) (2021-01-24)
+
+
+### Bug Fixes
+
+* doc screenshot png path ([cb8b253](https://github.com/Rain120/qq-music-api/commit/cb8b25358219ca1cc3e973e6f46a3f75bb3b8b29))
+
+
+### Features
+
+* user cookie ([#32](https://github.com/Rain120/qq-music-api/issues/32)) ([5a32dae](https://github.com/Rain120/qq-music-api/commit/5a32daeca351c7b18352f9267db0c173fef9bff6))
+
+
+
+## [1.0.1](https://github.com/Rain120/qq-music-api/compare/v1.0.0...v1.0.1) (2020-12-25)
+
+
+### Bug Fixes
+
+* build docker image sh ([fe395a4](https://github.com/Rain120/qq-music-api/commit/fe395a435efc0678d3d387abbcd6b33786bb72fa))
+
+
+### Features
+
+* docker build images to hub for docker env run ([dcbbf95](https://github.com/Rain120/qq-music-api/commit/dcbbf95e70b305cd2ad4d00a7cc0bd4db5d0f8ab))
+* docker repository version ([d74a425](https://github.com/Rain120/qq-music-api/commit/d74a4251da8c0c2dac2f5e4251e91f288f732d43))
+
+
+
+# [1.0.0](https://github.com/Rain120/qq-music-api/compare/4d79041a5e5712c0c6bc6e6d55045f732636c80f...v1.0.0) (2020-09-15)
+
+
+### Bug Fixes
+
+* bug about search by key https://github.com/Rain120/qq-music-api/issues/28 ([12b7d66](https://github.com/Rain120/qq-music-api/commit/12b7d667c05f92ad61545c5f75a82d878ad3220c))
+* getComment ([#26](https://github.com/Rain120/qq-music-api/issues/26)) ([9e62be5](https://github.com/Rain120/qq-music-api/commit/9e62be539b3b78cdf0eea3e1696d9505ab242756))
+* getSingerHotsong pagination ([#19](https://github.com/Rain120/qq-music-api/issues/19)) ([9bb705a](https://github.com/Rain120/qq-music-api/commit/9bb705a1b6eb4e2577ba20f0a279ccb63112390d))
+* getSingerHotsong pagination ([#22](https://github.com/Rain120/qq-music-api/issues/22)) ([6d6dbf3](https://github.com/Rain120/qq-music-api/commit/6d6dbf36c545269ad7a6138e711e436a90d61e28))
 * issue 14 about getRank topId was invalid ([024096f](https://github.com/Rain120/qq-music-api/commit/024096fa63144391680f1d6ec376929fee697c37))
 * issue 14 about getRank which bug about period change by qq music api ([f13d2b5](https://github.com/Rain120/qq-music-api/commit/f13d2b540d860994600cc2728e4d848df574b2f4))
 * issue: 12 -> (getHotkey -> getHotKey); axios option error; ([ee0371b](https://github.com/Rain120/qq-music-api/commit/ee0371b32352546feb8b60b7725dc3ff66a412ef))
