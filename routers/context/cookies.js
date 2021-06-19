@@ -2,7 +2,7 @@
  * @Author: Rainy [https://github.com/rain120]
  * @Date: 2021-01-23 15:41:41
  * @LastEditors: Rainy
- * @LastEditTime: 2021-01-23 18:13:59
+ * @LastEditTime: 2021-06-19 22:22:31
  */
 module.exports = {
 	get: async (ctx, next) => {
@@ -15,6 +15,8 @@ module.exports = {
 				cookieObject: global.cookieObject,
 			},
 		};
+
+		await next();
 	},
 	set: async (ctx, next) => {
 		ctx.request.cookies = global.cookie;
@@ -27,6 +29,8 @@ module.exports = {
 				code: 200,
 				message: '操作成功',
 			}
-		}
+		};
+
+		await next();
 	},
 }
