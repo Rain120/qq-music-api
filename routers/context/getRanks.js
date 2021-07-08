@@ -1,4 +1,5 @@
 const { UCommon } = require('../../module');
+const { commonParams } = require('../../module/config');
 const moment = require('moment');
 
 module.exports = async (ctx, next) => {
@@ -12,8 +13,18 @@ module.exports = async (ctx, next) => {
 	const week = moment(date).isoWeek();
 	const year = moment(date).year();
 	const period = `${year}_${week}`;
+
 	const data = {
-		detail: {
+		comm: {
+			...(commonParams || {}),
+			cv: 4747474,
+			ct: 24,
+			format: 'json',
+			inCharset: 'utf-8',
+			needNewCode: 1,
+			uin: 0,
+		},
+		req_1: {
 			module: 'musicToplist.ToplistInfoServer',
 			method: 'GetDetail',
 			param: {
@@ -23,10 +34,34 @@ module.exports = async (ctx, next) => {
 				period,
 			},
 		},
-		comm: {
-			ct: 24,
-			cv: 0,
-		},
+		// TODO: 新评论，之后迭代更新再说
+		// req_2: {
+		// 	module: 'music.globalComment.CommentReadServer',
+		// 	method: 'GetNewCommentList',
+		// 	param: {
+		// 		BizType: 4,
+		// 		BizId: '59',
+		// 		LastCommentSeqNo: '',
+		// 		PageSize: 25,
+		// 		PageNum: 0,
+		// 		FromCommentId: '',
+		// 		WithHot: 1,
+		// 	},
+		// },
+		// TODO: 热门评论，之后迭代更新再说
+		// req_3: {
+		// 	module: 'music.globalComment.CommentReadServer',
+		// 	method: 'GetHotCommentList',
+		// 	param: {
+		// 		BizType: 4,
+		// 		BizId: '59',
+		// 		LastCommentSeqNo: '',
+		// 		PageSize: 15,
+		// 		PageNum: 0,
+		// 		HotType: 2,
+		// 		WithAirborne: 1,
+		// 	},
+		// },
 	};
 	const params = Object.assign({
 		format: 'json',
