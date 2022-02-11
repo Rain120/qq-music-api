@@ -7,7 +7,7 @@ WORKDIR /
 
 COPY package.json .
 
-RUN yarn install --registry=https://registry.npm.taobao.org
+RUN yarn install --registry=https://registry.npmmirror.com
 
 COPY . .
 
