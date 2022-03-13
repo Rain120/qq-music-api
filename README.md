@@ -32,7 +32,8 @@ node -v
 ### 📦 安装
 
 ```
-git@github.com:Rain120/qq-music-api.git
+git clone git@github.com:Rain120/qq-music-api.git
+cd qq-music-api
 npm install
 ```
 
