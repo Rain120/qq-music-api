@@ -1,6 +1,6 @@
 {
   "name": "qq-music-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "qq music api, just for study",
   "main": "index.js",
   "scripts": {

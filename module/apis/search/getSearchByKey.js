@@ -6,7 +6,8 @@ module.exports = ({ method = 'get', params = {}, option = {} }) => {
 		outCharset: 'utf-8',
 		ct: 24,
 		qqmusic_ver: 1298,
-		new_json: 1,
+		// https://github.com/Rain120/qq-music-api/issues/68
+		// new_json: 1,
 		remoteplace: 'txt.yqq.song',
 		// searchid: 58932895599763136,
 		t: 0,
