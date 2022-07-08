@@ -53,7 +53,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "lodash.get": "^4.4.2",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
