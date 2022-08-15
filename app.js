@@ -1,4 +1,4 @@
-require("@babel/register");
+require('@babel/register');
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
@@ -11,22 +11,23 @@ const cors = require('./middlewares/koa-cors');
 const router = require('./routers/router');
 const cookie = require('./util/cookie');
 require('./util/colors');
-const userInfo = require('./config/user-info')
+const userInfo = require('./config/user-info');
+const package = require('./package.json');
 global = Object.assign({}, userInfo);
 
 console.log(chalk.green('\n🥳🎉 We had supported config the user cookies. \n'));
 
 if (!(global.loginUin || global.uin)) {
-	console.log(chalk.yellow(`😔 The configuration ${chalk.red('loginUin')} or your ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
+  console.log(chalk.yellow(`😔 The configuration ${chalk.red('loginUin')} or your ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
 }
 
 if (!global.cookie) {
-	console.log(chalk.yellow(`😔 The configuration ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
+  console.log(chalk.yellow(`😔 The configuration ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
 }
 
 exec('npm info QQ-Music-API version', (err, stdout, stderr) => {
   if(!err){
-    let version = stdout.trim()
+    let version = stdout.trim();
     if(package.version < version){
       console.log(`Current Version: ${version}, Current Version: ${package.version}, Please update it.`.prompt);
     }
@@ -70,5 +71,5 @@ app.use(router.routes())
 const PORT = process.env.PORT || 3200;
 
 app.listen(PORT, () => {
-  console.log(`server running @ http://localhost:${PORT}`.prompt)
+  console.log(`server running @ http://localhost:${PORT}`.prompt);
 });
