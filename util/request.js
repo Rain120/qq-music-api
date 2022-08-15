@@ -39,8 +39,6 @@ function request(url, method, options = {}, isUUrl = 'c') {
     headers: setHeaders(options.headers || {}),
   });
 
-  console.log(JSON.stringify(options));
-
   return axios[method](baseURL, options).then(
     response => {
       if (!response) {
