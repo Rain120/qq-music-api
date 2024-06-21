@@ -39,6 +39,12 @@ const UCommon = require('./apis/UCommon/UCommon');
 // getTopLists
 const getTopLists = require('./apis/rank/getTopLists');
 
+// getQQLoginQr
+const getQQLoginQr = require('./apis/user/getQQLoginQr');
+
+// checkQQLoginQr
+const checkQQLoginQr = require('./apis/user/checkQQLoginQr');
+
 module.exports = {
 	downloadQQMusic,
 	// search
@@ -70,4 +76,7 @@ module.exports = {
 	UCommon,
 	// getTopLists
 	getTopLists,
+	// login
+	getQQLoginQr,
+	checkQQLoginQr
 };

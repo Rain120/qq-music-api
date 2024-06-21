@@ -30,6 +30,8 @@ const getTopLists = require('./getTopLists');
 const getRanks = require('./getRanks');
 const getTicketInfo = require('./getTicketInfo');
 const getImageUrl = require('./getImageUrl');
+const getQQLoginQr = require('./getQQLoginQr');
+const checkQQLoginQr = require('./checkQQLoginQr');
 const {get: getCookie, set: setCookie} = require('./cookies');
 
 module.exports = {
@@ -67,4 +69,6 @@ module.exports = {
 	getRanks,
 	getTicketInfo,
 	getImageUrl,
+	getQQLoginQr,
+	checkQQLoginQr
 };

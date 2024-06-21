@@ -5,7 +5,7 @@ const get = require('lodash.get');
 // songmid=003rJSwm3TechU
 // songmid=001yNIo41SJjuC,001wPuVc4ZiMhj
 module.exports = async (ctx, next) => {
-	const uin = global.uin || '0';
+	const uin = global.userInfo.uin || '0';
 	const songmid = ctx.query.songmid + '';
 	// response data only need play url value (all play)
 	const justPlayUrl = (ctx.query.resType || 'play') === 'play';
