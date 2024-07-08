@@ -10,7 +10,7 @@ axios.defaults.responseType = 'json;text/plain;charset=utf-8;';
 const setHeaders = headers => {
   return {
     ...headers,
-    cookies: global.cookie
+    cookies: global.userInfo.cookie
   };
 };
 
@@ -18,21 +18,21 @@ let yURL = 'https://y.qq.com';
 let cURL = 'https://c.y.qq.com';
 // let uURL = 'https:/u.y.qq.com/cgi-bin/musicu.fcg';
 
-function request(url, method, options = {}, isUUrl = 'c') {
+function request(url, method = 'GET', options = {}, isUUrl = 'c') {
   let baseURL = '';
   switch (isUUrl) {
-  case 'y':
-    baseURL = yURL + url;
-    break;
-  case 'u':
-    baseURL = url;
-    break;
-  case 'c':
-    baseURL = cURL + url;
-    break;
-  default:
-    baseURL = cURL + url;
-    break;
+    case 'y':
+      baseURL = yURL + url;
+      break;
+    case 'u':
+      baseURL = url;
+      break;
+    case 'c':
+      baseURL = cURL + url;
+      break;
+    default:
+      baseURL = cURL + url;
+      break;
   }
 
   options = Object.assign(options, {

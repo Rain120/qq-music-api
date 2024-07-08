@@ -105,4 +105,8 @@ router.get('/getTicketInfo', context.getTicketInfo);
 // getImageUrl
 router.get('/getImageUrl', context.getImageUrl);
 
+// getQQLoginQr
+router.get('/user/getQQLoginQr', context.getQQLoginQr);
+router.post('/user/checkQQLoginQr', context.checkQQLoginQr);
+
 module.exports = router;

@@ -13,15 +13,15 @@ const cookie = require('./util/cookie');
 require('./util/colors');
 const userInfo = require('./config/user-info');
 const package = require('./package.json');
-global = Object.assign({}, userInfo);
+global.userInfo = Object.assign({}, userInfo);
 
 console.log(chalk.green('\n🥳🎉 We had supported config the user cookies. \n'));
 
-if (!(global.loginUin || global.uin)) {
+if (!(global.userInfo.loginUin || global.userInfo.uin)) {
   console.log(chalk.yellow(`😔 The configuration ${chalk.red('loginUin')} or your ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
 }
 
-if (!global.cookie) {
+if (!global.userInfo.cookie) {
   console.log(chalk.yellow(`😔 The configuration ${chalk.red('cookie')} in file ${chalk.green('config/user-info')} has not configured. \n`));
 }
 

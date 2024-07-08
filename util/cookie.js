@@ -1,12 +1,12 @@
 module.exports = () => async (ctx, next) => {
-  if (global.cookie) {
-    ctx.request.cookie = global.cookie;
+  if (global.userInfo.cookie) {
+    ctx.request.cookie = global.userInfo.cookie;
   }
 
   const cookieHeader = ctx.request.headers;
 
   if (cookieHeader) {
-    global.cookieList.forEach(cookie => {
+    global.userInfo.cookieList.forEach(cookie => {
       const [key, value = ''] = cookie.split('=');
 
       if (value) {
