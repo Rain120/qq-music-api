@@ -39,9 +39,9 @@ const userInfo = {
 }
 ```
 
-接口地址: `/getCookie`
+接口地址: `/user/getCookie`
 
-调用例子: `/getCookie`
+调用例子: `/user/getCookie`
 
 示例截图:
 
@@ -997,19 +997,19 @@ songs: [
 
 #### 获取单个播放链接
 
-例子: `/songmid=0025NhlN2yWrP4`
+例子: `/getMusicPlay?songmid=0012g3Et1iFQCC`
 
-![获取单个播放链接](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/getMusicPlay.png)
+![获取单个播放链接](https://raw.githubusercontent.com/RTAkland/qq-music-api/refs/heads/main/screenshot/musicPlay.png)
 
 #### 获取多个播放链接
 
-例子: `/songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=play`
+例子: `/getMusicPlay?songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=play`
 
 ![获取多个歌曲播放链接](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/just-get-play-url.png)
 
 #### 获取多个播放链接
 
-例子: `/songmid=001yNIo41SJjuC,001wPuVc4ZiMhj&resType=all`
+例子: `/getMusicPlay?songmid=0012g3Et1iFQCC,001wPuVc4ZiMhj&resType=all`
 
 ![获取接口所有数据](https://raw.githubusercontent.com/Rain120/qq-music-api/master/screenshot/get-play-all-data.png)
 
