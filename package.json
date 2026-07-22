@@ -48,7 +48,7 @@
     }
   },
   "dependencies": {
-    "axios": "^1.13.6",
+    "axios": "^1.18.0",
     "koa": "^2.16.4",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
