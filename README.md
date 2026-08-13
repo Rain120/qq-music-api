@@ -213,12 +213,12 @@ docker pull qq-music-api
 
 ### Star History
 
-<a href="https://www.star-history.com/?repos=rain120%2Fqq-music-api&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=rain120/qq-music-api&type=date&theme=dark&logscale&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=rain120/qq-music-api&type=date&logscale&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=rain120/qq-music-api&type=date&logscale&legend=top-left" />
- </picture>
+<a href="https://star-history.dera.page/#rain120/qq-music-api&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=rain120/qq-music-api&type=date&theme=dark&logscale&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=rain120/qq-music-api&type=date&logscale&legend=top-left" />
+    <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=rain120/qq-music-api&type=date&logscale&legend=top-left" />
+  </picture>
 </a>
 
 ### 关于项目
