@@ -3,9 +3,10 @@
 <div align="center">
 
 <img src='music.png' />
-![Ask DeepWiki](https://deepwiki.com/Rain120/qq-music-api) ![GitHub watchers](https\://img.shields.io/github/watchers/rain120/qq-music-api?style=social) ![GitHub stars](https\://img.shields.io/github/stars/rain120/qq-music-api?style=social) ![GitHub forks](https\://img.shields.io/github/forks/rain120/qq-music-api?style=social)
 
-![node](https\://img.shields.io/node/v/koa?style=flat-square) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Rain120/qq-music-api)
+![GitHub watchers](https\://img.shields.io/github/watchers/rain120/qq-music-api?style=social) ![GitHub stars](https\://img.shields.io/github/stars/rain120/qq-music-api?style=social) ![GitHub forks](https\://img.shields.io/github/forks/rain120/qq-music-api?style=social)
+
+![node](https\://img.shields.io/node/v/koa?style=flat-square) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Rain120/qq-music-api) 
 
 ![GitHub repo size](https\://img.shields.io/github/repo-size/rain120/qq-music-api?style=flat-square) ![GitHub package.json version](https\://img.shields.io/github/package-json/v/rain120/qq-music-api?style=flat-square) ![GitHub](https\://img.shields.io/github/license/rain120/qq-music-api?style=flat-square) ![GitHub open issues](https\://img.shields.io/github/issues/rain120/qq-music-api?style=flat-square) ![GitHub closed issues](https\://img.shields.io/github/issues-closed/rain120/qq-music-api) ![GitHub last commit](https\://img.shields.io/github/last-commit/rain120/qq-music-api?style=flat-square) ![GitHub top language](https\://img.shields.io/github/languages/top/rain120/qq-music-api?style=flat-square)
 
